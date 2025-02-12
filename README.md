@@ -44,15 +44,15 @@ java project
 <h4>password validation</h4>
     public static boolean passwordvalidation(String password){
         /*
-               *.--->  (?=.*[0-9]): At least one digit (0-9).
-               *.---> (?=.*[a-z]): At least one lowercase letter (a-z).
-               *.---> (?=.*[A-Z]): At least one uppercase letter (A-Z).
-               *.---> (?=.*[@#$%^&+=]): At least one special character from the set @#$%^&+=.
-               *.---> (?=\\S+$): No spaces are allowed (\\S matches any non-whitespace character).
-               *.---> .{8,}: The password must be at least 8 characters long.
+        //       *.--->  (?=.*[0-9]): At least one digit (0-9).
+        //       *.---> (?=.*[a-z]): At least one lowercase letter (a-z).
+        //      *.---> (?=.*[A-Z]): At least one uppercase letter (A-Z).
+        //      *.---> (?=.*[@#$%^&+=]): At least one special character from the set @#$%^&+=.
+        //      *.---> (?=\\S+$): No spaces are allowed (\\S matches any non-whitespace character).
+        //      *.---> .{8,}: The password must be at least 8 characters long.
          */
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-
+//
         // System.out.println(password.matches(pattern));
 
         //This prints true or false based on whether the password matches the regex pattern
@@ -64,7 +64,7 @@ java project
 
    
 <h4>student validation</h4>
-
+//
     public static boolean usernameValidation(String username) {
         // convert userName to lowerCase so this work dynamically
         String lowerCaseUsername =  username.toLowerCase();
@@ -72,9 +72,11 @@ java project
         // Starts with 'tg', followed by exactly 4 digits.
         String pattern = "^tg\\d{4}$"; 
 
+        //
 
         //This prints true or false based on whether the userName matches the regex pattern
         return lowerCaseUsername.matches(pattern);
+        //
     }
     
 
