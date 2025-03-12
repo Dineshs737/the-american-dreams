@@ -67,29 +67,103 @@ The project uses the [dotenv-java](https://github.com/cdimascio/dotenv-java) lib
 
 - The `.env` file is automatically loaded when the application runs.
 - Use the `Dotenv` library to access the variables in your code. Example:
-  ```java
-  import io.github.cdimascio.dotenv.Dotenv;
 
-  public class Main {
-      public static void main(String[] args) {
-          Dotenv dotenv = Dotenv.configure()
-                                .directory("config") // Specify the directory if not in the root
-                                .filename(".env")    // Specify the .env filename
-                                .load();
+ ```java
+ package org.techlms.demoitest;
 
-          String dbUrl = dotenv.get("DB_URL");
-          String dbUser = dotenv.get("DB_USER");
-          String dbPassword = dotenv.get("DB_PASSWORD");
+import io.github.cdimascio.dotenv.Dotenv;
+import java.sql.*;
 
-          System.out.println("Database URL: " + dbUrl);
-      }
-  }
+public class DBConnection {
+
+ 
+    public static Connection getConnection() {
+        Dotenv dotenv = Dotenv.configure()
+                .directory("./config") // Folder containing .env
+                .filename(".env")      // Explicitly specify the file name
+                .load();
+
+        String userName = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASSWORD");
+        String url = dotenv.get("DB_URL");
+
+        // Validate environment variables
+        if (userName == null || password == null || url == null ||
+                userName.isEmpty() || password.isEmpty() || url.isEmpty()) {
+            throw new IllegalArgumentException("Database configuration is missing or incomplete. Please check the .env file.");
+        }
+
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection(url, userName, password);
+        } catch (SQLException e) {
+            System.err.println("Database Connection Error: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return con;
+    }
+}
+```
+### TestDB Class
+
+The `TestDB` class demonstrates a simple query execution. It retrieves data from the `user` table and prints the results to the console.
+
+#### Database Setup
+
+Run the following SQL commands in your MySQL client to set up the demo database:
+
+```sql
+DROP DATABASE IF EXISTS demo_fx;
+CREATE DATABASE demo_fx;
+USE demo_fx;
+
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    password VARCHAR(255)
+);
+
+INSERT INTO user VALUES (1, "yourname", "7712400c26a5026771b495a03d891aecf08b9a7a1e2ff64f54feaae4f7bc3a08");
+
+SELECT * FROM user;
+
+```
+#### TestDB Class Code
+#### call TestDB.printDemoUser() function from main function
+
+```java
+package org.techlms.demoitest;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TestDB {
+
+    public static void printDemoUser(){
+        Connection con = DBConnection.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+            while(rs.next()){
+                System.out.println("User ID is: " + rs.getInt(1));
+                System.out.println("User Name is: " + rs.getString(2));
+                System.out.println("User Password Hashcode is: " + rs.getString(3));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Query Error!!");
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
 
 
+  # Additional Features and Functionality
 
-  ## Additional Features and Functionality
 
-# Project Documentation
 
 This project includes critical features for password security, such as **SHA-256 Password Hashing** and **Password Validation**. Below is a detailed explanation of how these features work and why they are essential.
 
