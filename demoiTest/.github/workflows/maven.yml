@@ -15,28 +15,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up JDK 17
-      - name: Set up JDK 22
+      # Set up JDK (change the version if JDK 22 is required)
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '22'
+          java-version: '17' # Change to '22' if required and available
           distribution: 'temurin'
           cache: maven
 
       # Navigate to the project directory and build the project using Maven
       - name: Build with Maven
         run: |
-          cd demoiTest  # Navigate to the correct directory
-          mvn -B package --file pom.xml
+          if [ -d "demoiTest" ]; then
+            cd demoiTest  # Navigate to the correct directory
+            mvn -B package --file pom.xml
+          else
+            echo "Error: Directory 'demoiTest' does not exist." >&2
+            exit 1
+          fi
 
-      # Push changes to main branch if tests pass
+      # Push changes to the main branch if tests pass
       - name: Push to main branch
-        if: success() # Only run this step if the build is successful
+        if: ${{ success() }} # Only run this step if the build is successful
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
+          git fetch origin
           git checkout main
           git merge test --no-ff -m "Merge changes from test branch after successful build"
           git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
