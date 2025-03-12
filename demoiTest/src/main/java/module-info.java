@@ -11,6 +11,7 @@ module org.techlms.demoitest {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires io.github.cdimascio.dotenv.java;
+    requires static lombok;
 
     opens org.techlms.demoitest to javafx.fxml;
     exports org.techlms.demoitest;
