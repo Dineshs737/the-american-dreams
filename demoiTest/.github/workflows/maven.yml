@@ -23,9 +23,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # Build the project using Maven
+      # Navigate to the project directory and build the project using Maven
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: |
+          cd demoiTest  # Navigate to the correct directory
+          mvn -B package --file pom.xml
 
       # Push changes to main branch if tests pass
       - name: Push to main branch
