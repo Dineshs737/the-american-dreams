@@ -1,13 +1,10 @@
-# This workflow builds a Java project with Maven and caches dependencies for faster execution.
-# For more details, visit: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
 name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "test" ] # Trigger on changes to the test branch
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ] # Run checks on pull requests targeting the main branch
 
 jobs:
   build:
@@ -23,13 +20,21 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'temurin'  # Fixed the typo here
+          distribution: 'temurin'
           cache: maven
 
       # Build the project using Maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      # Optional: Upload dependency graph for improved Dependabot alerts
-      - name: Update dependency graph
-        uses: advanced-security/maven-dependency-submission-action@v1.1.0
+      # Push changes to main branch if tests pass
+      - name: Push to main branch
+        if: success() # Only run this step if the build is successful
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git checkout main
+          git merge test --no-ff -m "Merge changes from test branch after successful build"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
