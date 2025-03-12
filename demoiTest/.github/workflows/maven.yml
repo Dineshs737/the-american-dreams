@@ -23,16 +23,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # Navigate to the project directory and build the project using Maven
+      # Build the project using Maven
       - name: Build with Maven
-        run: |
-          if [ -d "demoiTest" ]; then
-            cd demoiTest  # Navigate to the correct directory
-            mvn -B package --file pom.xml
-          else
-            echo "Error: Directory 'demoiTest' does not exist." >&2
-            exit 1
-          fi
+        run: mvn -B package --file pom.xml
 
       # Push changes to the main branch if tests pass
       - name: Push to main branch
