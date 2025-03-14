@@ -19,7 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '22' # Change to '22' if required and available
+          java-version: '22'
           distribution: 'temurin'
           cache: maven
 
@@ -29,13 +29,13 @@ jobs:
 
       # Push changes to the main branch if tests pass
       - name: Push to main branch
-        if: ${{ success() }} # Only run this step if the build is successful
+        if: ${{ success() }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
-          git fetch origin
+          git fetch origin test:refs/remotes/origin/test # Ensure 'test' branch is fetched
           git checkout main
-          git merge test --no-ff -m "Merge changes from test branch after successful build"
+          git merge origin/test --no-ff -m "Merge changes from test branch after successful build"
           git push origin main
