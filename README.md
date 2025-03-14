@@ -29,8 +29,9 @@ A **Student Management System** built using Java to manage student records effic
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/username/student-management-system.git
-   cd student-management-system
+   git clone git@github.com:Dineshs737/the-american-dreams.git
+   cd the-american-dreams
+   cd demoiTest
 
 ## Configuration: `.env` File Setup
 
