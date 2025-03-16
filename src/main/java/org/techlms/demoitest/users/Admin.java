@@ -18,7 +18,7 @@ public class Admin extends User{
         switch(role){
             case "admin" -> createAdmin();
             case "student" -> createStudent();
-            case "lecturer" -> cerateLecturer();
+            case "lecturer" -> createLecturer();
             case "technical_officer" -> createTechnicalOfficer();
             default -> System.out.println("....... user not exits");
         }
@@ -29,7 +29,7 @@ public class Admin extends User{
 
     }
 
-    private void cerateLecturer() {
+    private void createLecturer() {
     }
 
     private void createStudent() {

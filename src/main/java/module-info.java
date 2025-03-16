@@ -12,6 +12,7 @@ module org.techlms.demoitest {
     requires com.almasb.fxgl.all;
     requires io.github.cdimascio.dotenv.java;
     requires static lombok;
+    requires java.sql;
 
     opens org.techlms.demoitest to javafx.fxml;
     exports org.techlms.demoitest;
