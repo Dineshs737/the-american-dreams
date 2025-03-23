@@ -3,8 +3,14 @@ package org.techlms.demoitest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 
 public class LoginCon{
+    @FXML
+    private TextField username;
+    @FXML
+    private TextField password;
 
 
     public void login() {
