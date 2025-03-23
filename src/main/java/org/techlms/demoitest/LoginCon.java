@@ -13,6 +13,7 @@ public class LoginCon{
     private TextField password;
 
 
+
     public void login() {
     /*    try {
             // Load the new FXML file for the error message
@@ -30,9 +31,6 @@ public class LoginCon{
         }
     }
     */
-
-
-
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Login Error");
