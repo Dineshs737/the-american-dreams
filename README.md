@@ -15,7 +15,6 @@ A **Student Management System** built using Java to manage student records effic
 
 ---
 
-
 ## Requirements
 
 1. **Java Development Kit (JDK)**: Version 17 or higher.
@@ -32,6 +31,9 @@ A **Student Management System** built using Java to manage student records effic
    git clone git@github.com:Dineshs737/the-american-dreams.git
    cd the-american-dreams
    cd demoiTest
+   ```
+
+---
 
 ## Configuration: `.env` File Setup
 
@@ -161,10 +163,9 @@ public class TestDB {
 }
 ```
 
+---
 
-  # Additional Features and Functionality
-
-
+## Additional Features and Functionality
 
 This project includes critical features for password security, such as **SHA-256 Password Hashing** and **Password Validation**. Below is a detailed explanation of how these features work and why they are essential.
 
@@ -243,6 +244,60 @@ public static boolean passwordvalidation(String password) {
     return password.matches(pattern);
 }
 ```
+
+---
+
+## UML Class Diagram Generator
+
+The **Student Management System** supports UML Class Diagram generation to visually represent the class structure of the system. This helps in understanding the relationships between classes, including attributes, methods, and inheritance.
+
+### Features
+- **Automatic Diagram Generation**: Generates UML class diagrams from the Java class definitions used in the project.
+- **High-Quality Output**: Produces PNG diagrams that are clear and ideal for documentation purposes.
+
+### Repository
+The UML Class Diagram Generator is implemented as a separate project. Check out the repository [here](https://github.com/yourusername/uml-class-diagram-generator).
+
+### How to Use
+
+1. Clone the UML Class Diagram Generator repository:
+   ```bash
+   git@github.com:Dineshs737/UML-class-digram-Py.git
+   cd UML-class-digram-Py
+   ```
+
+2. Follow the instructions in the UML Class Diagram Generator README to set up and use the tool.
+
+3. Once set up, point the generator to your project's `UML-class-digram-Py` folder to generate the class diagram:
+   ```bash
+   py main.py
+   ```
+
+4. The generated class diagram will be saved in the specified output directory (e.g., `diagrams/uml_diagram.png`).
+
+---
+
+## Contribution Guidelines
+
+Contributions are welcome to improve the project and fix issues. Here are the steps to contribute:
+
+1. Fork the repository.
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes with a descriptive message:
+   ```bash
+   git commit -m "Add feature-name"
+   ```
+4. Push your changes to your fork:
+   ```bash
+   git push origin feature-name
+   ```
+5. Create a pull request to the main repository.
+
+---
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
@@ -250,10 +305,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Final Note
 
 Thank you for checking out this project! Feel free to explore, use, and contribute. Let's build something amazing together!
-
-
-
-
-
-
-
