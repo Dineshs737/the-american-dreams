@@ -1,56 +1,149 @@
-/* AnchorPane Styling */
+/* Root styling */
 .root {
-    -fx-background-color: white;
-}
-
-/* Labels Styling */
-.label {
+    -fx-font-family: "Arial, Helvetica, sans-serif";
     -fx-font-size: 16px;
-    -fx-font-family: "Arial";
-    -fx-text-fill: black;
-    -fx-font-weight: bold;
+    -fx-background-color: #f7f9fc;
+    -fx-alignment: center;
 }
 
-/* TextField Styling */
-.text-field {
-    -fx-font-size: 14px;
-    -fx-font-family: "Arial";
-    -fx-padding: 5px;
-    -fx-background-color: #ecf0f1;
-    -fx-border-color: #bdc3c7;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+/* Center alignment for all content */
+.center-content {
+    -fx-alignment: center;
 }
 
-/* Button Styling */
-.button {
-    -fx-font-size: 14px;
-    -fx-font-family: "Arial";
+/* Style for labels */
+
+/* Style for text fields */
+.center-textfield {
+    -fx-background-color: transparent; /* Make the background transparent */
+    -fx-border-width: 0 0 2px 0; /* Set only bottom border */
+    -fx-max-width: 500px;
+    -fx-border-color: transparent transparent black transparent; /* Set bottom border to black */
+    -fx-padding: 10px;
+    -fx-font-size: 16px;
+    -fx-prompt-text-fill: black;
+    /*-fx-prompt-text-;*/
+    -fx-alignment: center-left;
+}
+
+
+
+    /* When the text field is focused, change the bottom border color */
+.center-textfield:focused {
+    -fx-border-color: transparent transparent #3498db transparent; /* Change bottom border to blue when focused */
+    -fx-box-shadow: 0 0 5px #3498db; /* Add a shadow effect */
+}
+
+/* Style for password field (similar to text field) */
+.center-textfield:focused,
+.center-textfield {
+    -fx-border-color: transparent transparent black transparent;
+}
+
+@media screen and (min-width: 400px) {
+    .center-textfield {
+        -fx-pref-width: 400px;
+    }
+}
+
+/* Style for button container */
+.center-button-container {
+    -fx-alignment: center;
+    -fx-padding: 15px;
+}
+
+/* Style for buttons */
+.center-button {
     -fx-background-color: #3498db;
-    -fx-text-fill: white;
-    -fx-padding: 5px 10px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+    -fx-background-radius: 15px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-min-width: 160px;
+    -fx-max-width: 200px;
+    -fx-max-height: 45px;
     -fx-cursor: hand;
+    -fx-transition: background-color 0.3s ease;
 }
 
-.button:hover {
+@media screen and (min-width: 400px) {
+    .center-button {
+        -fx-pref-width: 300px;
+    }
+}
+
+.center-button:hover {
     -fx-background-color: #2980b9;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-/* Error Label Styling */
-#loginError {
+.center-button:pressed {
+    -fx-background-color: #1c6ea4;
+}
+
+/* Left-side background styling */
+.left-side {
+    -fx-background-color: #ecf0f1;
+    -fx-padding: 20px;
+    -fx-border-radius: 10px;
+    -fx-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    -fx-alignment: center;
+}
+
+/* Image styling */
+.center-image {
+    -fx-fit-width: 120px;
+    -fx-fit-height: 120px;
+    -fx-opacity: 0.9;
+    -fx-transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media screen and (min-width: 400px) {
+    .center-image {
+        -fx-fit-width: 250px;
+        -fx-fit-height: 250px;
+    }
+}
+
+.center-image:hover {
+    -fx-opacity: 1;
+    -fx-transform: scale(1.1);
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 600px) {
+    .center-textfield {
+        -fx-min-width: 100%;
+    }
+
+    .center-button {
+        -fx-min-width: 100%;
+    }
+}
+@media screen and (min-width: 1620px) {
+    .center-textfield {
+        -fx-pref-width: 500px;
+    }
+
+    .center-button {
+        -fx-pref-width: 300px;
+    }
+}
+/* Header Section Styling */
+.header-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+    /*-fx-padding: 15px;*/
+    -fx-alignment: center;
+}
+
+/* Footer Section Styling */
+.footer-label {
     -fx-font-size: 14px;
-    -fx-font-family: "Arial";
-    -fx-text-fill: red;
-    -fx-font-style: italic;
-}
-
-/* Image Styling */
-.image-view {
-    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);*/
-    -fx-background-radius: 50%;
-    -fx-clip-radius: 50%;
-    -fx-fit-height: 150px; /* Adjust size as needed */
-    -fx-fit-width: 150px;  /* Adjust size as needed */
+    -fx-text-fill: #7f8c8d;
+    -fx-padding: 10px;
+    -fx-alignment: center;
 }
