@@ -1,24 +1,10 @@
 package org.techlms.demoitest;
 
 import javafx.fxml.FXML;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-
-
-public class LoginCon {
-    @FXML
-    private TextField username;
-    @FXML
-    private TextField password;
-    @FXML
-    private Label loginError;
+public class LoginCon{
 
 
     public void login() {
@@ -40,12 +26,17 @@ public class LoginCon {
     */
 
 
+
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Login Error");
         alert.setContentText("Username or Password is incorrect");
 
-        // Show the alert and wait for the user to close it
         alert.showAndWait();
+        
+        // Alternatively, you can print the credentials to the console if that's desired:
+        System.out.println(username.getText() + " " + password.getText());
+    }
+}
 
-}}
+
