@@ -1,0 +1,56 @@
+/* AnchorPane Styling */
+.root {
+    -fx-background-color: white;
+}
+
+/* Labels Styling */
+.label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+/* TextField Styling */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-padding: 5px;
+    -fx-background-color: #ecf0f1;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Button Styling */
+.button {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Error Label Styling */
+#loginError {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: red;
+    -fx-font-style: italic;
+}
+
+/* Image Styling */
+.image-view {
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);*/
+    -fx-background-radius: 50%;
+    -fx-clip-radius: 50%;
+    -fx-fit-height: 150px; /* Adjust size as needed */
+    -fx-fit-width: 150px;  /* Adjust size as needed */
+}
