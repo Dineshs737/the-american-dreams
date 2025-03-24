@@ -2,7 +2,7 @@
 .root {
     -fx-font-family: "Arial, Helvetica, sans-serif";
     -fx-font-size: 16px;
-    -fx-background-color: #f7f9fc;
+    -fx-background-color: #ecf0f1;
     -fx-alignment: center;
 }
 
@@ -85,7 +85,7 @@
 
 /* Left-side background styling */
 .left-side {
-    -fx-background-color: #ecf0f1;
+    -fx-background-color: transparent;
     -fx-padding: 20px;
     -fx-border-radius: 10px;
     -fx-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
