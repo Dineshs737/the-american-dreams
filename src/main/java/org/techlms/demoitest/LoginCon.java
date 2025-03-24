@@ -5,6 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginCon{
     @FXML
@@ -31,15 +35,19 @@ public class LoginCon{
         }
     }
     */
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Login Error");
-        alert.setContentText("Username or Password is incorrect");
+//        Alert alert = new Alert(Alert.AlertType.ERROR);
+//        alert.setTitle("Error");
+//        alert.setHeaderText("Login Error");
+//        alert.setContentText("Username or Password is incorrect");
+//
+//        alert.showAndWait();
+//
+//        // Alternatively, you can print the credentials to the console if that's desired:
+//        System.out.println(username.getText() + " " + password.getText());
 
-        alert.showAndWait();
-        
-        // Alternatively, you can print the credentials to the console if that's desired:
-        System.out.println(username.getText() + " " + password.getText());
+        ErrorController controller = new ErrorController();
+        controller.showErrorMessage("this is custom error message");
+
     }
 }
 
