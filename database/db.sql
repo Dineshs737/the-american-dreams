@@ -21,57 +21,57 @@ CREATE TABLE user (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-INSERT INTO `user` (`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
-    ('TG1062', 'D.Jamper', 'Jamper999@gmail.com', 'Student', '761234654', 'dae5992a6320223d208f6277f7c1cb9e04fea726f16a1d16458963067cf7bb52'),
-    ('TG1063', 'O.Otara87', 'otara87@gmail.com', 'Student', '761234789', '06d913e979383fbec4ad1a4fed98c7af0206407a5de747adf2eaa3c968b07ab8'),
-    ('TG1064', 'M.Manodra', 'manodra@gmail.com', 'Student', '761234678', '64701c078db4c0dd283d04fa9c4d80ebb4eb919b2f83c1043dfe6eb3476ecb69'),
-    ('TG1414', 'R.Rajapaksha', 'rajapaksha@gmail.com', 'Student', '761234565', '85b408c39db526dfbfb59797ffcc5d300a874e7d1167cde9c70726f7db140e7e'),
-    ('TG1413', 'A.Asmaakram2', 'asmaakram2@gmail.com', 'Student', '761234564', '1055dd50f255c86a66ecadf4762aaca3358cfa24e4872dfe913fce2e036b09da'),
-    ('TG1345', 'K.Kanadipudayan', 'kanadipudayan@gmail.com', 'Student', '718032400', '1cbf767dcbbdd1cf3dfe005ee7eeb0d7a658685654cc2a535be32268c856a2fe'),
-    ('TG1067', 'S.Shalini52', 'shalini52@gmail.com', 'Student', '761234567', '8b20e9620a8858b94909f00f68b5c87c91c7091d5c9ffcd75a14aa9f0004ab78'),
-    ('TG1415', 'P.Pema00', 'pema00@gmail.com', 'Student', '718032468', '902237776fa6387dc42703e536b9cc68f3a8637a077ff550f70e3d9f1ec762ba'),
-    ('TG1417', 'A.AnpuSin', 'anpuSin@gmail.com', 'Student', '761234573', '7a7225adee04214c7ab27bffc4f4d77ea8b827d1ffe2f8166242c6caf36ed2fd'),
-    ('TG1416', 'D.Dinesh', 'dinesh@gmail.com', 'Student', '749900223', '50fdaaa812210d14ea648296b131844e23c1a9d51662ad969a81f3c4eef627f2'),
-    ('TG1418', 'K.Kaviya', 'kaviya@gmail.com', 'Student', '788765432', '499cbdc7ecd89d158fe7e4731f8943f0b0df7ed2080b28e8694e0be3393a64f1'),
-    ('TG1419', 'D.Dhanu', 'dhanu@gmail.com', 'Student', '745432188', 'b110d14482421f6d6e5afb454c4e308fae086c64a87b1966525a0ae11b23868b'),
-    ('TG1420', 'D.Dharshi', 'dharshi@gmail.com', 'Student', '751234509', 'd30a052c2cdd472d612cb4138f5b088ef94c97e6b3ffd90cea5718a1cefc854e'),
-    ('TG1421', 'T.Thinesh', 'thinesh@gmail.com', 'Student', '750987653', 'faa5f49f088dcabb4cee316f0bf24b2b49ddcdb2a87a54cd6118f1f28a58bc5d'),
-    ('TG1422', 'A.Akram', 'akram@gmail.com', 'Student', '764545456', '8c2012bcd0dabb0bcba27ab1cbb2c87b2f392486183548f0fdac95f405ed4223'),
-    ('TG1423', 'T.Thak', 'thak@gmail.com', 'Student', '761234098', '3cacb5d972d86adb6ecb75a89a58e47f1ea3eec8aaa2df826c03b4ac826c1224'),
-    ('TG1424', 'K.Keerthan', 'keerthan@gmail.com', 'Student', '789876588', '210a29ba180e17d8178c978893f1e86beba7187d5805e1d9c766e7245a9cb8f0'),
-    ('TG1425', 'V.Madhu', 'madhu@gmail.com', 'Student', '753456789', 'dcdb51b664e5dd3077bd929e41115683d36b84a7367021d228c32d1eb4621a46'),
-    ('TG1426', 'S.Suba', 'suba@gmail.com', 'Student', '747474745', 'cef9bb6c0e55d1f0fa1733a0695e055fa796476459c9534b7ce55eef729ce5c5'),
-    ('TG1427', 'P.Praveen', 'praveen@gmail.com', 'Student', '757698089', '85a9c28876bb35b406100c4cbad1636e2461acf4308033f18fca68216d2c0422'),
-    ('TG1428', 'S.Sajeeya', 'Sajeeya@gmail.com', 'Student', '718562347', '269ecb47ff8ebb12f4433c628a65a2ba5b4bf2fd24f5069c22ce0f277123761e'),
-    ('TG1429', 'A.Asma', 'Asma@gmail.com', 'Student', '768534547', '9fee23448017ed22508482bf9682107ed4fa9b58a1bf26d026dc6328ce0b5c71'),
-    ('TG1430', 'U.Umesha', 'Umesha@gmail.com', 'Student', '775340058', '4c6457f45036f181284bd111c9c0c5e2b581017b18edc71155ceda70c7c5149d'),
-    ('TG1431', 'D.Danith', 'Danith@gmail.com', 'Student', '718032400', 'a3129d8ceff0d71abb0851597f207f62e988e977f6133aac69e979d379c58159'),
-    ('TG1432', 'D.Dasun', 'Dasun@gmail.com', 'Student', '761234687', 'bdbdd2efdcfc779afa44c991daae58928cea35a53606b74516d9439f1fbc83bf');
+INSERT INTO `user` (user_id,`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
+    (1,'tg1062', 'D.Jamper', 'Jamper999@gmail.com', 'Student', '761234654', 'dae5992a6320223d208f6277f7c1cb9e04fea726f16a1d16458963067cf7bb52'),
+    (2,'tg1063', 'O.Otara87', 'otara87@gmail.com', 'Student', '761234789', '06d913e979383fbec4ad1a4fed98c7af0206407a5de747adf2eaa3c968b07ab8'),
+    (3,'tg1064', 'M.Manodra', 'manodra@gmail.com', 'Student', '761234678', '64701c078db4c0dd283d04fa9c4d80ebb4eb919b2f83c1043dfe6eb3476ecb69'),
+    (4,'tg1414', 'R.Rajapaksha', 'rajapaksha@gmail.com', 'Student', '761234565', '85b408c39db526dfbfb59797ffcc5d300a874e7d1167cde9c70726f7db140e7e'),
+    (5,'tg1413', 'A.Asmaakram2', 'asmaakram2@gmail.com', 'Student', '761234564', '1055dd50f255c86a66ecadf4762aaca3358cfa24e4872dfe913fce2e036b09da'),
+    (6,'tg1345', 'K.Kanadipudayan', 'kanadipudayan@gmail.com', 'Student', '718032400', '1cbf767dcbbdd1cf3dfe005ee7eeb0d7a658685654cc2a535be32268c856a2fe'),
+    (7,'tg1067', 'S.Shalini52', 'shalini52@gmail.com', 'Student', '761234567', '8b20e9620a8858b94909f00f68b5c87c91c7091d5c9ffcd75a14aa9f0004ab78'),
+    (8,'tg1415', 'P.Pema00', 'pema00@gmail.com', 'Student', '718032468', '902237776fa6387dc42703e536b9cc68f3a8637a077ff550f70e3d9f1ec762ba'),
+    (9,'tg1417', 'A.AnpuSin', 'anpuSin@gmail.com', 'Student', '761234573', '7a7225adee04214c7ab27bffc4f4d77ea8b827d1ffe2f8166242c6caf36ed2fd'),
+    (10,'tg1416', 'D.Dinesh', 'dinesh@gmail.com', 'Student', '749900223', '50fdaaa812210d14ea648296b131844e23c1a9d51662ad969a81f3c4eef627f2'),
+    (11,'tg1418', 'K.Kaviya', 'kaviya@gmail.com', 'Student', '788765432', '499cbdc7ecd89d158fe7e4731f8943f0b0df7ed2080b28e8694e0be3393a64f1'),
+    (12,'tg1419', 'D.Dhanu', 'dhanu@gmail.com', 'Student', '745432188', 'b110d14482421f6d6e5afb454c4e308fae086c64a87b1966525a0ae11b23868b'),
+    (13,'tg1420', 'D.Dharshi', 'dharshi@gmail.com', 'Student', '751234509', 'd30a052c2cdd472d612cb4138f5b088ef94c97e6b3ffd90cea5718a1cefc854e'),
+    (14,'tg1421', 'T.Thinesh', 'thinesh@gmail.com', 'Student', '750987653', 'faa5f49f088dcabb4cee316f0bf24b2b49ddcdb2a87a54cd6118f1f28a58bc5d'),
+    (15,'tg1422', 'A.Akram', 'akram@gmail.com', 'Student', '764545456', '8c2012bcd0dabb0bcba27ab1cbb2c87b2f392486183548f0fdac95f405ed4223'),
+    (16,'tg1423', 'T.Thak', 'thak@gmail.com', 'Student', '761234098', '3cacb5d972d86adb6ecb75a89a58e47f1ea3eec8aaa2df826c03b4ac826c1224'),
+    (17,'tg1424', 'K.Keerthan', 'keerthan@gmail.com', 'Student', '789876588', '210a29ba180e17d8178c978893f1e86beba7187d5805e1d9c766e7245a9cb8f0'),
+    (18,'tg1425', 'V.Madhu', 'madhu@gmail.com', 'Student', '753456789', 'dcdb51b664e5dd3077bd929e41115683d36b84a7367021d228c32d1eb4621a46'),
+    (19,'tg1426', 'S.Suba', 'suba@gmail.com', 'Student', '747474745', 'cef9bb6c0e55d1f0fa1733a0695e055fa796476459c9534b7ce55eef729ce5c5'),
+    (20,'tg1427', 'P.Praveen', 'praveen@gmail.com', 'Student', '757698089', '85a9c28876bb35b406100c4cbad1636e2461acf4308033f18fca68216d2c0422'),
+    (21,'tg1428', 'S.Sajeeya', 'Sajeeya@gmail.com', 'Student', '718562347', '269ecb47ff8ebb12f4433c628a65a2ba5b4bf2fd24f5069c22ce0f277123761e'),
+    (22,'tg1429', 'A.Asma', 'Asma@gmail.com', 'Student', '768534547', '9fee23448017ed22508482bf9682107ed4fa9b58a1bf26d026dc6328ce0b5c71'),
+    (23,'tg1430', 'U.Umesha', 'Umesha@gmail.com', 'Student', '775340058', '4c6457f45036f181284bd111c9c0c5e2b581017b18edc71155ceda70c7c5149d'),
+    (24,'tg1431', 'D.Danith', 'Danith@gmail.com', 'Student', '718032400', 'a3129d8ceff0d71abb0851597f207f62e988e977f6133aac69e979d379c58159'),
+    (25,'tg1432', 'D.Dasun', 'Dasun@gmail.com', 'Student', '761234687', 'bdbdd2efdcfc779afa44c991daae58928cea35a53606b74516d9439f1fbc83bf');
 
 -- Technical_officer user data insert
-INSERT INTO `user` (`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
-     ('Tech_off_01', 'K.Vaja', 'kavindi@gmail.com', 'Technical Officer', '769870000', '8d93cc2a76b00161ec7f372d7fdd1d45e5cba7d3b74cb0c068d07ff1e807ba17'),
-     ('Tech_off_02', 'R.Raja', 'raja@gmail.com', 'Technical Officer', '755566799', 'feffe1e1a73b6443c229f162e1c82d82295b08ebb576068566ecc71d6efd5c4f'),
-     ('Tech_off_03', 'K.Kamal', 'kamal@gmail.com', 'Technical Officer', '760987654', '4bb09b01c9012bff610927871af0ae59a6620a204efd6f2a251eb92b0a1c8d56'),
-     ('Tech_off_04', 'V.Vihanga', 'vihanga@gmail.com', 'Technical Officer', '760000987', '6989c62b46aeb11517ca743a00aa38d37dce2757141353c526ee682682ccbf06'),
-     ('Tech_off_05', 'M.Mithu', 'mithu@gmail.com', 'Technical Officer', '756677665', '5c3544e502ee2eb2ec924c34916c117be8d09708865b28210c74b7a1cfa7ac0a');
+INSERT INTO `user` (user_id,`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
+     (26,'tech_off_01', 'K.Vaja', 'kavindi@gmail.com', 'Technical Officer', '769870000', '8d93cc2a76b00161ec7f372d7fdd1d45e5cba7d3b74cb0c068d07ff1e807ba17'),
+     (27,'tech_off_02', 'R.Raja', 'raja@gmail.com', 'Technical Officer', '755566799', 'feffe1e1a73b6443c229f162e1c82d82295b08ebb576068566ecc71d6efd5c4f'),
+     (28,'tech_off_03', 'K.Kamal', 'kamal@gmail.com', 'Technical Officer', '760987654', '4bb09b01c9012bff610927871af0ae59a6620a204efd6f2a251eb92b0a1c8d56'),
+     (29,'tech_off_04', 'V.Vihanga', 'vihanga@gmail.com', 'Technical Officer', '760000987', '6989c62b46aeb11517ca743a00aa38d37dce2757141353c526ee682682ccbf06'),
+     (30,'tech_off_05', 'M.Mithu', 'mithu@gmail.com', 'Technical Officer', '756677665', '5c3544e502ee2eb2ec924c34916c117be8d09708865b28210c74b7a1cfa7ac0a');
 
 -- Admin user data insert
-INSERT INTO `user` (`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
-     ('Admin_001', 'S.Suman', 'suman@gmail.com', 'Admin', '719877898', 'e69eae4b4fc3a940114ddc693737292d838d8cabb299e8d5a1d84b5e97c0e68b');
+INSERT INTO `user` (user_id,`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
+     (31,'admin_001', 'S.Suman', 'suman@gmail.com', 'Admin', '719877898', 'e69eae4b4fc3a940114ddc693737292d838d8cabb299e8d5a1d84b5e97c0e68b');
 
 -- Lecturer user data insert
 INSERT INTO `user` (`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
-     ('L0001', 'M.Aayansah', 'aayansh@gmail.com', 'Lecturer', '0712345678', 'cb50b522a8f61e8a869ed009e71fbe3f12a50fe3708ad9f4c3cfda9e682f6047'),
-     ('L0002', 'M.Kavid', 'kavind@gmail.com', 'Lecturer', '0781234567', 'd7b674e3d1dbab1d05abfcd6fae2e35d1bb8e99a254208fc49d85dbd163ec1de'),
-     ('L0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'Lecturer', '0745678123', '204dd7de4295107a97b4a9b1759d5ca956ac1f3b33fa31790e592f1d0260635e'),
-     ('L0004', 'M.Tharindu', 'tharindu@gmail.com', 'Lecturer', '0712348765', '19f2e2b7340b853f3833992f5d2d9c23840d872c59975dbab98e7d87561f0981'),
-     ('L0005', 'M.Ishara', 'ishara@gmail.com', 'Lecturer', '0787654321', '189f91ff8321b6b69430243895a2d8cba292d6854c4950be42c32138cd3f399d'),
-     ('L0006', 'M.Lakal', 'lakal@gmail.com', 'Lecturer', '0741234567', '0b225a4da41b27d4d59441681010f95bbf9071e88cf76d72c09c4a72c4bfb988'),
-     ('L0007', 'M.Ruwan', 'ruwan@gmail.com', 'Lecturer', '0712349876', '82d35f15bc8d4e974b2788e7ecb8655d0f2b9e586bfa34021ac0b10d0a846689'),
-     ('L0008', 'M.Nishan', 'nishan@gmail.com', 'Lecturer', '0789123456', '9a17a599e04b0e3d430bbfe707be83f58e5400cdce2eab0b2148d328cc0d91a5'),
-     ('L0009', 'M.Shaneeka', 'shaneeka@gmail.com', 'Lecturer', '0712346589', 'ee46b712b7c2855283e7e522b82d7a96d92a2acb8d70896f5d99007b50d6220f'),
-     ('L0010', 'M.Kusum', 'kusum@gmail.com', 'Lecturer', '0745678901', 'fdcdcd062d7b8e5b77147cc5a02a062e7425b0710410ad9a1257f9e8b0bb04d9');
+     (31,'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'Lecturer', '0712345678', 'cb50b522a8f61e8a869ed009e71fbe3f12a50fe3708ad9f4c3cfda9e682f6047'),
+     (32,'l0002', 'M.Kavid', 'kavind@gmail.com', 'Lecturer', '0781234567', 'd7b674e3d1dbab1d05abfcd6fae2e35d1bb8e99a254208fc49d85dbd163ec1de'),
+     (33,'l0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'Lecturer', '0745678123', '204dd7de4295107a97b4a9b1759d5ca956ac1f3b33fa31790e592f1d0260635e'),
+     (34,'l0004', 'M.Tharindu', 'tharindu@gmail.com', 'Lecturer', '0712348765', '19f2e2b7340b853f3833992f5d2d9c23840d872c59975dbab98e7d87561f0981'),
+     (35,'l0005', 'M.Ishara', 'ishara@gmail.com', 'Lecturer', '0787654321', '189f91ff8321b6b69430243895a2d8cba292d6854c4950be42c32138cd3f399d'),
+     (36,'l0006', 'M.Lakal', 'lakal@gmail.com', 'Lecturer', '0741234567', '0b225a4da41b27d4d59441681010f95bbf9071e88cf76d72c09c4a72c4bfb988'),
+     (37,'l0007', 'M.Ruwan', 'ruwan@gmail.com', 'Lecturer', '0712349876', '82d35f15bc8d4e974b2788e7ecb8655d0f2b9e586bfa34021ac0b10d0a846689'),
+     (38,'l0008', 'M.Nishan', 'nishan@gmail.com', 'Lecturer', '0789123456', '9a17a599e04b0e3d430bbfe707be83f58e5400cdce2eab0b2148d328cc0d91a5'),
+     (39,'l0009', 'M.Shaneeka', 'shaneeka@gmail.com', 'Lecturer', '0712346589', 'ee46b712b7c2855283e7e522b82d7a96d92a2acb8d70896f5d99007b50d6220f'),
+     (40,'l0010', 'M.Kusum', 'kusum@gmail.com', 'Lecturer', '0745678901', 'fdcdcd062d7b8e5b77147cc5a02a062e7425b0710410ad9a1257f9e8b0bb04d9');
 
 
 
