@@ -14,13 +14,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //        LoginCon
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/org/techlms/demoitest/login.fxml")) ;
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/org/techlms/demoitest/student-ui.fxml")) ;
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
-        stage.setMaxHeight(600);
-        stage.setMaxWidth(1000);
-        stage.setMinWidth(400);
-        stage.setMinHeight(800);
         stage.show();
     }
 }
