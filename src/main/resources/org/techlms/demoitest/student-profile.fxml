@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="user-profile-root" stylesheets="@newStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox styleClass="side-bar" stylesheets="@./newStyle.css" BorderPane.alignment="TOP_LEFT">
+         <children>
+            <Label styleClass="student-nav-bar-labels" text="Home">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </VBox.margin>
+            </Label>
+            <Label styleClass="student-nav-bar-labels" text="Time table">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label styleClass="student-nav-bar-labels" text="Grades">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label styleClass="student-nav-bar-labels" text="Notes">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="logout-button" text="Logout" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Circle fill="#686c70" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                     <HBox.margin>
+                        <Insets bottom="30.0" />
+                     </HBox.margin></Circle>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="10.0" right="30.0" top="10.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <VBox styleClass="profile-left-card" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" styleClass="my-course-message">
+               <children>
+                  <Label styleClass="course-name-profile" text="User profile menu">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <VBox>
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <VBox alignment="CENTER" styleClass="profile-card">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Circle fill="#3d4d5c" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label styleClass="user-profile-label" text="User name">
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="1.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField prefWidth="400.0" promptText="User name" styleClass="user-profile-text-field">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="20.0" layoutY="20.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label styleClass="user-profile-label" text="contact number">
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="1.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField prefWidth="400.0" promptText="phone number" styleClass="user-profile-text-field">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="55.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label styleClass="user-profile-label" text="Gender">
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="1.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField prefWidth="400.0" promptText="Gender" styleClass="user-profile-text-field">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="101.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label styleClass="user-profile-label" text="Department">
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="1.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField prefWidth="400.0" promptText="Department" styleClass="user-profile-text-field">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="146.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label styleClass="user-profile-label" text="Address">
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="1.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField prefWidth="400.0" promptText="Address" styleClass="user-profile-text-field">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="191.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label styleClass="user-profile-label" text="Email">
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="1.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField prefWidth="400.0" promptText="Email" styleClass="user-profile-text-field">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="237.0">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <Button mnemonicParsing="false" styleClass="user-profile-button" text="Update">
+                                             <padding>
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                             </padding>
+                                          </Button>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>
