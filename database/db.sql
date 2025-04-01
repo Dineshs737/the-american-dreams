@@ -134,30 +134,30 @@ CREATE TABLE `student`
 
 INSERT INTO `student` (`student_id`, `student_username`, `batch`, `gender`, `department`)
 VALUES (1, 'tg1062', '2022', 'm', 'ict'),
-       (2, 'TG1063', '2022', 'M', 'ict'),
-       (3, 'TG1064', '2022', 'M', 'ict'),
-       (4, 'TG1414', '2022', 'M', 'ict'),
-       (5, 'TG1413', '2022', 'F', 'ict'),
-       (6, 'TG1345', '2022', 'M', 'ict'),
-       (7, 'TG1067', '2022', 'F', 'ict'),
-       (8, 'TG1415', '2022', 'M', 'ict'),
-       (9, 'TG1417', '2022', 'M', 'ict'),
-       (10, 'TG1416', '2022', 'M', 'ict'),
-       (11, 'TG1418', '2022', 'F', 'ict'),
-       (12, 'TG1419', '2022', 'F', 'ict'),
-       (13, 'TG1420', '2022', 'F', 'ict'),
-       (14, 'TG1421', '2022', 'M', 'ict'),
-       (15, 'TG1422', '2022', 'M', 'ict'),
-       (16, 'TG1423', '2022', 'M', 'ict'),
-       (17, 'TG1424', '2022', 'M', 'ict'),
-       (18, 'TG1425', '2022', 'F', 'ict'),
-       (19, 'TG1426', '2022', 'F', 'ict'),
-       (20, 'TG1427', '2022', 'M', 'ict'),
-       (21, 'TG1428', '2022', 'F', 'ict'),
-       (22, 'TG1429', '2022', 'F', 'ict'),
-       (23, 'TG1430', '2022', 'F', 'ict'),
-       (24, 'TG1431', '2022', 'M', 'ict'),
-       (25, 'TG1432', '2022', 'M', 'ict');
+       (2, 'tg1063', '2022', 'm', 'ict'),
+       (3, 'tg1064', '2022', 'm', 'ict'),
+       (4, 'tg1414', '2022', 'm', 'ict'),
+       (5, 'tg1413', '2022', 'f', 'ict'),
+       (6, 'tg1345', '2022', 'm', 'ict'),
+       (7, 'tg1067', '2022', 'f', 'ict'),
+       (8, 'tg1415', '2022', 'm', 'ict'),
+       (9, 'tg1417', '2022', 'm', 'ict'),
+       (10, 'tg1416', '2022', 'm', 'ict'),
+       (11, 'tg1418', '2022', 'f', 'ict'),
+       (12, 'tg1419', '2022', 'f', 'ict'),
+       (13, 'tg1420', '2022', 'f', 'ict'),
+       (14, 'tg1421', '2022', 'm', 'ict'),
+       (15, 'tg1422', '2022', 'm', 'ict'),
+       (16, 'tg1423', '2022', 'm', 'ict'),
+       (17, 'tg1424', '2022', 'm', 'ict'),
+       (18, 'tg1425', '2022', 'f', 'ict'),
+       (19, 'tg1426', '2022', 'f', 'ict'),
+       (20, 'tg1427', '2022', 'm', 'ict'),
+       (21, 'tg1428', '2022', 'f', 'ict'),
+       (22, 'tg1429', '2022', 'f', 'ict'),
+       (23, 'tg1430', '2022', 'f', 'ict'),
+       (24, 'tg1431', '2022', 'm', 'ict'),
+       (25, 'tg1432', '2022', 'm', 'ict');
 
 
 CREATE TABLE `department` (
@@ -238,11 +238,11 @@ CREATE TABLE IF NOT EXISTS `course` (
 );
 
 INSERT INTO `course`(`course_id`, `course_code`,`dep_code`, `name`, `credit`, `week`, `course_image`)
-VALUES (1, 'ICT2113','ict', 'Data Structures and Algorithms', 3, '15', null),
-       (2, 'ICT2133','ict' ,'E-Commerce Implementation, Management and Security', 3, '15', null),
-       (3, 'ICT2122','ict' ,'Object Oriented Analysis and Design', 2, '15', null),
-       (4, 'ICT2142','ict' ,'Object Oriented Programming Practicum', 2, '15', null),
-       (5, 'ICT2152','ict' ,'Object Oriented Programming', 2, '15', null);
+VALUES (1, 'ict2113','ict', 'Data Structures and Algorithms', 3, '15', null),
+       (2, 'ict2133','ict' ,'E-Commerce Implementation, Management and Security', 3, '15', null),
+       (3, 'ict2122','ict' ,'Object Oriented Analysis and Design', 2, '15', null),
+       (4, 'ict2142','ict' ,'Object Oriented Programming Practicum', 2, '15', null),
+       (5, 'ict2152','ict' ,'Object Oriented Programming', 2, '15', null);
 
 
 
