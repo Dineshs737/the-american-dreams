@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="user-profile-root" stylesheets="@newStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox styleClass="side-bar" stylesheets="@newStyle.css" BorderPane.alignment="TOP_LEFT">
+         <children>
+            <Label styleClass="student-nav-bar-labels" text="Home">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </VBox.margin>
+            </Label>
+            <Label styleClass="student-nav-bar-labels" text="Time table">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label styleClass="student-nav-bar-labels" text="Grades">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label styleClass="student-nav-bar-labels" text="Notes">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="logout-button" text="Logout" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Circle fill="#686c70" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                     <HBox.margin>
+                        <Insets bottom="30.0" />
+                     </HBox.margin></Circle>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="10.0" right="30.0" top="10.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <VBox styleClass="profile-left-card" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" styleClass="my-course-message">
+               <children>
+                  <Label styleClass="course-name-profile" text="Student Grades">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <VBox>
+               <children>
+                  <VBox alignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <TableView fx:id="studentGrades" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="courseCode" minWidth="-1.0" prefWidth="100.0" text="Course code" />
+                            <TableColumn fx:id="quiz01" prefWidth="100.0" text="Quiz01" />
+                              <TableColumn fx:id="quiz02" prefWidth="100.0" text="Quiz 02" />
+                              <TableColumn fx:id="quiz03" prefWidth="100.0" text="Quiz 03" />
+                              <TableColumn fx:id="inclassAssiegment" prefWidth="150.0" text="Inclass assiegment" />
+                              <TableColumn fx:id="midExam" prefWidth="100.0" text="Mid exam" />
+                              <TableColumn fx:id="endExam" prefWidth="100.0" text="End exam" />
+                              <TableColumn fx:id="SGPA" prefWidth="100.0" text="SGPA" />
+                              <TableColumn fx:id="CGPA" prefWidth="100.0" text="CGPA" />
+                              <TableColumn fx:id="GPA" prefWidth="100.0" text="GPA" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <VBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>
