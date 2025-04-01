@@ -1,16 +1,9 @@
 package org.techlms.demoitest.users;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-
-@Getter
-@Setter
 public class Admin extends User{
 
-    public Admin(String user_id, String name, String password, String email, String contactNo, String role) {
-        super(user_id, name, password, email, contactNo, "admin");
+    public Admin(int user_id, String user_name, String name, String password, String email, String contactNo, String role) {
+        super(user_id, user_name, name, password, email, contactNo, "admin");
     }
 
     public void createUser(String role){
@@ -19,7 +12,7 @@ public class Admin extends User{
             case "admin" -> createAdmin();
             case "student" -> createStudent();
             case "lecturer" -> createLecturer();
-            case "technical_officer" -> createTechnicalOfficer();
+            case "technical officer" -> createTechnicalOfficer();
             default -> System.out.println("....... user not exits");
         }
 
