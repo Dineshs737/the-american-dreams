@@ -1,6 +1,9 @@
-DROP DATABASE IF EXISTS `techlms`;
-CREATE DATABASE `techlms`;
-USE  `techlms`;
+DROP
+DATABASE IF EXISTS `techlms`;
+CREATE
+DATABASE `techlms`;
+USE
+`techlms`;
 
 -- Drop the table if it exists
 DROP TABLE IF EXISTS `user`;
@@ -10,197 +13,352 @@ DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS user;
 
 -- Create the user table
-CREATE TABLE user (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-	email VARCHAR(100) UNIQUE,
-	username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
+CREATE TABLE user
+(
+    user_id    INT AUTO_INCREMENT PRIMARY KEY,
+    name       VARCHAR(50)  NOT NULL,
+    email      VARCHAR(100) UNIQUE,
+    username   VARCHAR(50)  NOT NULL UNIQUE,
+    password   VARCHAR(255) NOT NULL,
     contact_no VARCHAR(15),
-    role ENUM('Admin', 'Lecturer', 'Student', 'Technical Officer') NOT NULL,
+    role       ENUM('Admin', 'Lecturer', 'Student', 'Technical Officer') NOT NULL,
+    `course_image` LONGBLOB,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-INSERT INTO `user` (user_id,`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
-    (1,'tg1062', 'D.Jamper', 'Jamper999@gmail.com', 'Student', '761234654', 'dae5992a6320223d208f6277f7c1cb9e04fea726f16a1d16458963067cf7bb52'),
-    (2,'tg1063', 'O.Otara87', 'otara87@gmail.com', 'Student', '761234789', '06d913e979383fbec4ad1a4fed98c7af0206407a5de747adf2eaa3c968b07ab8'),
-    (3,'tg1064', 'M.Manodra', 'manodra@gmail.com', 'Student', '761234678', '64701c078db4c0dd283d04fa9c4d80ebb4eb919b2f83c1043dfe6eb3476ecb69'),
-    (4,'tg1414', 'R.Rajapaksha', 'rajapaksha@gmail.com', 'Student', '761234565', '85b408c39db526dfbfb59797ffcc5d300a874e7d1167cde9c70726f7db140e7e'),
-    (5,'tg1413', 'A.Asmaakram2', 'asmaakram2@gmail.com', 'Student', '761234564', '1055dd50f255c86a66ecadf4762aaca3358cfa24e4872dfe913fce2e036b09da'),
-    (6,'tg1345', 'K.Kanadipudayan', 'kanadipudayan@gmail.com', 'Student', '718032400', '1cbf767dcbbdd1cf3dfe005ee7eeb0d7a658685654cc2a535be32268c856a2fe'),
-    (7,'tg1067', 'S.Shalini52', 'shalini52@gmail.com', 'Student', '761234567', '8b20e9620a8858b94909f00f68b5c87c91c7091d5c9ffcd75a14aa9f0004ab78'),
-    (8,'tg1415', 'P.Pema00', 'pema00@gmail.com', 'Student', '718032468', '902237776fa6387dc42703e536b9cc68f3a8637a077ff550f70e3d9f1ec762ba'),
-    (9,'tg1417', 'A.AnpuSin', 'anpuSin@gmail.com', 'Student', '761234573', '7a7225adee04214c7ab27bffc4f4d77ea8b827d1ffe2f8166242c6caf36ed2fd'),
-    (10,'tg1416', 'D.Dinesh', 'dinesh@gmail.com', 'Student', '749900223', '50fdaaa812210d14ea648296b131844e23c1a9d51662ad969a81f3c4eef627f2'),
-    (11,'tg1418', 'K.Kaviya', 'kaviya@gmail.com', 'Student', '788765432', '499cbdc7ecd89d158fe7e4731f8943f0b0df7ed2080b28e8694e0be3393a64f1'),
-    (12,'tg1419', 'D.Dhanu', 'dhanu@gmail.com', 'Student', '745432188', 'b110d14482421f6d6e5afb454c4e308fae086c64a87b1966525a0ae11b23868b'),
-    (13,'tg1420', 'D.Dharshi', 'dharshi@gmail.com', 'Student', '751234509', 'd30a052c2cdd472d612cb4138f5b088ef94c97e6b3ffd90cea5718a1cefc854e'),
-    (14,'tg1421', 'T.Thinesh', 'thinesh@gmail.com', 'Student', '750987653', 'faa5f49f088dcabb4cee316f0bf24b2b49ddcdb2a87a54cd6118f1f28a58bc5d'),
-    (15,'tg1422', 'A.Akram', 'akram@gmail.com', 'Student', '764545456', '8c2012bcd0dabb0bcba27ab1cbb2c87b2f392486183548f0fdac95f405ed4223'),
-    (16,'tg1423', 'T.Thak', 'thak@gmail.com', 'Student', '761234098', '3cacb5d972d86adb6ecb75a89a58e47f1ea3eec8aaa2df826c03b4ac826c1224'),
-    (17,'tg1424', 'K.Keerthan', 'keerthan@gmail.com', 'Student', '789876588', '210a29ba180e17d8178c978893f1e86beba7187d5805e1d9c766e7245a9cb8f0'),
-    (18,'tg1425', 'V.Madhu', 'madhu@gmail.com', 'Student', '753456789', 'dcdb51b664e5dd3077bd929e41115683d36b84a7367021d228c32d1eb4621a46'),
-    (19,'tg1426', 'S.Suba', 'suba@gmail.com', 'Student', '747474745', 'cef9bb6c0e55d1f0fa1733a0695e055fa796476459c9534b7ce55eef729ce5c5'),
-    (20,'tg1427', 'P.Praveen', 'praveen@gmail.com', 'Student', '757698089', '85a9c28876bb35b406100c4cbad1636e2461acf4308033f18fca68216d2c0422'),
-    (21,'tg1428', 'S.Sajeeya', 'Sajeeya@gmail.com', 'Student', '718562347', '269ecb47ff8ebb12f4433c628a65a2ba5b4bf2fd24f5069c22ce0f277123761e'),
-    (22,'tg1429', 'A.Asma', 'Asma@gmail.com', 'Student', '768534547', '9fee23448017ed22508482bf9682107ed4fa9b58a1bf26d026dc6328ce0b5c71'),
-    (23,'tg1430', 'U.Umesha', 'Umesha@gmail.com', 'Student', '775340058', '4c6457f45036f181284bd111c9c0c5e2b581017b18edc71155ceda70c7c5149d'),
-    (24,'tg1431', 'D.Danith', 'Danith@gmail.com', 'Student', '718032400', 'a3129d8ceff0d71abb0851597f207f62e988e977f6133aac69e979d379c58159'),
-    (25,'tg1432', 'D.Dasun', 'Dasun@gmail.com', 'Student', '761234687', 'bdbdd2efdcfc779afa44c991daae58928cea35a53606b74516d9439f1fbc83bf');
+-- Student user data insert
+INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
+VALUES (1, 'tg1062', 'D.Jamper', 'Jamper999@gmail.com', 'Student', '761234654',
+        'dae5992a6320223d208f6277f7c1cb9e04fea726f16a1d16458963067cf7bb52'),
+       (2, 'tg1063', 'O.Otara87', 'otara87@gmail.com', 'Student', '761234789',
+        '06d913e979383fbec4ad1a4fed98c7af0206407a5de747adf2eaa3c968b07ab8'),
+       (3, 'tg1064', 'M.Manodra', 'manodra@gmail.com', 'Student', '761234678',
+        '64701c078db4c0dd283d04fa9c4d80ebb4eb919b2f83c1043dfe6eb3476ecb69'),
+       (4, 'tg1414', 'R.Rajapaksha', 'rajapaksha@gmail.com', 'Student', '761234565',
+        '85b408c39db526dfbfb59797ffcc5d300a874e7d1167cde9c70726f7db140e7e'),
+       (5, 'tg1413', 'A.Asmaakram2', 'asmaakram2@gmail.com', 'Student', '761234564',
+        '1055dd50f255c86a66ecadf4762aaca3358cfa24e4872dfe913fce2e036b09da'),
+       (6, 'tg1345', 'K.Kanadipudayan', 'kanadipudayan@gmail.com', 'Student', '718032400',
+        '1cbf767dcbbdd1cf3dfe005ee7eeb0d7a658685654cc2a535be32268c856a2fe'),
+       (7, 'tg1067', 'S.Shalini52', 'shalini52@gmail.com', 'Student', '761234567',
+        '8b20e9620a8858b94909f00f68b5c87c91c7091d5c9ffcd75a14aa9f0004ab78'),
+       (8, 'tg1415', 'P.Pema00', 'pema00@gmail.com', 'Student', '718032468',
+        '902237776fa6387dc42703e536b9cc68f3a8637a077ff550f70e3d9f1ec762ba'),
+       (9, 'tg1417', 'A.AnpuSin', 'anpuSin@gmail.com', 'Student', '761234573',
+        '7a7225adee04214c7ab27bffc4f4d77ea8b827d1ffe2f8166242c6caf36ed2fd'),
+       (10, 'tg1416', 'D.Dinesh', 'dinesh@gmail.com', 'Student', '749900223',
+        '50fdaaa812210d14ea648296b131844e23c1a9d51662ad969a81f3c4eef627f2'),
+       (11, 'tg1418', 'K.Kaviya', 'kaviya@gmail.com', 'Student', '788765432',
+        '499cbdc7ecd89d158fe7e4731f8943f0b0df7ed2080b28e8694e0be3393a64f1'),
+       (12, 'tg1419', 'D.Dhanu', 'dhanu@gmail.com', 'Student', '745432188',
+        'b110d14482421f6d6e5afb454c4e308fae086c64a87b1966525a0ae11b23868b'),
+       (13, 'tg1420', 'D.Dharshi', 'dharshi@gmail.com', 'Student', '751234509',
+        'd30a052c2cdd472d612cb4138f5b088ef94c97e6b3ffd90cea5718a1cefc854e'),
+       (14, 'tg1421', 'T.Thinesh', 'thinesh@gmail.com', 'Student', '750987653',
+        'faa5f49f088dcabb4cee316f0bf24b2b49ddcdb2a87a54cd6118f1f28a58bc5d'),
+       (15, 'tg1422', 'A.Akram', 'akram@gmail.com', 'Student', '764545456',
+        '8c2012bcd0dabb0bcba27ab1cbb2c87b2f392486183548f0fdac95f405ed4223'),
+       (16, 'tg1423', 'T.Thak', 'thak@gmail.com', 'Student', '761234098',
+        '3cacb5d972d86adb6ecb75a89a58e47f1ea3eec8aaa2df826c03b4ac826c1224'),
+       (17, 'tg1424', 'K.Keerthan', 'keerthan@gmail.com', 'Student', '789876588',
+        '210a29ba180e17d8178c978893f1e86beba7187d5805e1d9c766e7245a9cb8f0'),
+       (18, 'tg1425', 'V.Madhu', 'madhu@gmail.com', 'Student', '753456789',
+        'dcdb51b664e5dd3077bd929e41115683d36b84a7367021d228c32d1eb4621a46'),
+       (19, 'tg1426', 'S.Suba', 'suba@gmail.com', 'Student', '747474745',
+        'cef9bb6c0e55d1f0fa1733a0695e055fa796476459c9534b7ce55eef729ce5c5'),
+       (20, 'tg1427', 'P.Praveen', 'praveen@gmail.com', 'Student', '757698089',
+        '85a9c28876bb35b406100c4cbad1636e2461acf4308033f18fca68216d2c0422'),
+       (21, 'tg1428', 'S.Sajeeya', 'Sajeeya@gmail.com', 'Student', '718562347',
+        '269ecb47ff8ebb12f4433c628a65a2ba5b4bf2fd24f5069c22ce0f277123761e'),
+       (22, 'tg1429', 'A.Asma', 'Asma@gmail.com', 'Student', '768534547',
+        '9fee23448017ed22508482bf9682107ed4fa9b58a1bf26d026dc6328ce0b5c71'),
+       (23, 'tg1430', 'U.Umesha', 'Umesha@gmail.com', 'Student', '775340058',
+        '4c6457f45036f181284bd111c9c0c5e2b581017b18edc71155ceda70c7c5149d'),
+       (24, 'tg1431', 'D.Danith', 'Danith@gmail.com', 'Student', '718032400',
+        'a3129d8ceff0d71abb0851597f207f62e988e977f6133aac69e979d379c58159'),
+       (25, 'tg1432', 'D.Dasun', 'Dasun@gmail.com', 'Student', '761234687',
+        'bdbdd2efdcfc779afa44c991daae58928cea35a53606b74516d9439f1fbc83bf');
 
 -- Technical_officer user data insert
-INSERT INTO `user` (user_id,`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
-     (26,'tech_off_01', 'K.Vaja', 'kavindi@gmail.com', 'Technical Officer', '769870000', '8d93cc2a76b00161ec7f372d7fdd1d45e5cba7d3b74cb0c068d07ff1e807ba17'),
-     (27,'tech_off_02', 'R.Raja', 'raja@gmail.com', 'Technical Officer', '755566799', 'feffe1e1a73b6443c229f162e1c82d82295b08ebb576068566ecc71d6efd5c4f'),
-     (28,'tech_off_03', 'K.Kamal', 'kamal@gmail.com', 'Technical Officer', '760987654', '4bb09b01c9012bff610927871af0ae59a6620a204efd6f2a251eb92b0a1c8d56'),
-     (29,'tech_off_04', 'V.Vihanga', 'vihanga@gmail.com', 'Technical Officer', '760000987', '6989c62b46aeb11517ca743a00aa38d37dce2757141353c526ee682682ccbf06'),
-     (30,'tech_off_05', 'M.Mithu', 'mithu@gmail.com', 'Technical Officer', '756677665', '5c3544e502ee2eb2ec924c34916c117be8d09708865b28210c74b7a1cfa7ac0a');
+INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
+VALUES (26, 'tech001', 'K.Vaja', 'kavindi@gmail.com', 'Technical Officer', '769870000',
+        '8d93cc2a76b00161ec7f372d7fdd1d45e5cba7d3b74cb0c068d07ff1e807ba17'),
+       (27, 'tech002', 'R.Raja', 'raja@gmail.com', 'Technical Officer', '755566799',
+        'feffe1e1a73b6443c229f162e1c82d82295b08ebb576068566ecc71d6efd5c4f'),
+       (28, 'tech003', 'K.Kamal', 'kamal@gmail.com', 'Technical Officer', '760987654',
+        '4bb09b01c9012bff610927871af0ae59a6620a204efd6f2a251eb92b0a1c8d56'),
+       (29, 'tech004', 'V.Vihanga', 'vihanga@gmail.com', 'Technical Officer', '760000987',
+        '6989c62b46aeb11517ca743a00aa38d37dce2757141353c526ee682682ccbf06'),
+       (30, 'tech005', 'M.Mithu', 'mithu@gmail.com', 'Technical Officer', '756677665',
+        '5c3544e502ee2eb2ec924c34916c117be8d09708865b28210c74b7a1cfa7ac0a');
 
 -- Admin user data insert
-INSERT INTO `user` (user_id,`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
-     (31,'admin_001', 'S.Suman', 'suman@gmail.com', 'Admin', '719877898', 'e69eae4b4fc3a940114ddc693737292d838d8cabb299e8d5a1d84b5e97c0e68b');
+INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
+VALUES (31, 'admin001', 'S.Suman', 'suman@gmail.com', 'Admin', '719877898',
+        'e69eae4b4fc3a940114ddc693737292d838d8cabb299e8d5a1d84b5e97c0e68b');
 
 -- Lecturer user data insert
-INSERT INTO `user` (`username`, `name`, `email`, `role`, `contact_no`, `password`) VALUES
-     (31,'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'Lecturer', '0712345678', 'cb50b522a8f61e8a869ed009e71fbe3f12a50fe3708ad9f4c3cfda9e682f6047'),
-     (32,'l0002', 'M.Kavid', 'kavind@gmail.com', 'Lecturer', '0781234567', 'd7b674e3d1dbab1d05abfcd6fae2e35d1bb8e99a254208fc49d85dbd163ec1de'),
-     (33,'l0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'Lecturer', '0745678123', '204dd7de4295107a97b4a9b1759d5ca956ac1f3b33fa31790e592f1d0260635e'),
-     (34,'l0004', 'M.Tharindu', 'tharindu@gmail.com', 'Lecturer', '0712348765', '19f2e2b7340b853f3833992f5d2d9c23840d872c59975dbab98e7d87561f0981'),
-     (35,'l0005', 'M.Ishara', 'ishara@gmail.com', 'Lecturer', '0787654321', '189f91ff8321b6b69430243895a2d8cba292d6854c4950be42c32138cd3f399d'),
-     (36,'l0006', 'M.Lakal', 'lakal@gmail.com', 'Lecturer', '0741234567', '0b225a4da41b27d4d59441681010f95bbf9071e88cf76d72c09c4a72c4bfb988'),
-     (37,'l0007', 'M.Ruwan', 'ruwan@gmail.com', 'Lecturer', '0712349876', '82d35f15bc8d4e974b2788e7ecb8655d0f2b9e586bfa34021ac0b10d0a846689'),
-     (38,'l0008', 'M.Nishan', 'nishan@gmail.com', 'Lecturer', '0789123456', '9a17a599e04b0e3d430bbfe707be83f58e5400cdce2eab0b2148d328cc0d91a5'),
-     (39,'l0009', 'M.Shaneeka', 'shaneeka@gmail.com', 'Lecturer', '0712346589', 'ee46b712b7c2855283e7e522b82d7a96d92a2acb8d70896f5d99007b50d6220f'),
-     (40,'l0010', 'M.Kusum', 'kusum@gmail.com', 'Lecturer', '0745678901', 'fdcdcd062d7b8e5b77147cc5a02a062e7425b0710410ad9a1257f9e8b0bb04d9');
+INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
+VALUES (32, 'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'Lecturer', '0712345678',
+        'cb50b522a8f61e8a869ed009e71fbe3f12a50fe3708ad9f4c3cfda9e682f6047'),
+       (33, 'l0002', 'M.Kavid', 'kavind@gmail.com', 'Lecturer', '0781234567',
+        'd7b674e3d1dbab1d05abfcd6fae2e35d1bb8e99a254208fc49d85dbd163ec1de'),
+       (34, 'l0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'Lecturer', '0745678123',
+        '204dd7de4295107a97b4a9b1759d5ca956ac1f3b33fa31790e592f1d0260635e'),
+       (35, 'l0004', 'M.Tharindu', 'tharindu@gmail.com', 'Lecturer', '0712348765',
+        '19f2e2b7340b853f3833992f5d2d9c23840d872c59975dbab98e7d87561f0981'),
+       (36, 'l0005', 'M.Ishara', 'ishara@gmail.com', 'Lecturer', '0787654321',
+        '189f91ff8321b6b69430243895a2d8cba292d6854c4950be42c32138cd3f399d'),
+       (37, 'l0006', 'M.Lakal', 'lakal@gmail.com', 'Lecturer', '0741234567',
+        '0b225a4da41b27d4d59441681010f95bbf9071e88cf76d72c09c4a72c4bfb988'),
+       (38, 'l0007', 'M.Ruwan', 'ruwan@gmail.com', 'Lecturer', '0712349876',
+        '82d35f15bc8d4e974b2788e7ecb8655d0f2b9e586bfa34021ac0b10d0a846689'),
+       (39, 'l0008', 'M.Nishan', 'nishan@gmail.com', 'Lecturer', '0789123456',
+        '9a17a599e04b0e3d430bbfe707be83f58e5400cdce2eab0b2148d328cc0d91a5'),
+       (40, 'l0009', 'M.Shaneeka', 'shaneeka@gmail.com', 'Lecturer', '0712346589',
+        'ee46b712b7c2855283e7e522b82d7a96d92a2acb8d70896f5d99007b50d6220f'),
+       (41, 'l0010', 'M.Kusum', 'kusum@gmail.com', 'Lecturer', '0745678901',
+        'fdcdcd062d7b8e5b77147cc5a02a062e7425b0710410ad9a1257f9e8b0bb04d9');
+
+
+
+CREATE TABLE `student`
+(
+    `student_id`       INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `student_username` VARCHAR(50) NOT NULL,
+    `batch`            VARCHAR(10) NOT NULL,
+    `gender`           CHAR(1)     NOT NULL,
+    `department`       VARCHAR(50) NOT NULL
+);
+
+
+INSERT INTO `student` (`student_id`, `student_username`, `batch`, `gender`, `department`)
+VALUES (1, 'tg1062', '2022', 'm', 'ict'),
+       (2, 'tg1063', '2022', 'm', 'ict'),
+       (3, 'tg1064', '2022', 'm', 'ict'),
+       (4, 'tg1414', '2022', 'm', 'ict'),
+       (5, 'tg1413', '2022', 'f', 'ict'),
+       (6, 'tg1345', '2022', 'm', 'ict'),
+       (7, 'tg1067', '2022', 'f', 'ict'),
+       (8, 'tg1415', '2022', 'm', 'ict'),
+       (9, 'tg1417', '2022', 'm', 'ict'),
+       (10, 'tg1416', '2022', 'm', 'ict'),
+       (11, 'tg1418', '2022', 'f', 'ict'),
+       (12, 'tg1419', '2022', 'f', 'ict'),
+       (13, 'tg1420', '2022', 'f', 'ict'),
+       (14, 'tg1421', '2022', 'm', 'ict'),
+       (15, 'tg1422', '2022', 'm', 'ict'),
+       (16, 'tg1423', '2022', 'm', 'ict'),
+       (17, 'tg1424', '2022', 'm', 'ict'),
+       (18, 'tg1425', '2022', 'f', 'ict'),
+       (19, 'tg1426', '2022', 'f', 'ict'),
+       (20, 'tg1427', '2022', 'm', 'ict'),
+       (21, 'tg1428', '2022', 'f', 'ict'),
+       (22, 'tg1429', '2022', 'f', 'ict'),
+       (23, 'tg1430', '2022', 'f', 'ict'),
+       (24, 'tg1431', '2022', 'm', 'ict'),
+       (25, 'tg1432', '2022', 'm', 'ict');
+
+
+CREATE TABLE `department` (
+`dep_id` INT AUTO_INCREMENT PRIMARY KEY,
+`dep_code` VARCHAR(10),
+`DepName` VARCHAR(20) DEFAULT NULL
+);
+
+INSERT INTO `department` (`dep_id`,`dep_code`, `DepName`) VALUES
+(1,'ict', 'Information and Communication Technology'),
+(2,'ict', 'Business Studies'),
+(3,'ict', 'Engineering Technology');
+
+
+
 
 
 
 DROP TABLE IF EXISTS `lecturer`;
-CREATE TABLE IF NOT EXISTS `lecturer`(
-    `lecturer_ID` CHAR(5),
-    `NIC` CHAR(12),
-    `subject` VARCHAR(50),
-    `name` VARCHAR(30),
-    `address` VARCHAR(100)
-);
+
+CREATE TABLE IF NOT EXISTS `lecturer` (
+    `lecturer_id` INT AUTO_INCREMENT PRIMARY KEY,  -- AUTO_INCREMENT for lecturer_id
+    `username` CHAR(50),
+    `department` VARCHAR(50)  -- Added department column
+    );
+
+INSERT INTO `lecturer` (`lecturer_id`, `username`, `department`) VALUES
+(32, 'l0001', 'ict'),
+(33, 'l0002', 'ict'),
+(34, 'l0003', 'ict'),
+(35, 'l0004', 'ict'),
+(36, 'l0005', 'ict'),
+(37, 'l0006', 'ict'),
+(38, 'l0007', 'ict'),
+(39, 'l0008', 'ict'),
+(40, 'l0009', 'ict'),
+(41, 'l0010', 'ict');
 
 
 
-INSERT INTO `lecturer` (`lecturer_ID`, `NIC`, `subject`, `name`, `address`) VALUES
-('L001', '198812332111', 'Database Management System', 'Mr.Aayansh', '123 Main Street, Colombo 07'),
-('L002', '197798788855', 'Computer Architecture', 'Miss.Kavindi', '45 Galle Road, Mount Lavinia'),
-('L003', '197800099988', 'Computer Networks', 'Miss.Nadeesha', 'No. 5, Kandy Road, Nugegoda'),
-('L004', '198155667788', 'Server Side Web Development', 'Mr.Tharindu', '78, Church Street, Negombo'),
-('L005', '198000998877', 'Computer Programming', 'Miss.Ishara', '34, Peradeniya Road, Kandy'),
-('L006', '199112340987', 'Multimedia Technology', 'Mr.Lakal', '10, Kottawa Junction, Piliyandala'),
-('L007', '198088336611', 'Fundamentals of Information System', 'Mr.Ruwan', '56, Gampaha Road, Kelaniya'),
-('L008', '198900664433', 'Web Technology', 'Mr.Nishan', 'Thadchanamaruthamaadhu, Mannar'),
-('L009', '198622330099', 'Artificial Intelligence', 'Miss.Shaneeka', '22, High Street, Jaffna'),
-('L010', '198977889911', 'Software Engineering', 'Ms.Kusum', '88, Baduwatta, Galle');
-##END
 
 
 DROP TABLE IF EXISTS `technical_Officer`;
+
 CREATE TABLE IF NOT EXISTS `technical_Officer` (
-    `technical_ID` CHAR(10) PRIMARY KEY, -- Increase size to accommodate longer IDs
-    `NIC` CHAR(12),
-    `name` VARCHAR(50)
+`tech_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Changed 'id' to 'tech_id'
+`username` CHAR(10) NOT NULL  -- 'username' column remains
 );
 
-INSERT INTO `technical_Officer` (`technical_ID`, `NIC`, `name`) VALUES
-('Tec_Off_01', '199012345678', 'Kavindi'),
-('Tec_Off_02', '199109876543', 'Raja'),
-('Tec_Off_04', '198956788765', 'Kamal'),
-('Tec_Off_07', '198809877890', 'Vihanga'),
-('Tec_Off_09', '199576547654', 'Mithu');
-## END
-
-
-DROP TABLE IF EXISTS `dean`;
-CREATE TABLE IF NOT EXISTS `dean` (
-    `dean_id` CHAR(5) PRIMARY KEY,
-    `NIC` CHAR(12) UNIQUE,
-    `name` VARCHAR(50),
-    `start_date` DATE
-);
-
-INSERT INTO `dean` (`dean_id`, `NIC`, `name`, `start_date`) VALUES
-('D0001', '198009809877', 'Praveen Kanth', '2017-01-01');
+INSERT INTO `technical_Officer` (`tech_id`,`username`) VALUES
+(26,'tech001'),
+(27,'tech002'),
+(28,'tech003'),
+(29,'tech004'),
+(30,'tech005');
 
 
 DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-    `Admin_ID` CHAR(5) PRIMARY KEY,-- Admin ID
-    `NIC` CHAR(12) NOT NULL,
-    `name` VARCHAR(50)                -- Name of the Admin
+
+CREATE TABLE `admin` (
+`admin_id` INT AUTO_INCREMENT,   -- Admin ID (auto-incremented)
+`username` CHAR(50) PRIMARY KEY   -- Admin username
 );
 
-## Insert data into  `admin` table
-##SART
-INSERT INTO `admin` (`admin_ID`,`NIC`, `name`) VALUES
-('A001','198366114466','Suman');
+INSERT INTO `admin` (`admin_id`, `username`) VALUES
+(31, 'admin001');
 
-
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE IF NOT EXISTS `student` (
-    `student_id` CHAR(10) PRIMARY KEY,
-    `NIC` CHAR(12) UNIQUE,
-    `name` VARCHAR(30),
-    `batch` CHAR(4),
-    `gender` CHAR(1) CHECK (`gender` IN ('M', 'F'))
-);
-
-
-INSERT INTO `student` (`student_id`, `NIC`, `name`, `batch`, `gender`) VALUES
-('TG1062', '200127800625', 'Jamper', '2022', 'M'),
-('TG1063', '200157800625', 'Kumar', '2022', 'M'),
-('TG1064', '200130800025', 'Rohit', '2022', 'M'),
-('TG1414', '200227900425', 'Karuvadu', '2022', 'M'),
-('TG1413', '200240800625', 'Rani', '2022', 'F'),
-('TG1345', '200127700625', 'Pampu', '2022', 'M'),
-('TG1067', '200127800626', 'Shalini', '2022', 'F'),
-('TG1415', '200127800565', 'Pema', '2022', 'M'),
-('TG1417', '200127800800', 'Anpu', '2022', 'M'),
-('TG1416', '200277889955', 'Dinesh', '2022', 'M'),
-('TG1418', '200212345678', 'Kaviya', '2022', 'F'),
-('TG1419', '200289765411', 'Dhanu', '2022', 'F'),
-('TG1420', '202289786756', 'Dharshi', '2022', 'F'),
-('TG1421', '200299666543', 'Thinesh', '2022', 'M'),
-('TG1422', '200278904321', 'Akram', '2022', 'M'),
-('TG1423', '200234567890', 'Thakshan', '2022', 'M'),
-('TG1424', '200287667887', 'Keerthan', '2022', 'M'),
-('TG1425', '200223450987', 'Madhu', '2022', 'F'),
-('TG1426', '200212347890', 'Suba', '2022', 'F'),
-('TG1427', '200298769876', 'Praveen', '2022', 'M'), -- Changed NIC to a unique value
-##              student  repeat  data            ##
-('TG901','200198769876','Sajeeya','2021','F'),
-('TG997','200112347890','Asma','2021','F'),
-('TG998','200134567890','Umesha','2021','F'),
-('TG999','200177889955','Danith','2021','M'),
-('TG1002','200130800126','Dasun','2021','M');
-##END
-
-SELECT * FROM  `student` ;
 
 DROP TABLE IF EXISTS `course`;
-CREATE TABLE IF NOT EXISTS  `course` (`course_id` CHAR(10) PRIMARY KEY ,
+CREATE TABLE IF NOT EXISTS `course` (
+`course_id` INT AUTO_INCREMENT PRIMARY KEY,
+`course_code` VARCHAR(10),
+`dep_code`,VARCHAR(10)
 `name` VARCHAR(100),
-`credit` INT ,
-`week` VARCHAR(20)
+`credit` INT,
+`week` VARCHAR(20),
+`course_image` LONGBLOB
+);
+
+INSERT INTO `course`(`course_id`, `course_code`,`dep_code`, `name`, `credit`, `week`, `course_image`)
+VALUES (1, 'ict2113','ict', 'Data Structures and Algorithms', 3, '15', null),
+       (2, 'ict2133','ict' ,'E-Commerce Implementation, Management and Security', 3, '15', null),
+       (3, 'ict2122','ict' ,'Object Oriented Analysis and Design', 2, '15', null),
+       (4, 'ict2142','ict' ,'Object Oriented Programming Practicum', 2, '15', null),
+       (5, 'ict2152','ict' ,'Object Oriented Programming', 2, '15', null);
+
+
+
+CREATE TABLE `attendance` (
+`att_id` int primary key AUTO_INCREMENT,
+`username` varchar(10) NOT NULL,
+`date` date DEFAULT NULL,
+`session` varchar(50) NOT NULL,
+`year` varchar(20) DEFAULT NULL,
+`courseCode` varchar(50) DEFAULT NULL,
+`department` varchar(50) NOT NULL,
+`status` varchar(10) DEFAULT NULL
 );
 
 
-INSERT INTO `course`(`course_id`,`name`,`credit`,`week`) VALUES
-('ICT1213', 'Database_management_system', 3, '15'),
-('ICT1222', 'computer_rchitecture', 2, '15'),
-('ICT1233', 'Computer_network', 3, '15'),
-('ICT1242', 'Server_side_web_development', 2, '15'),
-('ICT1253', 'Computer_programing', 3, '15'),
-('ICT1261', 'Muiltimedia_technology', 1, '15'),
-('ICT1271', 'Fundamendal_of_IS', 1, '15'),
-('ICT1283', 'Web_technology', 3, '15'),
-('ICT1293', 'Artificial_inteligence', 3, '15'),
-('ICT12101', 'Software_engineering', 2, '15');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
