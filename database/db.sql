@@ -247,6 +247,38 @@ VALUES (1, 'ict2113','ict', 'Data Structures and Algorithms', 3, '15', null),
        (4, 'ict2142','ict' ,'Object Oriented Programming Practicum', 2, '15', null),
        (5, 'ict2152','ict' ,'Object Oriented Programming', 2, '15', null);
 
+
+DROP TABLE IF EXISTS `medical`;
+CREATE TABLE `medical` (
+                           `medical_id` int primary key  AUTO_INCREMENT,
+                           `student_username` VARCHAR(50),
+                           `medical_data` LONGBLOB,
+                           `medical_start_date` DATE NOT NULL ,
+                           `medical_end_date` DATE NOT NULL
+);
+
+INSERT INTO `medical` (`medical_id`, `student_username`, `medical_start_date` , `medical_end_date`)  VALUES
+                                                                                                         (1 , 'tg1416','04/03/2025','04/06/2025'),
+                                                                                                         (1 , 'tg1415','05/03/2025','04/09/2025'),
+                                                                                                         (1 , 'tg1413','03/03/2025','03/06/2025');
+
+
+DROP TABLE IF EXISTS `notices`;
+CREATE TABLE `notices` (
+                           `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
+                           `admin_username` VARCHAR(50),
+                           `notice_name` VARCHAR(255),
+                           `notice_title`  VARCHAR(255),
+                           `notice_data` LONGBLOB,
+                           `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+select * from `notices`;
+
+
+
+
+
 CREATE TABLE `attendance` (
                               `att_id` int primary key AUTO_INCREMENT,
                               `username` varchar(10) NOT NULL,
