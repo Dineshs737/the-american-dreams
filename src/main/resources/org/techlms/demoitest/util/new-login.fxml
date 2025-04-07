@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@./newStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.LoginCon">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@newStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.utilController.LoginCon">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER_LEFT">
          <children>
@@ -37,7 +37,7 @@
          <children>
             <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@application-logo/logo.jpg" />
+                  <Image url="@../application-images/util/logo.jpg" />
                </image>
             </ImageView>
             <Label styleClass="login-welcome-message" text="Welcome to the Application" />

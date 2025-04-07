@@ -1,4 +1,4 @@
-package org.techlms.demoitest;
+package org.techlms.demoitest.util;
 
 public class SessionManager {
 

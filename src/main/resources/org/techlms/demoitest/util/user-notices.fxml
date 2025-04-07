@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" styleClass="profile-left-card" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.studentControllers.NoticeBoardController">
+   <children>
+      <HBox alignment="CENTER" styleClass="my-course-message">
+         <children>
+            <Label styleClass="course-name-profile" text="Most Recent Notes" />
+         </children>
+      </HBox>
+
+      <TableView fx:id="userNotesTable" stylesheets="@notice-style.css" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="notesNumber" prefWidth="100.0" text="No" />
+            <TableColumn fx:id="notesDateAndTime" prefWidth="200.0" text="Add Date / Time" />
+            <TableColumn fx:id="notesTitle" prefWidth="300.0" text="Title" />
+            <TableColumn fx:id="resourceDownload" prefWidth="150.0" text="Download" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
