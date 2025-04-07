@@ -5,12 +5,22 @@ DATABASE `techlms`;
 USE
 `techlms`;
 
+
+CREATE TABLE `department` (
+  `dep_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Primary key
+  `dep_code` VARCHAR(10) UNIQUE,            -- Make dep_code unique
+  `DepName` VARCHAR(100) DEFAULT NULL
+);
+
+
+INSERT INTO `department` (`dep_id`, `dep_code`, `DepName`) VALUES
+(1, 'ict', 'Information and Communication Technology'),
+(2, 'bst', 'Business Studies'),
+(3, 'et', 'Engineering Technology');
+
+
 -- Drop the table if it exists
 DROP TABLE IF EXISTS `user`;
-
--- Create the user table
--- Drop the table if it exists
-DROP TABLE IF EXISTS user;
 
 -- Create the user table
 CREATE TABLE user
@@ -97,7 +107,7 @@ VALUES (26, 'tech001', 'K.Vaja', 'kavindi@gmail.com', 'technical officer', '7698
 -- Admin user data insert
 INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
 VALUES (31, 'admin001', 'S.Suman', 'suman@gmail.com', 'admin', '719877898',
-        'e69eae4b4fc3a940114ddc693737292d838d8cabb299e8d5a1d84b5e97c0e68b');
+        'dinesh01');
 
 -- Lecturer user data insert
 INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
@@ -123,81 +133,75 @@ VALUES (32, 'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'lecturer', '0712345678'
         'fdcdcd062d7b8e5b77147cc5a02a062e7425b0710410ad9a1257f9e8b0bb04d9');
 
 
-
-CREATE TABLE `student`
-(
-    `student_id`       INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `student_username` VARCHAR(50) NOT NULL,
-    `batch`            VARCHAR(10) NOT NULL,
-    `gender`           CHAR(1)     NOT NULL,
-    `department`       VARCHAR(50) NOT NULL
+CREATE TABLE student (
+    user_id      INT PRIMARY KEY,
+    student_id   CHAR(15) NOT NULL UNIQUE,
+    batch        VARCHAR(10) NOT NULL,
+    gender       CHAR(1)     NOT NULL,
+    department   VARCHAR(10) NOT NULL,
+    CONSTRAINT fk_student_user FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_student_dept FOREIGN KEY (department) REFERENCES department(dep_code)
 );
 
 
-INSERT INTO `student` (`student_id`, `student_username`, `batch`, `gender`, `department`)
-VALUES (1, 'tg1062', '2022', 'm', 'ict'),
-       (2, 'tg1063', '2022', 'm', 'ict'),
-       (3, 'tg1064', '2022', 'm', 'ict'),
-       (4, 'tg1414', '2022', 'm', 'ict'),
-       (5, 'tg1413', '2022', 'f', 'ict'),
-       (6, 'tg1345', '2022', 'm', 'ict'),
-       (7, 'tg1067', '2022', 'f', 'ict'),
-       (8, 'tg1415', '2022', 'm', 'ict'),
-       (9, 'tg1417', '2022', 'm', 'ict'),
-       (10, 'tg1416', '2022', 'm', 'ict'),
-       (11, 'tg1418', '2022', 'f', 'ict'),
-       (12, 'tg1419', '2022', 'f', 'ict'),
-       (13, 'tg1420', '2022', 'f', 'ict'),
-       (14, 'tg1421', '2022', 'm', 'ict'),
-       (15, 'tg1422', '2022', 'm', 'ict'),
-       (16, 'tg1423', '2022', 'm', 'ict'),
-       (17, 'tg1424', '2022', 'm', 'ict'),
-       (18, 'tg1425', '2022', 'f', 'ict'),
-       (19, 'tg1426', '2022', 'f', 'ict'),
-       (20, 'tg1427', '2022', 'm', 'ict'),
-       (21, 'tg1428', '2022', 'f', 'ict'),
-       (22, 'tg1429', '2022', 'f', 'ict'),
-       (23, 'tg1430', '2022', 'f', 'ict'),
-       (24, 'tg1431', '2022', 'm', 'ict'),
-       (25, 'tg1432', '2022', 'm', 'ict');
 
-
-CREATE TABLE `department` (
-                              `dep_id` INT AUTO_INCREMENT PRIMARY KEY,
-                              `dep_code` VARCHAR(10),
-                              `DepName` VARCHAR(100) DEFAULT NULL
-);
-
-INSERT INTO `department` (`dep_id`,`dep_code`, `DepName`) VALUES
-                                                              (1,'ict', 'Information and Communication Technology'),
-                                                              (2,'ict', 'Business Studies'),
-                                                              (3,'ict', 'Engineering Technology');
-
-
-
-
+INSERT INTO `student` (`user_id`,`student_id`, `batch`, `gender`, `department`)
+VALUES 
+(1, 'tg/2022/1062', '2022', 'm', 'ict'),
+(2, 'tg/2022/1063', '2022', 'm', 'ict'),
+(3, 'tg/2022/1064', '2022', 'm', 'ict'),
+(4, 'tg/2022/1414', '2022', 'm', 'ict'),
+(5, 'tg/2022/1413', '2022', 'f', 'ict'),
+(6, 'tg/2022/1345', '2022', 'm', 'ict'),
+(7, 'tg/2022/1067', '2022', 'f', 'ict'),
+(8, 'tg/2022/1415', '2022', 'm', 'ict'),
+(9, 'tg/2022/1417', '2022', 'm', 'ict'),
+(10, 'tg/2022/1416', '2022', 'm', 'ict'),
+(11, 'tg/2022/1418', '2022', 'f', 'ict'),
+(12, 'tg/2022/1419', '2022', 'f', 'ict'),
+(13, 'tg/2022/1420', '2022', 'f', 'ict'),
+(14, 'tg/2022/1421', '2022', 'm', 'ict'),
+(15, 'tg/2022/1422', '2022', 'm', 'ict'),
+(16, 'tg/2022/1423', '2022', 'm', 'ict'),
+(17, 'tg/2022/1424', '2022', 'm', 'ict'),
+(18, 'tg/2022/1425', '2022', 'f', 'ict'),
+(19, 'tg/2022/1426', '2022', 'f', 'ict'),
+(20, 'tg/2022/1427', '2022', 'm', 'ict'),
+(21, 'tg/2022/1428', '2022', 'f', 'ict'),
+(22, 'tg/2022/1429', '2022', 'f', 'ict'),
+(23, 'tg/2022/1430', '2022', 'f', 'ict'),
+(24, 'tg/2022/1431', '2022', 'm', 'ict'),
+(25, 'tg/2022/1432', '2022', 'm', 'ict');
 
 
 DROP TABLE IF EXISTS `lecturer`;
 
 CREATE TABLE IF NOT EXISTS `lecturer` (
-                                          `lecturer_id` INT AUTO_INCREMENT PRIMARY KEY,  -- AUTO_INCREMENT for lecturer_id
-                                          `username` CHAR(50),
-    `department` VARCHAR(50)  -- Added department column
-    );
+    user_id      INT PRIMARY KEY,
+    lecturer_id  CHAR(15) NOT NULL UNIQUE,
+    department   VARCHAR(10) NOT NULL,  -- Change from ENUM to VARCHAR(10)
+    CONSTRAINT fk_lecturer_user FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_lecturer_dept FOREIGN KEY (department) REFERENCES department(dep_code)
+);
 
-INSERT INTO `lecturer` (`lecturer_id`, `username`, `department`) VALUES
-                                                                     (32, 'l0001', 'ict'),
-                                                                     (33, 'l0002', 'ict'),
-                                                                     (34, 'l0003', 'ict'),
-                                                                     (35, 'l0004', 'ict'),
-                                                                     (36, 'l0005', 'ict'),
-                                                                     (37, 'l0006', 'ict'),
-                                                                     (38, 'l0007', 'ict'),
-                                                                     (39, 'l0008', 'ict'),
-                                                                     (40, 'l0009', 'ict'),
-                                                                     (41, 'l0010', 'ict');
+-- Insert values for lecturers, assuming user_ids 32–41 already exist in the `user` table
+INSERT INTO lecturer (user_id, lecturer_id, department) VALUES
+(32, 'l0001', 'ict'),
+(33, 'l0002', 'ict'),
+(34, 'l0003', 'ict'),
+(35, 'l0004', 'ict'),
+(36, 'l0005', 'ict'),
+(37, 'l0006', 'ict'),
+(38, 'l0007', 'ict'),
+(39, 'l0008', 'ict'),
+(40, 'l0009', 'ict'),
+(41, 'l0010', 'ict');
 
+select * from student;
+select * from user;
+
+
+select * from lecturer;
 
 
 
@@ -205,28 +209,35 @@ INSERT INTO `lecturer` (`lecturer_id`, `username`, `department`) VALUES
 DROP TABLE IF EXISTS `technical_Officer`;
 
 CREATE TABLE IF NOT EXISTS `technical_Officer` (
-                                                   `tech_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Changed 'id' to 'tech_id'
-                                                   `username` CHAR(10) NOT NULL  -- 'username' column remains
-    );
+    user_id                INT PRIMARY KEY,
+    technical_Officer_id   CHAR(15) NOT NULL UNIQUE,
+    department             VARCHAR(10) NOT NULL,  -- Change from ENUM to VARCHAR(10)
+    CONSTRAINT fk_technical_officer_user FOREIGN KEY (user_id)
+        REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_technical_Officer_dept FOREIGN KEY (department) REFERENCES department(dep_code)
+);
 
-INSERT INTO `technical_Officer` (`tech_id`,`username`) VALUES
-                                                           (26,'tech001'),
-                                                           (27,'tech002'),
-                                                           (28,'tech003'),
-                                                           (29,'tech004'),
-                                                           (30,'tech005');
+-- Insert values for technical officers
+INSERT INTO `technical_Officer` (user_id, technical_Officer_id, department) VALUES
+(26, 'tech001', 'ict'),
+(27, 'tech002', 'ict'),
+(28, 'tech003', 'ict'),
+(29, 'tech004', 'ict'),
+(30, 'tech005', 'ict');
+
 
 
 DROP TABLE IF EXISTS `admin`;
 
 CREATE TABLE `admin` (
-                         `admin_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Primary key with auto-increment
-                         `username` CHAR(10) UNIQUE                  -- Username must be unique
+    user_id   INT PRIMARY KEY,
+    admin_id  CHAR(15) UNIQUE,
+    CONSTRAINT fk_admin_user FOREIGN KEY (user_id)
+        REFERENCES user(user_id) ON DELETE CASCADE
 );
 
-INSERT INTO `admin` (`admin_id` ,`username`) VALUES
-    (31,'admin001'); -- No need to manually set `admin_id`, MySQL will auto-generate it
-
+INSERT INTO `admin` (user_id, admin_id) VALUES
+(31, 'admin001');
 
 
 DROP TABLE IF EXISTS `course`;
