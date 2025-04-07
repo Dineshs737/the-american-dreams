@@ -1,6 +1,6 @@
 package org.techlms.demoitest.util;
 
-import org.techlms.demoitest.dto.NoticeBoardDTO;
+import org.techlms.demoitest.dto.utilDTO.NoticeBoardDTO;
 
 import java.util.List;
 

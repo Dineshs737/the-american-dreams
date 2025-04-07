@@ -7,8 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.techlms.demoitest.dto.LoginDTO;
-import org.techlms.demoitest.service.AuthService;
+import org.techlms.demoitest.dto.utilDTO.LoginDTO;
+import org.techlms.demoitest.service.utilService.AuthService;
 import org.techlms.demoitest.users.User;
 
 public class LoginCon {
