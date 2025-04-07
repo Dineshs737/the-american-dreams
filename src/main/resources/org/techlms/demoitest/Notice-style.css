@@ -1,0 +1,77 @@
+/* TableView styling */
+.table-view {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: transparent; /* Remove border on hover */
+    -fx-border-width: 1;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+}
+
+/* TableView border on hover */
+.table-view:hover {
+    -fx-border-color: transparent; /* Ensure no border on hover */
+}
+
+/* Header styling */
+.table-view .column-header {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+/* Remove the sorting icon in the column header */
+.table-view .column-header .sort-arrow {
+    -fx-opacity: 0; /* Hide the sort arrow */
+}
+
+/* TableCell Styling */
+.table-cell {
+    -fx-background-color: white;  /* Set background to white */
+    -fx-text-fill: black;          /* Set text color to black */
+    -fx-border-color: #ddd;
+    -fx-border-width: 0.5px;
+    -fx-alignment: center;
+}
+
+/* Button Styling */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 15px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+    -fx-cursor: hand;
+}
+
+.button:pressed {
+    -fx-background-color: #388e3c;
+}
+
+/* Customize TableColumn Headers */
+.table-column {
+    -fx-text-fill: #4CAF50;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Specific styling for download button inside table */
+.table-cell .button {
+    -fx-background-color: #1E88E5;
+    -fx-font-size: 12px;
+    -fx-border-radius: 5px;
+}
+
+.table-cell .button:hover {
+    -fx-background-color: #1565C0;
+}
+
+.table-cell .button:pressed {
+    -fx-background-color: #0D47A1;
+}
