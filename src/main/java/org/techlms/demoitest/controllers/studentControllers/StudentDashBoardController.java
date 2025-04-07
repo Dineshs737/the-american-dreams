@@ -14,8 +14,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.techlms.demoitest.util.SessionManager;
-import org.techlms.demoitest.dto.StudentCourseDTO;
-import org.techlms.demoitest.service.StudentCourseService;
+import org.techlms.demoitest.dto.studentDTO.StudentCourseDTO;
+import org.techlms.demoitest.service.studentService.StudentCourseService;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;

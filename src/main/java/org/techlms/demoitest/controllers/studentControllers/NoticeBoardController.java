@@ -5,8 +5,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import org.techlms.demoitest.dto.NoticeBoardDTO;
-import org.techlms.demoitest.service.NoticeBoardService;
+import org.techlms.demoitest.dto.utilDTO.NoticeBoardDTO;
+import org.techlms.demoitest.service.studentService.NoticeBoardService;
 
 import java.io.File;
 import java.io.IOException;

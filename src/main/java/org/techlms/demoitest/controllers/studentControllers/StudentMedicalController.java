@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.techlms.demoitest.dto.StudentMedicalDTO;
-import org.techlms.demoitest.service.StudentMedicalService;
+import org.techlms.demoitest.dto.studentDTO.StudentMedicalDTO;
+import org.techlms.demoitest.service.studentService.StudentMedicalService;
 import org.techlms.demoitest.util.FileUtils;
 
 import java.io.File;
