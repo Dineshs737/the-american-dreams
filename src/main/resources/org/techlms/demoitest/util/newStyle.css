@@ -1,0 +1,127 @@
+.rootStudent-ui{
+    -fx-background-color: #E5D9F2;
+}
+
+
+.login-welcome-message{
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+
+.login-button{
+    -fx-background-color: #3498db;
+    -fx-background-radius: 15px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.3s ease;
+}
+
+.login-user-text-field{
+    -fx-background-color: transparent; /* Make the background transparent */
+    -fx-border-width: 0 0 2px 0; /* Set only bottom border */
+    -fx-border-color: transparent transparent black transparent; /* Set bottom border to black */
+    -fx-padding: 10px;
+    -fx-font-size: 16px;
+    -fx-prompt-text-fill: black;
+    /*-fx-prompt-text-;*/
+}
+
+/* student ******************/
+
+.side-bar{
+    -fx-background-color: black;
+    -fx-background-radius: 0 20 0 0;
+}
+
+.logout-button{
+    -fx-background-color: #3498db;
+    -fx-background-radius: 15px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.3s ease;
+}
+
+.student-nav-bar-labels{
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.course-name{
+    -fx-font-size: 14px;
+
+}
+
+.course-card{
+    -fx-background-color: #789DBC ;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+
+}
+.course-card-name{
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+
+.right-side{
+    -fx-background-color: transparent;
+}
+.my-course-message{
+    -fx-text-fill: #3E3F5B;
+    -fx-font-size: 20px;
+}
+.user-profile-label{
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-padding: 5px;
+}
+.user-profile-text-field{
+    -fx-font-size: 16px;
+    -fx-text-fill: #3E3F5B;
+    -fx-background-radius: 10px;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+}
+.user-profile-button{
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 20px;
+}
+
+.user-profile-root{
+    -fx-background-color: #7886C7;
+}
+.course-name-profile{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+
+.medical-date-picker {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3E3F5B;
+    -fx-background-radius: 10px;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent; /* Remove blue focus border */
+    -fx-faint-focus-color: transparent; /* Remove faint focus glow */
+}
+
+.medical-pdf-open-button{
+    -fx-padding: 10 10 10 10;
+    -fx-border-radius: 10;
+    -fx-background-radius: 20;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent; /* Remove blue focus border */
+    -fx-faint-focus-color: transparent;
+}
