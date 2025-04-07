@@ -1,4 +1,4 @@
-package org.techlms.demoitest.util;
+package org.techlms.demoitest.controllers.utilController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import org.techlms.demoitest.dto.utilDTO.LoginDTO;
 import org.techlms.demoitest.service.utilService.AuthService;
 import org.techlms.demoitest.users.User;
+import org.techlms.demoitest.util.SessionManager;
 
 public class LoginCon {
 
