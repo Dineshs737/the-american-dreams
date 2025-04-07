@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox alignment="CENTER" spacing="15" stylesheets="@../util/newStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <!-- User Profile Picture -->
+   <HBox alignment="CENTER">
+      <children>
+         <Circle fill="#3d4d5c" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"/>
+      </children>
+   </HBox>
+
+   <!-- Profile Information Fields -->
+   <VBox spacing="10">
+      <children>
+         <VBox>
+            <children>
+               <Label styleClass="user-profile-label" text="User name"/>
+               <TextField promptText="User name" styleClass="user-profile-text-field"/>
+            </children>
+         </VBox>
+
+         <VBox>
+            <children>
+               <Label styleClass="user-profile-label" text="Contact Number"/>
+               <TextField promptText="Phone number" styleClass="user-profile-text-field"/>
+            </children>
+         </VBox>
+
+         <VBox>
+            <children>
+               <Label styleClass="user-profile-label" text="Gender"/>
+               <TextField promptText="Gender" styleClass="user-profile-text-field"/>
+            </children>
+         </VBox>
+
+         <VBox>
+            <children>
+               <Label styleClass="user-profile-label" text="Department"/>
+               <TextField promptText="Department" styleClass="user-profile-text-field"/>
+            </children>
+         </VBox>
+
+         <VBox>
+            <children>
+               <Label styleClass="user-profile-label" text="Address"/>
+               <TextField promptText="Address" styleClass="user-profile-text-field"/>
+            </children>
+         </VBox>
+
+         <VBox>
+            <children>
+               <Label styleClass="user-profile-label" text="Email"/>
+               <TextField promptText="Email" styleClass="user-profile-text-field"/>
+            </children>
+         </VBox>
+
+         <!-- Update Button -->
+         <HBox alignment="CENTER">
+            <Button text="Update" styleClass="user-profile-button"/>
+         </HBox>
+      </children>
+   </VBox>
+</VBox>

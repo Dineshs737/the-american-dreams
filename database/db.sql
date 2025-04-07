@@ -241,15 +241,17 @@ INSERT INTO `admin` (user_id, admin_id) VALUES
 
 
 DROP TABLE IF EXISTS `course`;
+DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
-                                        `course_id` INT AUTO_INCREMENT PRIMARY KEY,
-                                        `course_code` VARCHAR(10),
+    `course_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `course_code` CHAR(10) UNIQUE,  -- Adding a unique constraint to 'course_code'
     `dep_code` VARCHAR(10),
     `name` VARCHAR(100),
     `credit` INT,
     `week` VARCHAR(20),
     `course_image` LONGBLOB
-    );
+);
+
 
 INSERT INTO `course`(`course_id`, `course_code`,`dep_code`, `name`, `credit`, `week`, `course_image`)
 VALUES (1, 'ict2113','ict', 'Data Structures and Algorithms', 3, '15', null),
@@ -259,29 +261,58 @@ VALUES (1, 'ict2113','ict', 'Data Structures and Algorithms', 3, '15', null),
        (5, 'ict2152','ict' ,'Object Oriented Programming', 2, '15', null);
 
 
+DROP TABLE IF EXISTS course_enrollment;
+CREATE TABLE course_enrollment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id CHAR(15),
+    course_code VARCHAR(10),
+    registered_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    department CHAR(10),
+    enrolled BOOLEAN DEFAULT FALSE,  -- Setting the default value of 'enrolled' to FALSE
+    CONSTRAINT fk_course_enrollment_student FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
+    CONSTRAINT fk_course_enrollment_course FOREIGN KEY (course_code) REFERENCES course(course_code) ON DELETE CASCADE
+);
+
+
+CREATE TABLE lecturing (
+    teach_id INT AUTO_INCREMENT PRIMARY KEY,    -- Auto-incrementing primary key for teach_id
+    course_id CHAR(10),                       -- course_id column with VARCHAR(10)
+    lecturer_id CHAR(15),                         -- lecture_id column with CHAR(15)
+    CONSTRAINT fk_teaching_course FOREIGN KEY (course_id) REFERENCES course(course_code) ON DELETE CASCADE,  -- Foreign key for course_code
+    CONSTRAINT fk_teaching_lecture FOREIGN KEY (lecturer_id) REFERENCES lecturer(lecturer_id) ON DELETE CASCADE  -- Foreign key for lecture_id
+);
+
+
+
+
+
+
+
+
+
 DROP TABLE IF EXISTS `medical`;
 CREATE TABLE `medical` (
-                           `medical_id` int primary key  AUTO_INCREMENT,
-                           `student_username` VARCHAR(50),
-                           `medical_data` LONGBLOB,
-                           `medical_start_date` DATE NOT NULL ,
-                           `medical_end_date` DATE NOT NULL
+`medical_id` int primary key  AUTO_INCREMENT,
+`student_username` VARCHAR(50),
+`medical_data` LONGBLOB,
+`medical_start_date` DATE NOT NULL ,
+`medical_end_date` DATE NOT NULL
 );
 
 INSERT INTO `medical` (`medical_id`, `student_username`, `medical_start_date` , `medical_end_date`)  VALUES
-                                                                                                         (1 , 'tg1416','04/03/2025','04/06/2025'),
-                                                                                                         (1 , 'tg1415','05/03/2025','04/09/2025'),
-                                                                                                         (1 , 'tg1413','03/03/2025','03/06/2025');
+ (1 , 'tg1416','04/03/2025','04/06/2025'),
+ (1 , 'tg1415','05/03/2025','04/09/2025'),
+ (1 , 'tg1413','03/03/2025','03/06/2025');
 
 
 DROP TABLE IF EXISTS `notices`;
 CREATE TABLE `notices` (
-                           `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
-                           `admin_username` VARCHAR(50),
-                           `notice_name` VARCHAR(255),
-                           `notice_title`  VARCHAR(255),
-                           `notice_data` LONGBLOB,
-                           `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
+ `admin_username` VARCHAR(50),
+ `notice_name` VARCHAR(255),
+ `notice_title`  VARCHAR(255),
+ `notice_data` LONGBLOB,
+ `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 select * from `notices`;

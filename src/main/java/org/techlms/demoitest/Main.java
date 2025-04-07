@@ -13,9 +13,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //        LoginCon
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/org/techlms/demoitest/NewLogin.fxml")) ;
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/org/techlms/demoitest/util/new-login.fxml")) ;
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
     }
+
+
 }
