@@ -1,4 +1,4 @@
-package org.techlms.demoitest.dto;
+package org.techlms.demoitest.dto.utilDTO;
 
 public class LoginDTO {
     private String username;
