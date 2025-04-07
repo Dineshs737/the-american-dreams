@@ -15,8 +15,9 @@ module org.techlms.demoitest {
     requires com.fasterxml.jackson.core;
     opens org.techlms.demoitest to javafx.fxml;
     exports org.techlms.demoitest;
-    exports org.techlms.demoitest.controllers.studentControllers;
-    opens org.techlms.demoitest.controllers.studentControllers to javafx.fxml;
     exports org.techlms.demoitest.util;
     opens org.techlms.demoitest.util to javafx.fxml;
+    exports org.techlms.demoitest.controllers.utilController;
+    opens org.techlms.demoitest.controllers.utilController to javafx.fxml;
+
 }
