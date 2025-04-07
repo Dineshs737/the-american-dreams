@@ -1,4 +1,4 @@
-package org.techlms.demoitest.service.studentDTO;
+package org.techlms.demoitest.service.studentService;
 
 import org.techlms.demoitest.dbconnection.DBConnection;
 import org.techlms.demoitest.dto.utilDTO.NoticeBoardDTO;

@@ -1,4 +1,4 @@
-package org.techlms.demoitest.service.studentDTO;
+package org.techlms.demoitest.service.studentService;
 
 import org.techlms.demoitest.util.SessionManager;
 import org.techlms.demoitest.dbconnection.DBConnection;
