@@ -46,7 +46,7 @@ public class LoginCon {
 
                 }
                 else if(SessionManager.getInstance().getRole().equals("admin")){
-                    fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/admin-ui-Components/admin-userPage.fxml"));
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/admin-ui-components/admin-home-page.fxml"));
 
 
                 }
