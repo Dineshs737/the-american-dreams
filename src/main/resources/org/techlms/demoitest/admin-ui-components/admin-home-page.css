@@ -1,0 +1,37 @@
+.total-user-count-card{
+
+        -fx-background-color: #605678 ;
+        -fx-padding: 15;
+        -fx-background-radius: 10;
+
+}
+.user-count-label{
+        -fx-text-fill: white;
+        -fx-font-size: 16px;
+        -fx-padding: 0px 5px 0px 5px;
+}
+.user-barchart-card{
+        -fx-background-color: #605678;
+        -fx-text-fill: white;
+        -fx-padding: 20px 20px 20px 20px;
+        -fx-background-radius: 10px 10px 10px 10px;
+
+}
+
+.user-barchart-card-label{
+        -fx-text-fill: white;
+        -fx-font-size: 18px;
+}
+
+.admin-user-page-card{
+        -fx-background-color: #789DBC ;
+        -fx-text-fill: white;
+        -fx-padding: 20px 20px 20px 20px;
+        -fx-background-radius: 10px 10px 10px 10px;
+}
+
+.admin-user-page-card-label{
+        -fx-text-fill: white;
+        -fx-font-size: 16px;
+        -fx-padding: 0px 20px 0px 20px;
+}
