@@ -5,12 +5,22 @@ DATABASE `techlms`;
 USE
 `techlms`;
 
+
+CREATE TABLE `department` (
+  `dep_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Primary key
+  `dep_code` VARCHAR(10) UNIQUE,            -- Make dep_code unique
+  `DepName` VARCHAR(100) DEFAULT NULL
+);
+
+
+INSERT INTO `department` (`dep_id`, `dep_code`, `DepName`) VALUES
+(1, 'ict', 'Information and Communication Technology'),
+(2, 'bst', 'Business Studies'),
+(3, 'et', 'Engineering Technology');
+
+
 -- Drop the table if it exists
 DROP TABLE IF EXISTS `user`;
-
--- Create the user table
--- Drop the table if it exists
-DROP TABLE IF EXISTS user;
 
 -- Create the user table
 CREATE TABLE user
@@ -28,176 +38,170 @@ CREATE TABLE user
 );
 -- Student user data insert
 INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
-VALUES (1, 'tg1062', 'D.Jamper', 'Jamper999@gmail.com', 'Student', '761234654',
+VALUES (1, 'tg1062', 'D.Jamper', 'Jamper999@gmail.com', 'student', '761234654',
         'dae5992a6320223d208f6277f7c1cb9e04fea726f16a1d16458963067cf7bb52'),
-       (2, 'tg1063', 'O.Otara87', 'otara87@gmail.com', 'Student', '761234789',
+       (2, 'tg1063', 'O.Otara87', 'otara87@gmail.com', 'student', '761234789',
         '06d913e979383fbec4ad1a4fed98c7af0206407a5de747adf2eaa3c968b07ab8'),
-       (3, 'tg1064', 'M.Manodra', 'manodra@gmail.com', 'Student', '761234678',
+       (3, 'tg1064', 'M.Manodra', 'manodra@gmail.com', 'student', '761234678',
         '64701c078db4c0dd283d04fa9c4d80ebb4eb919b2f83c1043dfe6eb3476ecb69'),
-       (4, 'tg1414', 'R.Rajapaksha', 'rajapaksha@gmail.com', 'Student', '761234565',
+       (4, 'tg1414', 'R.Rajapaksha', 'rajapaksha@gmail.com', 'student', '761234565',
         '85b408c39db526dfbfb59797ffcc5d300a874e7d1167cde9c70726f7db140e7e'),
-       (5, 'tg1413', 'A.Asmaakram2', 'asmaakram2@gmail.com', 'Student', '761234564',
+       (5, 'tg1413', 'A.Asmaakram2', 'asmaakram2@gmail.com', 'student', '761234564',
         '1055dd50f255c86a66ecadf4762aaca3358cfa24e4872dfe913fce2e036b09da'),
-       (6, 'tg1345', 'K.Kanadipudayan', 'kanadipudayan@gmail.com', 'Student', '718032400',
+       (6, 'tg1345', 'K.Kanadipudayan', 'kanadipudayan@gmail.com', 'student', '718032400',
         '1cbf767dcbbdd1cf3dfe005ee7eeb0d7a658685654cc2a535be32268c856a2fe'),
-       (7, 'tg1067', 'S.Shalini52', 'shalini52@gmail.com', 'Student', '761234567',
+       (7, 'tg1067', 'S.Shalini52', 'shalini52@gmail.com', 'student', '761234567',
         '8b20e9620a8858b94909f00f68b5c87c91c7091d5c9ffcd75a14aa9f0004ab78'),
-       (8, 'tg1415', 'P.Pema00', 'pema00@gmail.com', 'Student', '718032468',
+       (8, 'tg1415', 'P.Pema00', 'pema00@gmail.com', 'student', '718032468',
         '902237776fa6387dc42703e536b9cc68f3a8637a077ff550f70e3d9f1ec762ba'),
-       (9, 'tg1417', 'A.AnpuSin', 'anpuSin@gmail.com', 'Student', '761234573',
+       (9, 'tg1417', 'A.AnpuSin', 'anpuSin@gmail.com', 'student', '761234573',
         '7a7225adee04214c7ab27bffc4f4d77ea8b827d1ffe2f8166242c6caf36ed2fd'),
-       (10, 'tg1416', 'D.Dinesh', 'dinesh@gmail.com', 'Student', '749900223',
+       (10, 'tg1416', 'D.Dinesh', 'dinesh@gmail.com', 'student', '749900223',
         'dinesh01'),
-       (11, 'tg1418', 'K.Kaviya', 'kaviya@gmail.com', 'Student', '788765432',
+       (11, 'tg1418', 'K.Kaviya', 'kaviya@gmail.com', 'student', '788765432',
         '499cbdc7ecd89d158fe7e4731f8943f0b0df7ed2080b28e8694e0be3393a64f1'),
-       (12, 'tg1419', 'D.Dhanu', 'dhanu@gmail.com', 'Student', '745432188',
+       (12, 'tg1419', 'D.Dhanu', 'dhanu@gmail.com', 'student', '745432188',
         'b110d14482421f6d6e5afb454c4e308fae086c64a87b1966525a0ae11b23868b'),
-       (13, 'tg1420', 'D.Dharshi', 'dharshi@gmail.com', 'Student', '751234509',
+       (13, 'tg1420', 'D.Dharshi', 'dharshi@gmail.com', 'student', '751234509',
         'd30a052c2cdd472d612cb4138f5b088ef94c97e6b3ffd90cea5718a1cefc854e'),
-       (14, 'tg1421', 'T.Thinesh', 'thinesh@gmail.com', 'Student', '750987653',
+       (14, 'tg1421', 'T.Thinesh', 'thinesh@gmail.com', 'student', '750987653',
         'faa5f49f088dcabb4cee316f0bf24b2b49ddcdb2a87a54cd6118f1f28a58bc5d'),
-       (15, 'tg1422', 'A.Akram', 'akram@gmail.com', 'Student', '764545456',
+       (15, 'tg1422', 'A.Akram', 'akram@gmail.com', 'student', '764545456',
         '8c2012bcd0dabb0bcba27ab1cbb2c87b2f392486183548f0fdac95f405ed4223'),
-       (16, 'tg1423', 'T.Thak', 'thak@gmail.com', 'Student', '761234098',
+       (16, 'tg1423', 'T.Thak', 'thak@gmail.com', 'student', '761234098',
         '3cacb5d972d86adb6ecb75a89a58e47f1ea3eec8aaa2df826c03b4ac826c1224'),
-       (17, 'tg1424', 'K.Keerthan', 'keerthan@gmail.com', 'Student', '789876588',
+       (17, 'tg1424', 'K.Keerthan', 'keerthan@gmail.com', 'student', '789876588',
         '210a29ba180e17d8178c978893f1e86beba7187d5805e1d9c766e7245a9cb8f0'),
-       (18, 'tg1425', 'V.Madhu', 'madhu@gmail.com', 'Student', '753456789',
+       (18, 'tg1425', 'V.Madhu', 'madhu@gmail.com', 'student', '753456789',
         'dcdb51b664e5dd3077bd929e41115683d36b84a7367021d228c32d1eb4621a46'),
-       (19, 'tg1426', 'S.Suba', 'suba@gmail.com', 'Student', '747474745',
+       (19, 'tg1426', 'S.Suba', 'suba@gmail.com', 'student', '747474745',
         'cef9bb6c0e55d1f0fa1733a0695e055fa796476459c9534b7ce55eef729ce5c5'),
-       (20, 'tg1427', 'P.Praveen', 'praveen@gmail.com', 'Student', '757698089',
+       (20, 'tg1427', 'P.Praveen', 'praveen@gmail.com', 'student', '757698089',
         '85a9c28876bb35b406100c4cbad1636e2461acf4308033f18fca68216d2c0422'),
-       (21, 'tg1428', 'S.Sajeeya', 'Sajeeya@gmail.com', 'Student', '718562347',
+       (21, 'tg1428', 'S.Sajeeya', 'Sajeeya@gmail.com', 'student', '718562347',
         '269ecb47ff8ebb12f4433c628a65a2ba5b4bf2fd24f5069c22ce0f277123761e'),
-       (22, 'tg1429', 'A.Asma', 'Asma@gmail.com', 'Student', '768534547',
+       (22, 'tg1429', 'A.Asma', 'Asma@gmail.com', 'student', '768534547',
         '9fee23448017ed22508482bf9682107ed4fa9b58a1bf26d026dc6328ce0b5c71'),
-       (23, 'tg1430', 'U.Umesha', 'Umesha@gmail.com', 'Student', '775340058',
+       (23, 'tg1430', 'U.Umesha', 'Umesha@gmail.com', 'student', '775340058',
         '4c6457f45036f181284bd111c9c0c5e2b581017b18edc71155ceda70c7c5149d'),
-       (24, 'tg1431', 'D.Danith', 'Danith@gmail.com', 'Student', '718032400',
+       (24, 'tg1431', 'D.Danith', 'Danith@gmail.com', 'student', '718032400',
         'a3129d8ceff0d71abb0851597f207f62e988e977f6133aac69e979d379c58159'),
-       (25, 'tg1432', 'D.Dasun', 'Dasun@gmail.com', 'Student', '761234687',
+       (25, 'tg1432', 'D.Dasun', 'Dasun@gmail.com', 'student', '761234687',
         'bdbdd2efdcfc779afa44c991daae58928cea35a53606b74516d9439f1fbc83bf');
 
 select * from user;
 
 -- Technical_officer user data insert
 INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
-VALUES (26, 'tech001', 'K.Vaja', 'kavindi@gmail.com', 'Technical Officer', '769870000',
+VALUES (26, 'tech001', 'K.Vaja', 'kavindi@gmail.com', 'technical officer', '769870000',
         '8d93cc2a76b00161ec7f372d7fdd1d45e5cba7d3b74cb0c068d07ff1e807ba17'),
-       (27, 'tech002', 'R.Raja', 'raja@gmail.com', 'Technical Officer', '755566799',
+       (27, 'tech002', 'R.Raja', 'raja@gmail.com', 'technical officer', '755566799',
         'feffe1e1a73b6443c229f162e1c82d82295b08ebb576068566ecc71d6efd5c4f'),
-       (28, 'tech003', 'K.Kamal', 'kamal@gmail.com', 'Technical Officer', '760987654',
+       (28, 'tech003', 'K.Kamal', 'kamal@gmail.com', 'technical officer', '760987654',
         '4bb09b01c9012bff610927871af0ae59a6620a204efd6f2a251eb92b0a1c8d56'),
-       (29, 'tech004', 'V.Vihanga', 'vihanga@gmail.com', 'Technical Officer', '760000987',
+       (29, 'tech004', 'V.Vihanga', 'vihanga@gmail.com', 'technical officer', '760000987',
         '6989c62b46aeb11517ca743a00aa38d37dce2757141353c526ee682682ccbf06'),
-       (30, 'tech005', 'M.Mithu', 'mithu@gmail.com', 'Technical Officer', '756677665',
+       (30, 'tech005', 'M.Mithu', 'mithu@gmail.com', 'technical officer', '756677665',
         '5c3544e502ee2eb2ec924c34916c117be8d09708865b28210c74b7a1cfa7ac0a');
 
 -- Admin user data insert
 INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
-VALUES (31, 'admin001', 'S.Suman', 'suman@gmail.com', 'Admin', '719877898',
-        'e69eae4b4fc3a940114ddc693737292d838d8cabb299e8d5a1d84b5e97c0e68b');
+VALUES (31, 'admin001', 'S.Suman', 'suman@gmail.com', 'admin', '719877898',
+        'dinesh01');
 
 -- Lecturer user data insert
 INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
-VALUES (32, 'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'Lecturer', '0712345678',
+VALUES (32, 'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'lecturer', '0712345678',
         'cb50b522a8f61e8a869ed009e71fbe3f12a50fe3708ad9f4c3cfda9e682f6047'),
-       (33, 'l0002', 'M.Kavid', 'kavind@gmail.com', 'Lecturer', '0781234567',
+       (33, 'l0002', 'M.Kavid', 'kavind@gmail.com', 'lecturer', '0781234567',
         'd7b674e3d1dbab1d05abfcd6fae2e35d1bb8e99a254208fc49d85dbd163ec1de'),
-       (34, 'l0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'Lecturer', '0745678123',
+       (34, 'l0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'lecturer', '0745678123',
         '204dd7de4295107a97b4a9b1759d5ca956ac1f3b33fa31790e592f1d0260635e'),
-       (35, 'l0004', 'M.Tharindu', 'tharindu@gmail.com', 'Lecturer', '0712348765',
+       (35, 'l0004', 'M.Tharindu', 'tharindu@gmail.com', 'lecturer', '0712348765',
         '19f2e2b7340b853f3833992f5d2d9c23840d872c59975dbab98e7d87561f0981'),
-       (36, 'l0005', 'M.Ishara', 'ishara@gmail.com', 'Lecturer', '0787654321',
+       (36, 'l0005', 'M.Ishara', 'ishara@gmail.com', 'lecturer', '0787654321',
         '189f91ff8321b6b69430243895a2d8cba292d6854c4950be42c32138cd3f399d'),
-       (37, 'l0006', 'M.Lakal', 'lakal@gmail.com', 'Lecturer', '0741234567',
+       (37, 'l0006', 'M.Lakal', 'lakal@gmail.com', 'lecturer', '0741234567',
         '0b225a4da41b27d4d59441681010f95bbf9071e88cf76d72c09c4a72c4bfb988'),
-       (38, 'l0007', 'M.Ruwan', 'ruwan@gmail.com', 'Lecturer', '0712349876',
+       (38, 'l0007', 'M.Ruwan', 'ruwan@gmail.com', 'lecturer', '0712349876',
         '82d35f15bc8d4e974b2788e7ecb8655d0f2b9e586bfa34021ac0b10d0a846689'),
-       (39, 'l0008', 'M.Nishan', 'nishan@gmail.com', 'Lecturer', '0789123456',
+       (39, 'l0008', 'M.Nishan', 'nishan@gmail.com', 'lecturer', '0789123456',
         '9a17a599e04b0e3d430bbfe707be83f58e5400cdce2eab0b2148d328cc0d91a5'),
-       (40, 'l0009', 'M.Shaneeka', 'shaneeka@gmail.com', 'Lecturer', '0712346589',
+       (40, 'l0009', 'M.Shaneeka', 'shaneeka@gmail.com', 'lecturer', '0712346589',
         'ee46b712b7c2855283e7e522b82d7a96d92a2acb8d70896f5d99007b50d6220f'),
-       (41, 'l0010', 'M.Kusum', 'kusum@gmail.com', 'Lecturer', '0745678901',
+       (41, 'l0010', 'M.Kusum', 'kusum@gmail.com', 'lecturer', '0745678901',
         'fdcdcd062d7b8e5b77147cc5a02a062e7425b0710410ad9a1257f9e8b0bb04d9');
 
 
-
-CREATE TABLE `student`
-(
-    `student_id`       INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `student_username` VARCHAR(50) NOT NULL,
-    `batch`            VARCHAR(10) NOT NULL,
-    `gender`           CHAR(1)     NOT NULL,
-    `department`       VARCHAR(50) NOT NULL
+CREATE TABLE student (
+    user_id      INT PRIMARY KEY,
+    student_id   CHAR(15) NOT NULL UNIQUE,
+    batch        VARCHAR(10) NOT NULL,
+    gender       CHAR(1)     NOT NULL,
+    department   VARCHAR(10) NOT NULL,
+    CONSTRAINT fk_student_user FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_student_dept FOREIGN KEY (department) REFERENCES department(dep_code)
 );
 
 
-INSERT INTO `student` (`student_id`, `student_username`, `batch`, `gender`, `department`)
-VALUES (1, 'tg1062', '2022', 'm', 'ict'),
-       (2, 'tg1063', '2022', 'm', 'ict'),
-       (3, 'tg1064', '2022', 'm', 'ict'),
-       (4, 'tg1414', '2022', 'm', 'ict'),
-       (5, 'tg1413', '2022', 'f', 'ict'),
-       (6, 'tg1345', '2022', 'm', 'ict'),
-       (7, 'tg1067', '2022', 'f', 'ict'),
-       (8, 'tg1415', '2022', 'm', 'ict'),
-       (9, 'tg1417', '2022', 'm', 'ict'),
-       (10, 'tg1416', '2022', 'm', 'ict'),
-       (11, 'tg1418', '2022', 'f', 'ict'),
-       (12, 'tg1419', '2022', 'f', 'ict'),
-       (13, 'tg1420', '2022', 'f', 'ict'),
-       (14, 'tg1421', '2022', 'm', 'ict'),
-       (15, 'tg1422', '2022', 'm', 'ict'),
-       (16, 'tg1423', '2022', 'm', 'ict'),
-       (17, 'tg1424', '2022', 'm', 'ict'),
-       (18, 'tg1425', '2022', 'f', 'ict'),
-       (19, 'tg1426', '2022', 'f', 'ict'),
-       (20, 'tg1427', '2022', 'm', 'ict'),
-       (21, 'tg1428', '2022', 'f', 'ict'),
-       (22, 'tg1429', '2022', 'f', 'ict'),
-       (23, 'tg1430', '2022', 'f', 'ict'),
-       (24, 'tg1431', '2022', 'm', 'ict'),
-       (25, 'tg1432', '2022', 'm', 'ict');
 
-
-CREATE TABLE `department` (
-                              `dep_id` INT AUTO_INCREMENT PRIMARY KEY,
-                              `dep_code` VARCHAR(10),
-                              `DepName` VARCHAR(100) DEFAULT NULL
-);
-
-INSERT INTO `department` (`dep_id`,`dep_code`, `DepName`) VALUES
-                                                              (1,'ict', 'Information and Communication Technology'),
-                                                              (2,'ict', 'Business Studies'),
-                                                              (3,'ict', 'Engineering Technology');
-
-
-
-
+INSERT INTO `student` (`user_id`,`student_id`, `batch`, `gender`, `department`)
+VALUES 
+(1, 'tg/2022/1062', '2022', 'm', 'ict'),
+(2, 'tg/2022/1063', '2022', 'm', 'ict'),
+(3, 'tg/2022/1064', '2022', 'm', 'ict'),
+(4, 'tg/2022/1414', '2022', 'm', 'ict'),
+(5, 'tg/2022/1413', '2022', 'f', 'ict'),
+(6, 'tg/2022/1345', '2022', 'm', 'ict'),
+(7, 'tg/2022/1067', '2022', 'f', 'ict'),
+(8, 'tg/2022/1415', '2022', 'm', 'ict'),
+(9, 'tg/2022/1417', '2022', 'm', 'ict'),
+(10, 'tg/2022/1416', '2022', 'm', 'ict'),
+(11, 'tg/2022/1418', '2022', 'f', 'ict'),
+(12, 'tg/2022/1419', '2022', 'f', 'ict'),
+(13, 'tg/2022/1420', '2022', 'f', 'ict'),
+(14, 'tg/2022/1421', '2022', 'm', 'ict'),
+(15, 'tg/2022/1422', '2022', 'm', 'ict'),
+(16, 'tg/2022/1423', '2022', 'm', 'ict'),
+(17, 'tg/2022/1424', '2022', 'm', 'ict'),
+(18, 'tg/2022/1425', '2022', 'f', 'ict'),
+(19, 'tg/2022/1426', '2022', 'f', 'ict'),
+(20, 'tg/2022/1427', '2022', 'm', 'ict'),
+(21, 'tg/2022/1428', '2022', 'f', 'ict'),
+(22, 'tg/2022/1429', '2022', 'f', 'ict'),
+(23, 'tg/2022/1430', '2022', 'f', 'ict'),
+(24, 'tg/2022/1431', '2022', 'm', 'ict'),
+(25, 'tg/2022/1432', '2022', 'm', 'ict');
 
 
 DROP TABLE IF EXISTS `lecturer`;
 
 CREATE TABLE IF NOT EXISTS `lecturer` (
-                                          `lecturer_id` INT AUTO_INCREMENT PRIMARY KEY,  -- AUTO_INCREMENT for lecturer_id
-                                          `username` CHAR(50),
-    `department` VARCHAR(50)  -- Added department column
-    );
+    user_id      INT PRIMARY KEY,
+    lecturer_id  CHAR(15) NOT NULL UNIQUE,
+    department   VARCHAR(10) NOT NULL,  -- Change from ENUM to VARCHAR(10)
+    CONSTRAINT fk_lecturer_user FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_lecturer_dept FOREIGN KEY (department) REFERENCES department(dep_code)
+);
 
-INSERT INTO `lecturer` (`lecturer_id`, `username`, `department`) VALUES
-                                                                     (32, 'l0001', 'ict'),
-                                                                     (33, 'l0002', 'ict'),
-                                                                     (34, 'l0003', 'ict'),
-                                                                     (35, 'l0004', 'ict'),
-                                                                     (36, 'l0005', 'ict'),
-                                                                     (37, 'l0006', 'ict'),
-                                                                     (38, 'l0007', 'ict'),
-                                                                     (39, 'l0008', 'ict'),
-                                                                     (40, 'l0009', 'ict'),
-                                                                     (41, 'l0010', 'ict');
+-- Insert values for lecturers, assuming user_ids 32–41 already exist in the `user` table
+INSERT INTO lecturer (user_id, lecturer_id, department) VALUES
+(32, 'l0001', 'ict'),
+(33, 'l0002', 'ict'),
+(34, 'l0003', 'ict'),
+(35, 'l0004', 'ict'),
+(36, 'l0005', 'ict'),
+(37, 'l0006', 'ict'),
+(38, 'l0007', 'ict'),
+(39, 'l0008', 'ict'),
+(40, 'l0009', 'ict'),
+(41, 'l0010', 'ict');
 
+select * from student;
+select * from user;
+
+
+select * from lecturer;
 
 
 
@@ -205,40 +209,49 @@ INSERT INTO `lecturer` (`lecturer_id`, `username`, `department`) VALUES
 DROP TABLE IF EXISTS `technical_Officer`;
 
 CREATE TABLE IF NOT EXISTS `technical_Officer` (
-                                                   `tech_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Changed 'id' to 'tech_id'
-                                                   `username` CHAR(10) NOT NULL  -- 'username' column remains
-    );
+    user_id                INT PRIMARY KEY,
+    technical_Officer_id   CHAR(15) NOT NULL UNIQUE,
+    department             VARCHAR(10) NOT NULL,  -- Change from ENUM to VARCHAR(10)
+    CONSTRAINT fk_technical_officer_user FOREIGN KEY (user_id)
+        REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_technical_Officer_dept FOREIGN KEY (department) REFERENCES department(dep_code)
+);
 
-INSERT INTO `technical_Officer` (`tech_id`,`username`) VALUES
-                                                           (26,'tech001'),
-                                                           (27,'tech002'),
-                                                           (28,'tech003'),
-                                                           (29,'tech004'),
-                                                           (30,'tech005');
+-- Insert values for technical officers
+INSERT INTO `technical_Officer` (user_id, technical_Officer_id, department) VALUES
+(26, 'tech001', 'ict'),
+(27, 'tech002', 'ict'),
+(28, 'tech003', 'ict'),
+(29, 'tech004', 'ict'),
+(30, 'tech005', 'ict');
+
 
 
 DROP TABLE IF EXISTS `admin`;
 
 CREATE TABLE `admin` (
-                         `admin_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Primary key with auto-increment
-                         `username` CHAR(10) UNIQUE                  -- Username must be unique
+    user_id   INT PRIMARY KEY,
+    admin_id  CHAR(15) UNIQUE,
+    CONSTRAINT fk_admin_user FOREIGN KEY (user_id)
+        REFERENCES user(user_id) ON DELETE CASCADE
 );
 
-INSERT INTO `admin` (`admin_id` ,`username`) VALUES
-    (31,'admin001'); -- No need to manually set `admin_id`, MySQL will auto-generate it
-
+INSERT INTO `admin` (user_id, admin_id) VALUES
+(31, 'admin001');
 
 
 DROP TABLE IF EXISTS `course`;
+DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
-                                        `course_id` INT AUTO_INCREMENT PRIMARY KEY,
-                                        `course_code` VARCHAR(10),
+    `course_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `course_code` CHAR(10) UNIQUE,  -- Adding a unique constraint to 'course_code'
     `dep_code` VARCHAR(10),
     `name` VARCHAR(100),
     `credit` INT,
     `week` VARCHAR(20),
     `course_image` LONGBLOB
-    );
+);
+
 
 INSERT INTO `course`(`course_id`, `course_code`,`dep_code`, `name`, `credit`, `week`, `course_image`)
 VALUES (1, 'ict2113','ict', 'Data Structures and Algorithms', 3, '15', null),
@@ -246,6 +259,67 @@ VALUES (1, 'ict2113','ict', 'Data Structures and Algorithms', 3, '15', null),
        (3, 'ict2122','ict' ,'Object Oriented Analysis and Design', 2, '15', null),
        (4, 'ict2142','ict' ,'Object Oriented Programming Practicum', 2, '15', null),
        (5, 'ict2152','ict' ,'Object Oriented Programming', 2, '15', null);
+
+
+DROP TABLE IF EXISTS course_enrollment;
+CREATE TABLE course_enrollment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id CHAR(15),
+    course_code VARCHAR(10),
+    registered_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    department CHAR(10),
+    enrolled BOOLEAN DEFAULT FALSE,  -- Setting the default value of 'enrolled' to FALSE
+    CONSTRAINT fk_course_enrollment_student FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
+    CONSTRAINT fk_course_enrollment_course FOREIGN KEY (course_code) REFERENCES course(course_code) ON DELETE CASCADE
+);
+
+
+CREATE TABLE lecturing (
+    teach_id INT AUTO_INCREMENT PRIMARY KEY,    -- Auto-incrementing primary key for teach_id
+    course_id CHAR(10),                       -- course_id column with VARCHAR(10)
+    lecturer_id CHAR(15),                         -- lecture_id column with CHAR(15)
+    CONSTRAINT fk_teaching_course FOREIGN KEY (course_id) REFERENCES course(course_code) ON DELETE CASCADE,  -- Foreign key for course_code
+    CONSTRAINT fk_teaching_lecture FOREIGN KEY (lecturer_id) REFERENCES lecturer(lecturer_id) ON DELETE CASCADE  -- Foreign key for lecture_id
+);
+
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS `medical`;
+CREATE TABLE `medical` (
+`medical_id` int primary key  AUTO_INCREMENT,
+`student_username` VARCHAR(50),
+`medical_data` LONGBLOB,
+`medical_start_date` DATE NOT NULL ,
+`medical_end_date` DATE NOT NULL
+);
+
+INSERT INTO `medical` (`medical_id`, `student_username`, `medical_start_date` , `medical_end_date`)  VALUES
+ (1 , 'tg1416','04/03/2025','04/06/2025'),
+ (1 , 'tg1415','05/03/2025','04/09/2025'),
+ (1 , 'tg1413','03/03/2025','03/06/2025');
+
+
+DROP TABLE IF EXISTS `notices`;
+CREATE TABLE `notices` (
+ `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
+ `admin_username` VARCHAR(50),
+ `notice_name` VARCHAR(255),
+ `notice_title`  VARCHAR(255),
+ `notice_data` LONGBLOB,
+ `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+select * from `notices`;
+
+
+
+
 
 CREATE TABLE `attendance` (
                               `att_id` int primary key AUTO_INCREMENT,

@@ -32,7 +32,7 @@
 /* student ******************/
 
 .side-bar{
--fx-background-color: black;
+    -fx-background-color: black;
     -fx-background-radius: 0 20 0 0;
 }
 
@@ -103,4 +103,25 @@
 .course-name-profile{
     -fx-text-fill: white;
     -fx-font-size: 20px;
+}
+
+
+.medical-date-picker {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3E3F5B;
+    -fx-background-radius: 10px;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent; /* Remove blue focus border */
+    -fx-faint-focus-color: transparent; /* Remove faint focus glow */
+}
+
+.medical-pdf-open-button{
+    -fx-padding: 10 10 10 10;
+    -fx-border-radius: 10;
+    -fx-background-radius: 20;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent; /* Remove blue focus border */
+    -fx-faint-focus-color: transparent;
 }
