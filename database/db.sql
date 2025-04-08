@@ -7,16 +7,16 @@ USE
 
 
 CREATE TABLE `department` (
-  `dep_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Primary key
-  `dep_code` VARCHAR(10) UNIQUE,            -- Make dep_code unique
-  `DepName` VARCHAR(100) DEFAULT NULL
+                              `dep_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Primary key
+                              `dep_code` VARCHAR(10) UNIQUE,            -- Make dep_code unique
+                              `DepName` VARCHAR(100) DEFAULT NULL
 );
 
 
 INSERT INTO `department` (`dep_id`, `dep_code`, `DepName`) VALUES
-(1, 'ict', 'Information and Communication Technology'),
-(2, 'bst', 'Business Studies'),
-(3, 'et', 'Engineering Technology');
+                                                               (1, 'ict', 'Information and Communication Technology'),
+                                                               (2, 'bst', 'Business Studies'),
+                                                               (3, 'et', 'Engineering Technology');
 
 
 -- Drop the table if it exists
@@ -112,9 +112,9 @@ VALUES (31, 'admin001', 'S.Suman', 'suman@gmail.com', 'admin', '719877898',
 -- Lecturer user data insert
 INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
 VALUES (32, 'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'lecturer', '0712345678',
-        'cb50b522a8f61e8a869ed009e71fbe3f12a50fe3708ad9f4c3cfda9e682f6047'),
+        'dinesh01'),
        (33, 'l0002', 'M.Kavid', 'kavind@gmail.com', 'lecturer', '0781234567',
-        'd7b674e3d1dbab1d05abfcd6fae2e35d1bb8e99a254208fc49d85dbd163ec1de'),
+        'dinesh02'),
        (34, 'l0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'lecturer', '0745678123',
         '204dd7de4295107a97b4a9b1759d5ca956ac1f3b33fa31790e592f1d0260635e'),
        (35, 'l0004', 'M.Tharindu', 'tharindu@gmail.com', 'lecturer', '0712348765',
@@ -134,68 +134,69 @@ VALUES (32, 'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'lecturer', '0712345678'
 
 
 CREATE TABLE student (
-    user_id      INT PRIMARY KEY,
-    student_id   CHAR(15) NOT NULL UNIQUE,
-    batch        VARCHAR(10) NOT NULL,
-    gender       CHAR(1)     NOT NULL,
-    department   VARCHAR(10) NOT NULL,
-    CONSTRAINT fk_student_user FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-    CONSTRAINT fk_student_dept FOREIGN KEY (department) REFERENCES department(dep_code)
+                         user_id      INT PRIMARY KEY,
+                         student_id   CHAR(15) NOT NULL UNIQUE,
+                         batch        VARCHAR(10) NOT NULL,
+                         gender       CHAR(1)     NOT NULL,
+                         department   VARCHAR(10) NOT NULL,
+                         CONSTRAINT fk_student_user FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+                         CONSTRAINT fk_student_dept FOREIGN KEY (department) REFERENCES department(dep_code)
 );
 
 
 
+
 INSERT INTO `student` (`user_id`,`student_id`, `batch`, `gender`, `department`)
-VALUES 
-(1, 'tg/2022/1062', '2022', 'm', 'ict'),
-(2, 'tg/2022/1063', '2022', 'm', 'ict'),
-(3, 'tg/2022/1064', '2022', 'm', 'ict'),
-(4, 'tg/2022/1414', '2022', 'm', 'ict'),
-(5, 'tg/2022/1413', '2022', 'f', 'ict'),
-(6, 'tg/2022/1345', '2022', 'm', 'ict'),
-(7, 'tg/2022/1067', '2022', 'f', 'ict'),
-(8, 'tg/2022/1415', '2022', 'm', 'ict'),
-(9, 'tg/2022/1417', '2022', 'm', 'ict'),
-(10, 'tg/2022/1416', '2022', 'm', 'ict'),
-(11, 'tg/2022/1418', '2022', 'f', 'ict'),
-(12, 'tg/2022/1419', '2022', 'f', 'ict'),
-(13, 'tg/2022/1420', '2022', 'f', 'ict'),
-(14, 'tg/2022/1421', '2022', 'm', 'ict'),
-(15, 'tg/2022/1422', '2022', 'm', 'ict'),
-(16, 'tg/2022/1423', '2022', 'm', 'ict'),
-(17, 'tg/2022/1424', '2022', 'm', 'ict'),
-(18, 'tg/2022/1425', '2022', 'f', 'ict'),
-(19, 'tg/2022/1426', '2022', 'f', 'ict'),
-(20, 'tg/2022/1427', '2022', 'm', 'ict'),
-(21, 'tg/2022/1428', '2022', 'f', 'ict'),
-(22, 'tg/2022/1429', '2022', 'f', 'ict'),
-(23, 'tg/2022/1430', '2022', 'f', 'ict'),
-(24, 'tg/2022/1431', '2022', 'm', 'ict'),
-(25, 'tg/2022/1432', '2022', 'm', 'ict');
+VALUES
+    (1, 'tg/2022/1062', '2022', 'm', 'ict'),
+    (2, 'tg/2022/1063', '2022', 'm', 'ict'),
+    (3, 'tg/2022/1064', '2022', 'm', 'ict'),
+    (4, 'tg/2022/1414', '2022', 'm', 'ict'),
+    (5, 'tg/2022/1413', '2022', 'f', 'ict'),
+    (6, 'tg/2022/1345', '2022', 'm', 'ict'),
+    (7, 'tg/2022/1067', '2022', 'f', 'ict'),
+    (8, 'tg/2022/1415', '2022', 'm', 'ict'),
+    (9, 'tg/2022/1417', '2022', 'm', 'ict'),
+    (10, 'tg/2022/1416', '2022', 'm', 'ict'),
+    (11, 'tg/2022/1418', '2022', 'f', 'ict'),
+    (12, 'tg/2022/1419', '2022', 'f', 'ict'),
+    (13, 'tg/2022/1420', '2022', 'f', 'ict'),
+    (14, 'tg/2022/1421', '2022', 'm', 'ict'),
+    (15, 'tg/2022/1422', '2022', 'm', 'ict'),
+    (16, 'tg/2022/1423', '2022', 'm', 'ict'),
+    (17, 'tg/2022/1424', '2022', 'm', 'ict'),
+    (18, 'tg/2022/1425', '2022', 'f', 'ict'),
+    (19, 'tg/2022/1426', '2022', 'f', 'ict'),
+    (20, 'tg/2022/1427', '2022', 'm', 'ict'),
+    (21, 'tg/2022/1428', '2022', 'f', 'ict'),
+    (22, 'tg/2022/1429', '2022', 'f', 'ict'),
+    (23, 'tg/2022/1430', '2022', 'f', 'ict'),
+    (24, 'tg/2022/1431', '2022', 'm', 'ict'),
+    (25, 'tg/2022/1432', '2022', 'm', 'ict');
 
 
 DROP TABLE IF EXISTS `lecturer`;
 
 CREATE TABLE IF NOT EXISTS `lecturer` (
-    user_id      INT PRIMARY KEY,
-    lecturer_id  CHAR(15) NOT NULL UNIQUE,
+                                          user_id      INT PRIMARY KEY,
+                                          lecturer_id  CHAR(15) NOT NULL UNIQUE,
     department   VARCHAR(10) NOT NULL,  -- Change from ENUM to VARCHAR(10)
     CONSTRAINT fk_lecturer_user FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
     CONSTRAINT fk_lecturer_dept FOREIGN KEY (department) REFERENCES department(dep_code)
-);
+    );
 
 -- Insert values for lecturers, assuming user_ids 32–41 already exist in the `user` table
 INSERT INTO lecturer (user_id, lecturer_id, department) VALUES
-(32, 'l0001', 'ict'),
-(33, 'l0002', 'ict'),
-(34, 'l0003', 'ict'),
-(35, 'l0004', 'ict'),
-(36, 'l0005', 'ict'),
-(37, 'l0006', 'ict'),
-(38, 'l0007', 'ict'),
-(39, 'l0008', 'ict'),
-(40, 'l0009', 'ict'),
-(41, 'l0010', 'ict');
+                                                            (32, 'l0001', 'ict'),
+                                                            (33, 'l0002', 'ict'),
+                                                            (34, 'l0003', 'ict'),
+                                                            (35, 'l0004', 'ict'),
+                                                            (36, 'l0005', 'ict'),
+                                                            (37, 'l0006', 'ict'),
+                                                            (38, 'l0007', 'ict'),
+                                                            (39, 'l0008', 'ict'),
+                                                            (40, 'l0009', 'ict'),
+                                                            (41, 'l0010', 'ict');
 
 select * from student;
 select * from user;
@@ -209,78 +210,342 @@ select * from lecturer;
 DROP TABLE IF EXISTS `technical_Officer`;
 
 CREATE TABLE IF NOT EXISTS `technical_Officer` (
-    user_id                INT PRIMARY KEY,
-    technical_Officer_id   CHAR(15) NOT NULL UNIQUE,
+                                                   user_id                INT PRIMARY KEY,
+                                                   technical_Officer_id   CHAR(15) NOT NULL UNIQUE,
     department             VARCHAR(10) NOT NULL,  -- Change from ENUM to VARCHAR(10)
     CONSTRAINT fk_technical_officer_user FOREIGN KEY (user_id)
-        REFERENCES user(user_id) ON DELETE CASCADE,
+    REFERENCES user(user_id) ON DELETE CASCADE,
     CONSTRAINT fk_technical_Officer_dept FOREIGN KEY (department) REFERENCES department(dep_code)
-);
+    );
 
 -- Insert values for technical officers
 INSERT INTO `technical_Officer` (user_id, technical_Officer_id, department) VALUES
-(26, 'tech001', 'ict'),
-(27, 'tech002', 'ict'),
-(28, 'tech003', 'ict'),
-(29, 'tech004', 'ict'),
-(30, 'tech005', 'ict');
+                                                                                (26, 'tech001', 'ict'),
+                                                                                (27, 'tech002', 'ict'),
+                                                                                (28, 'tech003', 'ict'),
+                                                                                (29, 'tech004', 'ict'),
+                                                                                (30, 'tech005', 'ict');
 
 
 
 DROP TABLE IF EXISTS `admin`;
 
 CREATE TABLE `admin` (
-    user_id   INT PRIMARY KEY,
-    admin_id  CHAR(15) UNIQUE,
-    CONSTRAINT fk_admin_user FOREIGN KEY (user_id)
-        REFERENCES user(user_id) ON DELETE CASCADE
+                         user_id   INT PRIMARY KEY,
+                         admin_id  CHAR(15) UNIQUE,
+                         CONSTRAINT fk_admin_user FOREIGN KEY (user_id)
+                             REFERENCES user(user_id) ON DELETE CASCADE
 );
 
 INSERT INTO `admin` (user_id, admin_id) VALUES
-(31, 'admin001');
+    (31, 'admin001');
+
+
+
+
 
 
 DROP TABLE IF EXISTS `course`;
-DROP TABLE IF EXISTS `course`;
-CREATE TABLE IF NOT EXISTS `course` (
-    `course_id` INT AUTO_INCREMENT PRIMARY KEY,
-    `course_code` CHAR(10) UNIQUE,  -- Adding a unique constraint to 'course_code'
-    `dep_code` VARCHAR(10),
-    `name` VARCHAR(100),
-    `credit` INT,
-    `week` VARCHAR(20),
-    `course_image` LONGBLOB
+
+CREATE TABLE `course` (
+                          `course_id` INT AUTO_INCREMENT PRIMARY KEY,
+                          `course_code` VARCHAR(10) NOT NULL UNIQUE,
+                          `dep_code` VARCHAR(10),
+                          `name` VARCHAR(100),
+                          `credit` INT,
+                          `week` VARCHAR(20),
+                          `course_semester` VARCHAR(50),
+                          `course_image` LONGBLOB
+
 );
 
 
-INSERT INTO `course`(`course_id`, `course_code`,`dep_code`, `name`, `credit`, `week`, `course_image`)
-VALUES (1, 'ict2113','ict', 'Data Structures and Algorithms', 3, '15', null),
-       (2, 'ict2133','ict' ,'E-Commerce Implementation, Management and Security', 3, '15', null),
-       (3, 'ict2122','ict' ,'Object Oriented Analysis and Design', 2, '15', null),
-       (4, 'ict2142','ict' ,'Object Oriented Programming Practicum', 2, '15', null),
-       (5, 'ict2152','ict' ,'Object Oriented Programming', 2, '15', null);
+DROP TABLE IF EXISTS `course`;
+
+CREATE TABLE `course` (
+                          `course_id` INT AUTO_INCREMENT PRIMARY KEY,
+                          `course_code` VARCHAR(10) NOT NULL UNIQUE,
+                          `dep_code` VARCHAR(10),
+                          `name` VARCHAR(100),
+                          `credit` INT,
+                          `week` VARCHAR(20),
+                          `course_semester` VARCHAR(50),
+                          `course_image` LONGBLOB
+
+);
+
+INSERT INTO `course`(`course_id`, `course_code`, `dep_code`, `name`, `credit`, `week`, `course_image`, `course_semester`)
+VALUES
+    (1, 'ict2113', 'ict', 'Data Structures and Algorithms', 3, '15', null, 'Level 2 First Semester'),
+    (2, 'ict2133', 'ict', 'E-Commerce Implementation, Management and Security', 3, '15', null, 'Level 2 First Semester'),
+    (3, 'ict2122', 'ict', 'Object Oriented Analysis and Design', 2, '15', null, 'Level 2 First Semester'),
+    (4, 'ict2142', 'ict', 'Object Oriented Programming Practicum', 2, '15', null, 'Level 2 First Semester'),
+    (5, 'ict2152', 'ict', 'Object Oriented Programming', 2, '15', null, 'Level 2 First Semester'),
+    (6, 'ict1023', 'ict', 'Web technologies', 2, '15', null, 'Level 1 First Semester'),
+    (7, 'ict1033', 'ict', 'Multimedia technology', 2, '15', null, 'Level 1 First Semester'),
+    (8, 'ict1043', 'ict', 'Database management systems', 3, '15', null, 'Level 1 First Semester'),
+    (9, 'ict1045', 'ict', 'Computer networks', 2, '15', null, 'Level 1 First Semester'),
+    (10, 'ict1034', 'ict', 'Server side scripting', 2, '15', null, 'Level 1 First Semester'),
+    (11, 'ict3014', 'ict', 'Advance programming', 4, '15', null, 'Level 3 First Semester'),
+    (12, 'ict3012', 'ict', 'Advance database management system', 4, '15', null, 'Level 3 First Semester'),
+    (13, 'ict3031', 'ict', 'Operating system', 2, '15', null, 'Level 3 First Semester'),
+    (14, 'ict4021', 'ict', 'Software development', 4, '15', null, 'Level 4 First Semester');
+
+select * from course;
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS `medical`;
+CREATE TABLE `medical` (
+                           `medical_id` INT PRIMARY KEY AUTO_INCREMENT,
+                           `student_username` VARCHAR(50),
+                           `medical_data` LONGBLOB,
+                           `medical_start_date` DATE NOT NULL,
+                           `medical_end_date` DATE NOT NULL
+);
+
+-- Corrected INSERT statements with unique medical_id values and valid date format
+INSERT INTO `medical` (`medical_id`, `student_username`, `medical_start_date`, `medical_end_date`) VALUES
+                                                                                                       (1, 'tg1416', '2025-03-04', '2025-06-04'),
+                                                                                                       (2, 'tg1415', '2025-03-05', '2025-09-04'),
+                                                                                                       (3, 'tg1413', '2025-03-03', '2025-06-03');
+
+
+
+DROP TABLE IF EXISTS `notices`;
+CREATE TABLE `notices` (
+                           `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
+                           `admin_username` VARCHAR(50),
+                           `notice_name` VARCHAR(255),
+                           `notice_title`  VARCHAR(255),
+                           `notice_data` LONGBLOB,
+                           `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+select * from `notices`;
+
+
+
+
+
+CREATE TABLE `attendance` (
+                              `att_id` int primary key AUTO_INCREMENT,
+                              `username` varchar(10) NOT NULL,
+                              `date` date DEFAULT NULL,
+                              `session` varchar(50) NOT NULL,
+                              `year` varchar(20) DEFAULT NULL,
+                              `courseCode` varchar(50) DEFAULT NULL,
+                              `department` varchar(50) NOT NULL,
+                              `status` varchar(10) DEFAULT NULL
+);
 
 
 DROP TABLE IF EXISTS course_enrollment;
 CREATE TABLE course_enrollment (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    student_id CHAR(15),
-    course_code VARCHAR(10),
-    registered_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    department CHAR(10),
-    enrolled BOOLEAN DEFAULT FALSE,  -- Setting the default value of 'enrolled' to FALSE
-    CONSTRAINT fk_course_enrollment_student FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
-    CONSTRAINT fk_course_enrollment_course FOREIGN KEY (course_code) REFERENCES course(course_code) ON DELETE CASCADE
+                                   id INT AUTO_INCREMENT PRIMARY KEY,
+                                   student_id CHAR(15),
+                                   course_code VARCHAR(10),
+                                   registered_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                   department CHAR(10),
+                                   enrolled BOOLEAN DEFAULT FALSE,  -- Setting the default value of 'enrolled' to FALSE
+                                   CONSTRAINT fk_course_enrollment_student FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
+                                   CONSTRAINT fk_course_enrollment_course FOREIGN KEY (course_code) REFERENCES course(course_code) ON DELETE CASCADE
 );
 
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1062', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1062', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1062', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1062', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1062', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1063', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1063', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1063', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1063', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1063', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1064', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1064', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1064', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1064', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1064', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1414', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1414', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1414', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1414', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1414', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1413', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1413', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1413', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1413', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1413', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1345', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1345', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1345', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1345', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1345', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1067', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1067', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1067', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1067', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1067', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1415', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1415', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1415', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1415', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1415', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1417', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1417', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1417', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1417', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1417', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1416', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1416', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1416', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1416', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1416', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1418', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1418', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1418', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1418', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1418', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1419', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1419', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1419', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1419', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1419', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1420', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1420', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1420', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1420', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1420', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1421', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1421', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1421', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1421', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1421', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1422', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1422', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1422', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1422', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1422', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1423', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1423', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1423', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1423', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1423', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1424', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1424', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1424', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1424', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1424', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1425', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1425', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1425', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1425', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1425', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1426', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1426', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1426', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1426', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1426', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1427', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1427', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1427', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1427', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1427', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1428', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1428', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1428', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1428', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1428', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1429', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1429', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1429', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1429', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1429', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1430', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1430', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1430', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1430', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1430', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1431', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1431', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1431', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1431', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1431', 'ict2152', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1432', 'ict2113', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1432', 'ict2133', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1432', 'ict2122', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1432', 'ict2142', 'ict', TRUE);
+INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1432', 'ict2152', 'ict', TRUE);
 
 CREATE TABLE lecturing (
-    teach_id INT AUTO_INCREMENT PRIMARY KEY,    -- Auto-incrementing primary key for teach_id
-    course_id CHAR(10),                       -- course_id column with VARCHAR(10)
-    lecturer_id CHAR(15),                         -- lecture_id column with CHAR(15)
-    CONSTRAINT fk_teaching_course FOREIGN KEY (course_id) REFERENCES course(course_code) ON DELETE CASCADE,  -- Foreign key for course_code
-    CONSTRAINT fk_teaching_lecture FOREIGN KEY (lecturer_id) REFERENCES lecturer(lecturer_id) ON DELETE CASCADE  -- Foreign key for lecture_id
+                           teach_id INT AUTO_INCREMENT PRIMARY KEY,    -- Auto-incrementing primary key for teach_id
+                           course_id CHAR(10),                         -- course_id column with CHAR(10)
+                           lecturer_id CHAR(15),                       -- lecturer_id column with CHAR(15)
+                           CONSTRAINT fk_teaching_course FOREIGN KEY (course_id) REFERENCES course(course_code) ON DELETE CASCADE,  -- Foreign key for course_code
+                           CONSTRAINT fk_teaching_lecture FOREIGN KEY (lecturer_id) REFERENCES lecturer(lecturer_id) ON DELETE CASCADE  -- Foreign key for lecturer_id
 );
+
+
+
+INSERT INTO lecturing(course_id, lecturer_id) VALUES
+                                                  ('ict2142', 'l0001'),
+                                                  ('ict2152', 'l0001'),
+                                                  ('ict1043', 'l0001'),
+                                                  ('ict3014', 'l0001'),
+                                                  ('ict4021', 'l0001'),
+                                                  ('ict2133', 'l0002'),
+                                                  ('ict1045', 'l0002'),
+                                                  ('ict3031', 'l0002'),
+                                                  ('ict2122', 'l0003'),
+                                                  ('ict2113', 'l0004'),
+                                                  ('ict1033', 'l0005');
+SELECT * from lecturing;
+select * from course;
+
+
+
+
+
+
+
+select * from course_enrollment;
+
+
+SELECT c.name, c.course_image, c.course_semester FROM course c JOIN  lecturing lec ON c.course_code = lec.course_id
+WHERE  lec.lecturer_id = 'l0001';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -292,27 +557,27 @@ CREATE TABLE lecturing (
 
 DROP TABLE IF EXISTS `medical`;
 CREATE TABLE `medical` (
-`medical_id` int primary key  AUTO_INCREMENT,
-`student_username` VARCHAR(50),
-`medical_data` LONGBLOB,
-`medical_start_date` DATE NOT NULL ,
-`medical_end_date` DATE NOT NULL
+                           `medical_id` int primary key  AUTO_INCREMENT,
+                           `student_username` VARCHAR(50),
+                           `medical_data` LONGBLOB,
+                           `medical_start_date` DATE NOT NULL ,
+                           `medical_end_date` DATE NOT NULL
 );
 
 INSERT INTO `medical` (`medical_id`, `student_username`, `medical_start_date` , `medical_end_date`)  VALUES
- (1 , 'tg1416','04/03/2025','04/06/2025'),
- (1 , 'tg1415','05/03/2025','04/09/2025'),
- (1 , 'tg1413','03/03/2025','03/06/2025');
+                                                                                                         (1 , 'tg1416','04/03/2025','04/06/2025'),
+                                                                                                         (1 , 'tg1415','05/03/2025','04/09/2025'),
+                                                                                                         (1 , 'tg1413','03/03/2025','03/06/2025');
 
 
 DROP TABLE IF EXISTS `notices`;
 CREATE TABLE `notices` (
- `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
- `admin_username` VARCHAR(50),
- `notice_name` VARCHAR(255),
- `notice_title`  VARCHAR(255),
- `notice_data` LONGBLOB,
- `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                           `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
+                           `admin_username` VARCHAR(50),
+                           `notice_name` VARCHAR(255),
+                           `notice_title`  VARCHAR(255),
+                           `notice_data` LONGBLOB,
+                           `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 select * from `notices`;
