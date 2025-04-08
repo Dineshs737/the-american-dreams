@@ -8,7 +8,7 @@ def store_gif_as_blob(gif_path, course_id):
     try:
         config = {
             'host': 'localhost',        # MySQL server host
-            'port': 3050,               # Change this to your MySQL port
+            'port': 3307,               # Change this to your MySQL port
             'user': 'root',             # MySQL username
             'password': 'root',         # MySQL password
             'database': 'techlms',      # Database name
@@ -42,21 +42,21 @@ def store_gif_as_blob(gif_path, course_id):
             print("MySQL connection is closed.")
 
 # Provide the path to your GIF and the course_id
-gif_path = "opp-t.jpg"
+gif_path = "course-images/l2s1/opp-t.jpg"
 course_id = 5
 
 # Call the function
 store_gif_as_blob(gif_path, course_id)
 
 
-gif_path = "oop.jpg"
+gif_path = "course-images/l2s1/oop.jpg"
 course_id = 4
 
 # Call the function
 store_gif_as_blob(gif_path, course_id)
 
 
-gif_path = "oopa.png"
+gif_path = "course-images/l2s1/oopa.png"
 course_id = 3
 
 # Call the function
@@ -65,7 +65,7 @@ store_gif_as_blob(gif_path, course_id)
 
 
 
-gif_path = "e-commerce.png"
+gif_path = "course-images/l2s1/e-commerce.png"
 course_id = 2
 
 # Call the function
@@ -73,7 +73,7 @@ store_gif_as_blob(gif_path, course_id)
 
 
 
-gif_path = "dsa.gif"
+gif_path = "course-images/l2s1/dsa.gif"
 course_id = 1
 
 # Call the function
@@ -81,8 +81,64 @@ store_gif_as_blob(gif_path, course_id)
 
 
 
-gif_path = "opp-t.jpg"
-course_id = 5
+gif_path = "course-images/l1s1/webTechnology.jpg"
+course_id = 6
+
+# Call the function
+store_gif_as_blob(gif_path, course_id)
+
+
+gif_path = "course-images/l1s1/multiMedia.jpg"
+course_id = 7
+
+# Call the function
+store_gif_as_blob(gif_path, course_id)
+
+
+gif_path = "course-images/l1s1/databaseManagementSystem.jpg"
+course_id = 8
+
+# Call the function
+store_gif_as_blob(gif_path, course_id)
+
+
+
+gif_path = "course-images/l1s1/network.jpg"
+course_id = 9
+
+# Call the function
+store_gif_as_blob(gif_path, course_id)
+
+
+
+gif_path = "course-images/l1s1/sever-side-scripting.jpg"
+course_id = 10
+
+# Call the function
+store_gif_as_blob(gif_path, course_id)
+
+
+gif_path = "course-images/l3s1/advanceProgramming.jpg"
+course_id = 11
+
+# Call the function
+store_gif_as_blob(gif_path, course_id)
+
+
+
+gif_path = "course-images/l3s1/advance-database-managementSystem.jpg"
+course_id = 12
+
+# Call the function
+store_gif_as_blob(gif_path, course_id)
+
+gif_path = "course-images/l3s1/operatingSystem.jpg"
+course_id = 13
+
+# Call the function
+store_gif_as_blob(gif_path, course_id)
+gif_path = "course-images/l4s1/softwareDevelopment.jpg"
+course_id = 14
 
 # Call the function
 store_gif_as_blob(gif_path, course_id)
