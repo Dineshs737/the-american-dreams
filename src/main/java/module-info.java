@@ -21,5 +21,8 @@ module org.techlms.demoitest {
     opens org.techlms.demoitest.controllers.utilController to javafx.fxml;
     exports org.techlms.demoitest.controllers.adminControllers to javafx.fxml;
     opens org.techlms.demoitest.controllers.adminControllers to javafx.fxml;
+    exports org.techlms.demoitest.controllers.lecturerControllers to javafx.fxml;
+    opens org.techlms.demoitest.controllers.lecturerControllers to javafx.fxml;
+
 
 }
