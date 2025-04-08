@@ -79,7 +79,7 @@
                                        <children>
                                           <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../application-images/adminUIImages/3631626.png" />
+                                                <Image url="@../application-images/admin-ui-Images/3631626.png" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -101,7 +101,7 @@
                                        <children>
                                           <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../application-images/adminUIImages/65049.png" />
+                                                <Image url="@../application-images/admin-ui-Images/65049.png" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -123,7 +123,7 @@
                                        <children>
                                           <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../application-images/adminUIImages/3410475.png" />
+                                                <Image url="@../application-images/admin-ui-Images/3410475.png" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -145,7 +145,7 @@
                                        <children>
                                           <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../application-images/adminUIImages/delete-user-data.png" />
+                                                <Image url="@../application-images/admin-ui-Images/delete-user-data.png" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -349,7 +349,7 @@
                                              <children>
                                                 <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../application-images/adminUIImages/9523684.png" />
+                                                      <Image url="@../application-images/admin-ui-Images/9523684.png" />
                                                    </image>
                                                 </ImageView>
                                                 <HBox alignment="CENTER">
@@ -370,7 +370,7 @@
                                              <children>
                                                 <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../application-images/adminUIImages/234723.png" />
+                                                      <Image url="@../application-images/admin-ui-Images/234723.png" />
                                                    </image>
                                                 </ImageView>
                                                 <HBox alignment="CENTER">
@@ -388,7 +388,7 @@
                                              <children>
                                                 <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../application-images/adminUIImages/2206248.png" />
+                                                      <Image url="@../application-images/admin-ui-Images/2206248.png" />
                                                    </image>
                                                 </ImageView>
                                                 <HBox alignment="CENTER">
@@ -406,7 +406,7 @@
                                              <children>
                                                 <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../application-images/adminUIImages/5225075.png" />
+                                                      <Image url="@../application-images/admin-ui-Images/5225075.png" />
                                                    </image>
                                                 </ImageView>
                                                 <HBox alignment="CENTER">
