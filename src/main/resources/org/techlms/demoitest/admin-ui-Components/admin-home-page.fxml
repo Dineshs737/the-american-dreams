@@ -65,7 +65,7 @@
       </VBox>
    </left>
    <center>
-      <VBox styleClass="right-side" stylesheets="@adminHomePage.css" BorderPane.alignment="CENTER">
+      <VBox styleClass="right-side" stylesheets="@admin-home-page.css" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" VBox.vgrow="NEVER">
                <children>
