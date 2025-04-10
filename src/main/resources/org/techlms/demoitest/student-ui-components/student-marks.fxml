@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" styleClass="profile-left-card" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" styleClass="my-course-message">
+         <children>
+            <Label styleClass="course-name-profile" text="Student Grades" />
+         </children>
+      </HBox>
+
+      <TableView fx:id="studentGrades" pickOnBounds="false" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="courseCode" editable="false" prefWidth="100.0" sortType="DESCENDING" sortable="false" text="Course Code" />
+            <TableColumn fx:id="quiz01" editable="false" prefWidth="100.0" sortable="false" text="Quiz 01" />
+            <TableColumn fx:id="quiz02" editable="false" prefWidth="100.0" sortType="DESCENDING" sortable="false" text="Quiz 02" />
+            <TableColumn fx:id="quiz03" editable="false" prefWidth="100.0" sortType="DESCENDING" sortable="false" text="Quiz 03" />
+            <TableColumn fx:id="inclassAssignment" editable="false" prefWidth="150.0" sortable="false" text="In-Class Assignment" />
+            <TableColumn fx:id="midExam" editable="false" prefWidth="100.0" sortType="DESCENDING" sortable="false" text="Mid Exam" />
+            <TableColumn fx:id="endExam" editable="false" prefWidth="100.0" sortable="false" text="End Exam" />
+            <TableColumn fx:id="SGPA" editable="false" prefWidth="100.0" sortable="false" text="SGPA" />
+            <TableColumn fx:id="CGPA" editable="false" prefWidth="100.0" sortable="false" text="CGPA" />
+            <TableColumn fx:id="GPA" editable="false" prefWidth="100.0" sortable="false" text="GPA" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
