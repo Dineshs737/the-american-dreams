@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox alignment="CENTER" fillWidth="false" spacing="50.0" stylesheets="@../util/newStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <!-- User Profile Picture -->
+   <HBox alignment="CENTER" fillHeight="false">
+      <children>
+         <Circle fill="#3d4d5c" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      </children>
+   </HBox>
+
+   <!-- Profile Information Fields -->
+   <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="NEVER">
+      <children>
+         <VBox VBox.vgrow="NEVER">
+            <children>
+               <Label styleClass="user-profile-label" text="User name" />
+               <TextField maxWidth="500.0" promptText="User name" styleClass="user-profile-text-field">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding></TextField>
+            </children>
+         </VBox>
+
+         <VBox VBox.vgrow="NEVER">
+            <children>
+               <Label styleClass="user-profile-label" text="Contact Number" />
+               <TextField maxWidth="500.0" promptText="Phone number" styleClass="user-profile-text-field">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding></TextField>
+            </children>
+         </VBox>
+
+         <VBox VBox.vgrow="NEVER">
+            <children>
+               <Label styleClass="user-profile-label" text="Gender" />
+               <ChoiceBox prefWidth="500.0">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </ChoiceBox>
+            </children>
+         </VBox>
+
+         <VBox VBox.vgrow="NEVER">
+            <children>
+               <Label styleClass="user-profile-label" text="Department" />
+               <TextField maxWidth="500.0" promptText="Department" styleClass="user-profile-text-field">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding></TextField>
+            </children>
+         </VBox>
+
+         <VBox VBox.vgrow="NEVER">
+            <children>
+               <Label styleClass="user-profile-label" text="Address" />
+               <TextField maxWidth="500.0" promptText="Address" styleClass="user-profile-text-field">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding></TextField>
+            </children>
+         </VBox>
+
+         <VBox VBox.vgrow="NEVER">
+            <children>
+               <Label styleClass="user-profile-label" text="Email" />
+               <TextField maxWidth="500.0" promptText="Email" styleClass="user-profile-text-field">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding></TextField>
+            </children>
+         </VBox>
+
+         <!-- Update Button -->
+         <HBox alignment="CENTER">
+            <Button styleClass="user-profile-button" text="Edit">
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding></Button>
+         </HBox>
+      </children>
+      <VBox.margin>
+         <Insets bottom="30.0" />
+      </VBox.margin>
+   </VBox>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</VBox>
