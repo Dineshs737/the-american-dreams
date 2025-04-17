@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.studentControllers.AttendanceController">
+   <children>
+      <!-- Title Section -->
+      <HBox alignment="CENTER">
+         <children>
+            <Label styleClass="course-name-profile" text="Student Attendance">
+               <HBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+
+      <!-- Attendance Table Section -->
+      <VBox>
+         <children>
+            <TableView fx:id="studentAttendance">
+               <columns>
+                  <TableColumn fx:id="courseCode" text="Course Code" prefWidth="100.0" />
+                  <TableColumn fx:id="participate" text="Participate" prefWidth="100.0" />
+                  <TableColumn fx:id="nonParticipate" text="Non Participate" prefWidth="150.0" />
+                  <TableColumn fx:id="percentageParticipate" text="Current Participate (%)" prefWidth="150.0" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</VBox>
