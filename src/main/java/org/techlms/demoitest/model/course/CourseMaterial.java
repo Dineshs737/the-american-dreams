@@ -3,7 +3,7 @@ package org.techlms.demoitest.model.course;
 import java.util.Arrays;
 
 public class CourseMaterial {
-    private String courseMaterialId;
+    private int courseMaterialId;
     private String courseCode;
     private String lectureId;
     private String lectureTitle;
@@ -11,7 +11,7 @@ public class CourseMaterial {
 //    private String lectureDescription;
     private byte[] courseResource;
 
-    public CourseMaterial(String courseMaterialId, String lectureId, String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
+    public CourseMaterial(int courseMaterialId, String lectureId, String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
         this.courseMaterialId = courseMaterialId;
         this.lectureId = lectureId;
         this.courseCode = courseCode;
@@ -52,11 +52,11 @@ public class CourseMaterial {
         this.lectureDate = lectureDate;
     }
 
-    public String getCourseMaterialId() {
+    public int getCourseMaterialId() {
         return courseMaterialId;
     }
 
-    public void setCourseMaterialId(String courseMaterialId) {
+    public void setCourseMaterialId(int courseMaterialId) {
         this.courseMaterialId = courseMaterialId;
     }
 
