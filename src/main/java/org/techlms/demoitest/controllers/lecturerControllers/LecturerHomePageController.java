@@ -14,7 +14,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.techlms.demoitest.dto.lecturerDTO.LecturerCourseDTO;
+import org.techlms.demoitest.model.course.Course;
 import org.techlms.demoitest.service.lecturerService.LecturerCourseService;
 import org.techlms.demoitest.util.SessionManager;
 
@@ -39,19 +39,35 @@ public class LecturerHomePageController {
     }
 
     private void loadCourses() {
-        List<LecturerCourseDTO> courses = lecturerCourseService.getAllLecturerCourses();
-        for (LecturerCourseDTO course : courses) {
+        List<Course> courses = lecturerCourseService.getAllLecturerCourses();
+        for (Course course : courses) {
+            System.out.println(course.getCourseCode());
             coursesContainer.getChildren().add(createCourseCard(course));
         }
     }
 
     // open Course Details
-    private void openCourseDetails(LecturerCourseDTO course) {
-        System.out.println("Opening details for: " + course.getCourseName());
-        // TODO: Implement the logic to show course details
+    private void openCourseDetails(Course course) {
+        System.out.println("Opening details for: " + course.getCourseCode());
+        //TODO: if user click then show  course details
+        Course.courseSessionManager().setCourse(course.getCourseCode(),course.getCourseName());
+
+        FXMLLoader fxmlLoader = null;
+        try{
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/lecturer-course-material-page.fxml"));
+            Parent clickedCourse = fxmlLoader.load();
+//            VBox.setVgrow(clickedCourse, javafx.scene.layout.Priority.ALWAYS);
+            contentContainer.getChildren().clear();
+            contentContainer.getChildren().add(clickedCourse);
+            System.out.println("Grades Page");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
-    private VBox createCourseCard(LecturerCourseDTO course) {
+    private VBox createCourseCard(Course course) {
         VBox courseCard = new VBox(10); // Added spacing between elements
         courseCard.getStyleClass().add("course-card");
 
@@ -79,7 +95,7 @@ public class LecturerHomePageController {
         imageView.setPreserveRatio(true);
 
         Label courseLabel = new Label(course.getCourseName());
-        Label courseSemesterLabel = new Label(course.getCourseYearAndSemester());
+        Label courseSemesterLabel = new Label(course.getCourseSemester());
         courseSemesterLabel.getStyleClass().add("course-card-name");
         courseLabel.getStyleClass().add("course-card-name");
 
@@ -148,12 +164,12 @@ public class LecturerHomePageController {
     public void switchMedical() {
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-medical.fxml"));
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/tech-officer-ui-Components/medicalPages/tech-officer-medical.fxml"));
             Parent attendancePage = fxmlLoader.load();
             contentContainer.getChildren().clear();
             contentContainer.getChildren().add(attendancePage);
 
-           System.out.println("Medical Page");
+            System.out.println("Medical Page");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,7 +200,7 @@ public class LecturerHomePageController {
 
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-profile.fxml"));
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/util/user-profile.fxml"));
             Parent attendancePage = fxmlLoader.load();
             contentContainer.getChildren().clear();
             contentContainer.getChildren().add(attendancePage);
