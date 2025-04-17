@@ -121,14 +121,14 @@
                                    <children>
                                        <VBox alignment="CENTER" styleClass="user-barchart-card">
                                  <children>
-                                    <HBox>
+                                    <HBox stylesheets="@style-sheets/course-material-table.css">
                                        <children>
-                                          <TableView>
+                                          <TableView fx:id="courseMaterialTable">
                                             <columns>
-                                              <TableColumn editable="false" prefWidth="100.0" sortable="false" text="Lecturer No" />
-                                              <TableColumn editable="false" prefWidth="250.0" sortable="false" text="Lecturer title" />
-                                                <TableColumn editable="false" prefWidth="150.0" sortable="false" text="Upload Date" />
-                                                <TableColumn editable="false" prefWidth="250.0" sortable="false" text="Lecturer  Resources" />
+                                              <TableColumn fx:id="materialNumber" editable="false" prefWidth="100.0" sortable="false" text="Lecturer No" />
+                                              <TableColumn fx:id="lectureTitle" editable="false" prefWidth="250.0" sortable="false" text="Lecturer title" />
+                                                <TableColumn fx:id="lectureUploadDate" editable="false" prefWidth="150.0" sortable="false" text="Upload Date" />
+                                                <TableColumn fx:id="lectureResource" editable="false" prefWidth="250.0" sortable="false" text="Lecturer  Resources" />
                                             </columns>
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
