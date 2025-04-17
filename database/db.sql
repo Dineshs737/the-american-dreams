@@ -6,6 +6,28 @@ USE
 `techlms`;
 
 
+
+DROP TABLE IF EXISTS `batch`;
+
+-- Create the batch table
+CREATE TABLE `batch` (
+    `batch_id` INT PRIMARY KEY AUTO_INCREMENT,
+    `batch_year` VARCHAR(4) NOT NULL UNIQUE,
+    `current_student_semester` VARCHAR(50) NOT NULL UNIQUE
+);
+
+
+-- Insert batch years with specific batch_id for one of the entries
+INSERT INTO `batch` (`batch_id`, `batch_year`, `current_student_semester`)
+VALUES
+    (1, '2020', 'l4s2'),
+    (2, '2021', 'l3s2'),
+    (3, '2022', 'l2s1'),
+    (4, '2023', 'l1s1');
+
+
+
+
 CREATE TABLE `department` (
                               `dep_id` INT AUTO_INCREMENT PRIMARY KEY,  -- Primary key
                               `dep_code` VARCHAR(10) UNIQUE,            -- Make dep_code unique
@@ -19,8 +41,16 @@ INSERT INTO `department` (`dep_id`, `dep_code`, `DepName`) VALUES
                                                                (3, 'et', 'Engineering Technology');
 
 
+
+
+
+
+
+
+
 -- Drop the table if it exists
 DROP TABLE IF EXISTS `user`;
+
 
 -- Create the user table
 CREATE TABLE user
@@ -32,147 +62,130 @@ CREATE TABLE user
     password   VARCHAR(255) NOT NULL,
     contact_no VARCHAR(15),
     role       ENUM('admin', 'lecturer', 'student', 'technical officer') NOT NULL,
-    `course_image` LONGBLOB,
+    gender     CHAR(1),
+    user_profile LONGBLOB,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 -- Student user data insert
-INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
-VALUES (1, 'tg1062', 'D.Jamper', 'Jamper999@gmail.com', 'student', '761234654',
-        'dae5992a6320223d208f6277f7c1cb9e04fea726f16a1d16458963067cf7bb52'),
-       (2, 'tg1063', 'O.Otara87', 'otara87@gmail.com', 'student', '761234789',
-        '06d913e979383fbec4ad1a4fed98c7af0206407a5de747adf2eaa3c968b07ab8'),
-       (3, 'tg1064', 'M.Manodra', 'manodra@gmail.com', 'student', '761234678',
-        '64701c078db4c0dd283d04fa9c4d80ebb4eb919b2f83c1043dfe6eb3476ecb69'),
-       (4, 'tg1414', 'R.Rajapaksha', 'rajapaksha@gmail.com', 'student', '761234565',
-        '85b408c39db526dfbfb59797ffcc5d300a874e7d1167cde9c70726f7db140e7e'),
-       (5, 'tg1413', 'A.Asmaakram2', 'asmaakram2@gmail.com', 'student', '761234564',
-        '1055dd50f255c86a66ecadf4762aaca3358cfa24e4872dfe913fce2e036b09da'),
-       (6, 'tg1345', 'K.Kanadipudayan', 'kanadipudayan@gmail.com', 'student', '718032400',
-        '1cbf767dcbbdd1cf3dfe005ee7eeb0d7a658685654cc2a535be32268c856a2fe'),
-       (7, 'tg1067', 'S.Shalini52', 'shalini52@gmail.com', 'student', '761234567',
-        '8b20e9620a8858b94909f00f68b5c87c91c7091d5c9ffcd75a14aa9f0004ab78'),
-       (8, 'tg1415', 'P.Pema00', 'pema00@gmail.com', 'student', '718032468',
-        '902237776fa6387dc42703e536b9cc68f3a8637a077ff550f70e3d9f1ec762ba'),
-       (9, 'tg1417', 'A.AnpuSin', 'anpuSin@gmail.com', 'student', '761234573',
-        '7a7225adee04214c7ab27bffc4f4d77ea8b827d1ffe2f8166242c6caf36ed2fd'),
-       (10, 'tg1416', 'D.Dinesh', 'dinesh@gmail.com', 'student', '749900223',
-        'dinesh01'),
-       (11, 'tg1418', 'K.Kaviya', 'kaviya@gmail.com', 'student', '788765432',
-        '499cbdc7ecd89d158fe7e4731f8943f0b0df7ed2080b28e8694e0be3393a64f1'),
-       (12, 'tg1419', 'D.Dhanu', 'dhanu@gmail.com', 'student', '745432188',
-        'b110d14482421f6d6e5afb454c4e308fae086c64a87b1966525a0ae11b23868b'),
-       (13, 'tg1420', 'D.Dharshi', 'dharshi@gmail.com', 'student', '751234509',
-        'd30a052c2cdd472d612cb4138f5b088ef94c97e6b3ffd90cea5718a1cefc854e'),
-       (14, 'tg1421', 'T.Thinesh', 'thinesh@gmail.com', 'student', '750987653',
-        'faa5f49f088dcabb4cee316f0bf24b2b49ddcdb2a87a54cd6118f1f28a58bc5d'),
-       (15, 'tg1422', 'A.Akram', 'akram@gmail.com', 'student', '764545456',
-        '8c2012bcd0dabb0bcba27ab1cbb2c87b2f392486183548f0fdac95f405ed4223'),
-       (16, 'tg1423', 'T.Thak', 'thak@gmail.com', 'student', '761234098',
-        '3cacb5d972d86adb6ecb75a89a58e47f1ea3eec8aaa2df826c03b4ac826c1224'),
-       (17, 'tg1424', 'K.Keerthan', 'keerthan@gmail.com', 'student', '789876588',
-        '210a29ba180e17d8178c978893f1e86beba7187d5805e1d9c766e7245a9cb8f0'),
-       (18, 'tg1425', 'V.Madhu', 'madhu@gmail.com', 'student', '753456789',
-        'dcdb51b664e5dd3077bd929e41115683d36b84a7367021d228c32d1eb4621a46'),
-       (19, 'tg1426', 'S.Suba', 'suba@gmail.com', 'student', '747474745',
-        'cef9bb6c0e55d1f0fa1733a0695e055fa796476459c9534b7ce55eef729ce5c5'),
-       (20, 'tg1427', 'P.Praveen', 'praveen@gmail.com', 'student', '757698089',
-        '85a9c28876bb35b406100c4cbad1636e2461acf4308033f18fca68216d2c0422'),
-       (21, 'tg1428', 'S.Sajeeya', 'Sajeeya@gmail.com', 'student', '718562347',
-        '269ecb47ff8ebb12f4433c628a65a2ba5b4bf2fd24f5069c22ce0f277123761e'),
-       (22, 'tg1429', 'A.Asma', 'Asma@gmail.com', 'student', '768534547',
-        '9fee23448017ed22508482bf9682107ed4fa9b58a1bf26d026dc6328ce0b5c71'),
-       (23, 'tg1430', 'U.Umesha', 'Umesha@gmail.com', 'student', '775340058',
-        '4c6457f45036f181284bd111c9c0c5e2b581017b18edc71155ceda70c7c5149d'),
-       (24, 'tg1431', 'D.Danith', 'Danith@gmail.com', 'student', '718032400',
-        'a3129d8ceff0d71abb0851597f207f62e988e977f6133aac69e979d379c58159'),
-       (25, 'tg1432', 'D.Dasun', 'Dasun@gmail.com', 'student', '761234687',
-        'bdbdd2efdcfc779afa44c991daae58928cea35a53606b74516d9439f1fbc83bf');
+INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`, `gender`) 
+VALUES
+-- Students
+(1, 'tg1062', 'D.Jamper', 'Jamper999@gmail.com', 'student', '761234654', 'dae5992a6320223d208f6277f7c1cb9e04fea726f16a1d16458963067cf7bb52', 'M'),
+(2, 'tg1063', 'O.Otara87', 'otara87@gmail.com', 'student', '761234789', '06d913e979383fbec4ad1a4fed98c7af0206407a5de747adf2eaa3c968b07ab8', 'F'),
+(3, 'tg1064', 'M.Manodra', 'manodra@gmail.com', 'student', '761234678', '64701c078db4c0dd283d04fa9c4d80ebb4eb919b2f83c1043dfe6eb3476ecb69', 'M'),
+(4, 'tg1414', 'R.Rajapaksha', 'rajapaksha@gmail.com', 'student', '761234565', '85b408c39db526dfbfb59797ffcc5d300a874e7d1167cde9c70726f7db140e7e', 'M'),
+(5, 'tg1413', 'A.Asmaakram2', 'asmaakram2@gmail.com', 'student', '761234564', '1055dd50f255c86a66ecadf4762aaca3358cfa24e4872dfe913fce2e036b09da', 'F'),
+(6, 'tg1345', 'K.Kanadipudayan', 'kanadipudayan@gmail.com', 'student', '718032400', '1cbf767dcbbdd1cf3dfe005ee7eeb0d7a658685654cc2a535be32268c856a2fe', 'M'),
+(7, 'tg1067', 'S.Shalini52', 'shalini52@gmail.com', 'student', '761234567', '8b20e9620a8858b94909f00f68b5c87c91c7091d5c9ffcd75a14aa9f0004ab78', 'F'),
+(8, 'tg1415', 'P.Pema00', 'pema00@gmail.com', 'student', '718032468', '902237776fa6387dc42703e536b9cc68f3a8637a077ff550f70e3d9f1ec762ba', 'F'),
+(9, 'tg1417', 'A.AnpuSin', 'anpuSin@gmail.com', 'student', '761234573', '7a7225adee04214c7ab27bffc4f4d77ea8b827d1ffe2f8166242c6caf36ed2fd', 'M'),
+(10, 'tg1416', 'D.Dinesh', 'dinesh@gmail.com', 'student', '749900223', 'dinesh01', 'M'),
+(11, 'tg1418', 'K.Kaviya', 'kaviya@gmail.com', 'student', '788765432', '499cbdc7ecd89d158fe7e4731f8943f0b0df7ed2080b28e8694e0be3393a64f1', 'F'),
+(12, 'tg1419', 'D.Dhanu', 'dhanu@gmail.com', 'student', '745432188', 'b110d14482421f6d6e5afb454c4e308fae086c64a87b1966525a0ae11b23868b', 'M'),
+(13, 'tg1420', 'D.Dharshi', 'dharshi@gmail.com', 'student', '751234509', 'd30a052c2cdd472d612cb4138f5b088ef94c97e6b3ffd90cea5718a1cefc854e', 'F'),
+(14, 'tg1421', 'T.Thinesh', 'thinesh@gmail.com', 'student', '750987653', 'faa5f49f088dcabb4cee316f0bf24b2b49ddcdb2a87a54cd6118f1f28a58bc5d', 'M'),
+(15, 'tg1422', 'A.Akram', 'akram@gmail.com', 'student', '764545456', '8c2012bcd0dabb0bcba27ab1cbb2c87b2f392486183548f0fdac95f405ed4223', 'M'),
+(16, 'tg1423', 'T.Thak', 'thak@gmail.com', 'student', '761234098', '3cacb5d972d86adb6ecb75a89a58e47f1ea3eec8aaa2df826c03b4ac826c1224', 'M'),
+(17, 'tg1424', 'K.Keerthan', 'keerthan@gmail.com', 'student', '789876588', '210a29ba180e17d8178c978893f1e86beba7187d5805e1d9c766e7245a9cb8f0', 'M'),
+(18, 'tg1425', 'V.Madhu', 'madhu@gmail.com', 'student', '753456789', 'dcdb51b664e5dd3077bd929e41115683d36b84a7367021d228c32d1eb4621a46', 'F'),
+(19, 'tg1426', 'S.Suba', 'suba@gmail.com', 'student', '747474745', 'cef9bb6c0e55d1f0fa1733a0695e055fa796476459c9534b7ce55eef729ce5c5', 'F'),
+(20, 'tg1427', 'P.Praveen', 'praveen@gmail.com', 'student', '757698089', '85a9c28876bb35b406100c4cbad1636e2461acf4308033f18fca68216d2c0422', 'M'),
+(21, 'tg1428', 'S.Sajeeya', 'Sajeeya@gmail.com', 'student', '718562347', '269ecb47ff8ebb12f4433c628a65a2ba5b4bf2fd24f5069c22ce0f277123761e', 'F'),
+(22, 'tg1429', 'A.Asma', 'Asma@gmail.com', 'student', '768534547', '9fee23448017ed22508482bf9682107ed4fa9b58a1bf26d026dc6328ce0b5c71', 'F'),
+(23, 'tg1430', 'U.Umesha', 'Umesha@gmail.com', 'student', '775340058', '4c6457f45036f181284bd111c9c0c5e2b581017b18edc71155ceda70c7c5149d', 'F'),
+(24, 'tg1431', 'D.Danith', 'Danith@gmail.com', 'student', '718032400', 'a3129d8ceff0d71abb0851597f207f62e988e977f6133aac69e979d379c58159', 'M'),
+(25, 'tg1432', 'D.Dasun', 'Dasun@gmail.com', 'student', '761234687', 'bdbdd2efdcfc779afa44c991daae58928cea35a53606b74516d9439f1fbc83bf', 'M');
 
-select * from user;
-
--- Technical_officer user data insert
-INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
-VALUES (26, 'tech001', 'K.Vaja', 'kavindi@gmail.com', 'technical officer', '769870000',
-        '8d93cc2a76b00161ec7f372d7fdd1d45e5cba7d3b74cb0c068d07ff1e807ba17'),
-       (27, 'tech002', 'R.Raja', 'raja@gmail.com', 'technical officer', '755566799',
-        'feffe1e1a73b6443c229f162e1c82d82295b08ebb576068566ecc71d6efd5c4f'),
-       (28, 'tech003', 'K.Kamal', 'kamal@gmail.com', 'technical officer', '760987654',
-        '4bb09b01c9012bff610927871af0ae59a6620a204efd6f2a251eb92b0a1c8d56'),
-       (29, 'tech004', 'V.Vihanga', 'vihanga@gmail.com', 'technical officer', '760000987',
-        '6989c62b46aeb11517ca743a00aa38d37dce2757141353c526ee682682ccbf06'),
-       (30, 'tech005', 'M.Mithu', 'mithu@gmail.com', 'technical officer', '756677665',
-        '5c3544e502ee2eb2ec924c34916c117be8d09708865b28210c74b7a1cfa7ac0a');
+INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`, `gender`) 
+VALUES
+-- Technical Officers
+(26, 'tech001', 'K.Vaja', 'kavindi@gmail.com', 'technical officer', '769870000', 'dinesh001', 'F'),
+(27, 'tech002', 'R.Raja', 'raja@gmail.com', 'technical officer', '755566799', 'feffe1e1a73b6443c229f162e1c82d82295b08ebb576068566ecc71d6efd5c4f', 'M'),
+(28, 'tech003', 'K.Kamal', 'kamal@gmail.com', 'technical officer', '760987654', '4bb09b01c9012bff610927871af0ae59a6620a204efd6f2a251eb92b0a1c8d56', 'M'),
+(29, 'tech004', 'V.Vihanga', 'vihanga@gmail.com', 'technical officer', '760000987', '6989c62b46aeb11517ca743a00aa38d37dce2757141353c526ee682682ccbf06', 'F'),
+(30, 'tech005', 'M.Mithu', 'mithu@gmail.com', 'technical officer', '756677665', '5c3544e502ee2eb2ec924c34916c117be8d09708865b28210c74b7a1cfa7ac0a', 'M');
 
 -- Admin user data insert
-INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
-VALUES (31, 'admin001', 'S.Suman', 'suman@gmail.com', 'admin', '719877898',
-        'dinesh01');
+INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`, `gender`)
+VALUES
+-- Admin
+(31, 'admin001', 'A.Admin', 'admin@gmail.com', 'admin', '700000001', 
+ 'dinesh01', 'm');
+
 
 -- Lecturer user data insert
-INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`)
-VALUES (32, 'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'lecturer', '0712345678',
-        'dinesh01'),
-       (33, 'l0002', 'M.Kavid', 'kavind@gmail.com', 'lecturer', '0781234567',
-        'dinesh02'),
-       (34, 'l0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'lecturer', '0745678123',
-        '204dd7de4295107a97b4a9b1759d5ca956ac1f3b33fa31790e592f1d0260635e'),
-       (35, 'l0004', 'M.Tharindu', 'tharindu@gmail.com', 'lecturer', '0712348765',
-        '19f2e2b7340b853f3833992f5d2d9c23840d872c59975dbab98e7d87561f0981'),
-       (36, 'l0005', 'M.Ishara', 'ishara@gmail.com', 'lecturer', '0787654321',
-        '189f91ff8321b6b69430243895a2d8cba292d6854c4950be42c32138cd3f399d'),
-       (37, 'l0006', 'M.Lakal', 'lakal@gmail.com', 'lecturer', '0741234567',
-        '0b225a4da41b27d4d59441681010f95bbf9071e88cf76d72c09c4a72c4bfb988'),
-       (38, 'l0007', 'M.Ruwan', 'ruwan@gmail.com', 'lecturer', '0712349876',
-        '82d35f15bc8d4e974b2788e7ecb8655d0f2b9e586bfa34021ac0b10d0a846689'),
-       (39, 'l0008', 'M.Nishan', 'nishan@gmail.com', 'lecturer', '0789123456',
-        '9a17a599e04b0e3d430bbfe707be83f58e5400cdce2eab0b2148d328cc0d91a5'),
-       (40, 'l0009', 'M.Shaneeka', 'shaneeka@gmail.com', 'lecturer', '0712346589',
-        'ee46b712b7c2855283e7e522b82d7a96d92a2acb8d70896f5d99007b50d6220f'),
-       (41, 'l0010', 'M.Kusum', 'kusum@gmail.com', 'lecturer', '0745678901',
-        'fdcdcd062d7b8e5b77147cc5a02a062e7425b0710410ad9a1257f9e8b0bb04d9');
+INSERT INTO `user` (`user_id`, `username`, `name`, `email`, `role`, `contact_no`, `password`, `gender`)
+VALUES
+    (32, 'l0001', 'M.Aayansah', 'aayansh@gmail.com', 'lecturer', '0712345678', 'dinesh01', 'M'),
+    (33, 'l0002', 'M.Kavid', 'kavind@gmail.com', 'lecturer', '0781234567', 'dinesh02', 'M'),
+    (34, 'l0003', 'M.Nadeesha', 'nadeesha@gmail.com', 'lecturer', '0745678123', '204dd7de4295107a97b4a9b1759d5ca956ac1f3b33fa31790e592f1d0260635e', 'F'),
+    (35, 'l0004', 'M.Tharindu', 'tharindu@gmail.com', 'lecturer', '0712348765', '19f2e2b7340b853f3833992f5d2d9c23840d872c59975dbab98e7d87561f0981', 'M'),
+    (36, 'l0005', 'M.Ishara', 'ishara@gmail.com', 'lecturer', '0787654321', '189f91ff8321b6b69430243895a2d8cba292d6854c4950be42c32138cd3f399d', 'F'),
+    (37, 'l0006', 'M.Lakal', 'lakal@gmail.com', 'lecturer', '0741234567', '0b225a4da41b27d4d59441681010f95bbf9071e88cf76d72c09c4a72c4bfb988', 'M'),
+    (38, 'l0007', 'M.Ruwan', 'ruwan@gmail.com', 'lecturer', '0712349876', '82d35f15bc8d4e974b2788e7ecb8655d0f2b9e586bfa34021ac0b10d0a846689', 'M'),
+    (39, 'l0008', 'M.Nishan', 'nishan@gmail.com', 'lecturer', '0789123456', '9a17a599e04b0e3d430bbfe707be83f58e5400cdce2eab0b2148d328cc0d91a5', 'M'),
+    (40, 'l0009', 'M.Shaneeka', 'shaneeka@gmail.com', 'lecturer', '0712346589', 'ee46b712b7c2855283e7e522b82d7a96d92a2acb8d70896f5d99007b50d6220f', 'F'),
+    (41, 'l0010', 'M.Kusum', 'kusum@gmail.com', 'lecturer', '0745678901', 'fdcdcd062d7b8e5b77147cc5a02a062e7425b0710410ad9a1257f9e8b0bb04d9', 'F');
+
+CREATE VIEW UserRoleCounts AS
+SELECT 
+    SUM(CASE WHEN role = 'student' THEN 1 ELSE 0 END) AS StudentCount,
+    SUM(CASE WHEN role = 'lecturer' THEN 1 ELSE 0 END) AS LecturerCount,
+    SUM(CASE WHEN role = 'admin' THEN 1 ELSE 0 END) AS AdminCount,
+    SUM(CASE WHEN role = 'technical officer' THEN 1 ELSE 0 END) AS TechnicalOfficerCount
+FROM 
+    `user`;
+    
+    select * from UserRoleCounts;
 
 
-CREATE TABLE student (
-                         user_id      INT PRIMARY KEY,
-                         student_id   CHAR(15) NOT NULL UNIQUE,
-                         batch        VARCHAR(10) NOT NULL,
-                         gender       CHAR(1)     NOT NULL,
-                         department   VARCHAR(10) NOT NULL,
-                         CONSTRAINT fk_student_user FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-                         CONSTRAINT fk_student_dept FOREIGN KEY (department) REFERENCES department(dep_code)
+
+-- Drop the student table if it already exists
+DROP TABLE IF EXISTS `student`;
+
+
+-- Create the student table
+CREATE TABLE `student` (
+    `user_id` INT PRIMARY KEY,
+    `student_id` CHAR(15) NOT NULL UNIQUE,
+    `department` VARCHAR(10) NOT NULL,
+    `batch_year` VARCHAR(4) NOT NULL,
+    CONSTRAINT fk_student_user FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+    CONSTRAINT fk_student_dept FOREIGN KEY (`department`) REFERENCES `department` (`dep_code`),
+    CONSTRAINT fk_student_batch FOREIGN KEY (`batch_year`) REFERENCES `batch` (`batch_year`) ON DELETE CASCADE
 );
 
-
-
-
-INSERT INTO `student` (`user_id`,`student_id`, `batch`, `gender`, `department`)
+-- Insert data into the student table with the batch_year as a foreign key
+INSERT INTO `student` (`user_id`, `student_id`, `batch_year`, `department`)
 VALUES
-    (1, 'tg/2022/1062', '2022', 'm', 'ict'),
-    (2, 'tg/2022/1063', '2022', 'm', 'ict'),
-    (3, 'tg/2022/1064', '2022', 'm', 'ict'),
-    (4, 'tg/2022/1414', '2022', 'm', 'ict'),
-    (5, 'tg/2022/1413', '2022', 'f', 'ict'),
-    (6, 'tg/2022/1345', '2022', 'm', 'ict'),
-    (7, 'tg/2022/1067', '2022', 'f', 'ict'),
-    (8, 'tg/2022/1415', '2022', 'm', 'ict'),
-    (9, 'tg/2022/1417', '2022', 'm', 'ict'),
-    (10, 'tg/2022/1416', '2022', 'm', 'ict'),
-    (11, 'tg/2022/1418', '2022', 'f', 'ict'),
-    (12, 'tg/2022/1419', '2022', 'f', 'ict'),
-    (13, 'tg/2022/1420', '2022', 'f', 'ict'),
-    (14, 'tg/2022/1421', '2022', 'm', 'ict'),
-    (15, 'tg/2022/1422', '2022', 'm', 'ict'),
-    (16, 'tg/2022/1423', '2022', 'm', 'ict'),
-    (17, 'tg/2022/1424', '2022', 'm', 'ict'),
-    (18, 'tg/2022/1425', '2022', 'f', 'ict'),
-    (19, 'tg/2022/1426', '2022', 'f', 'ict'),
-    (20, 'tg/2022/1427', '2022', 'm', 'ict'),
-    (21, 'tg/2022/1428', '2022', 'f', 'ict'),
-    (22, 'tg/2022/1429', '2022', 'f', 'ict'),
-    (23, 'tg/2022/1430', '2022', 'f', 'ict'),
-    (24, 'tg/2022/1431', '2022', 'm', 'ict'),
-    (25, 'tg/2022/1432', '2022', 'm', 'ict');
+    (1, 'tg/2022/1062', '2022', 'ict'),
+    (2, 'tg/2022/1063', '2022', 'ict'),
+    (3, 'tg/2022/1064', '2022', 'ict'),
+    (4, 'tg/2022/1414', '2022', 'ict'),
+    (5, 'tg/2022/1413', '2022', 'ict'),
+    (6, 'tg/2022/1345', '2022', 'ict'),
+    (7, 'tg/2022/1067', '2022', 'ict'),
+    (8, 'tg/2022/1415', '2022', 'ict'),
+    (9, 'tg/2022/1417', '2022', 'ict'),
+    (10, 'tg/2022/1416', '2022', 'ict'),
+    (11, 'tg/2022/1418', '2022', 'ict'),
+    (12, 'tg/2022/1419', '2022', 'ict'),
+    (13, 'tg/2022/1420', '2022', 'ict'),
+    (14, 'tg/2022/1421', '2022', 'ict'),
+    (15, 'tg/2022/1422', '2022', 'ict'),
+    (16, 'tg/2022/1423', '2022', 'ict'),
+    (17, 'tg/2022/1424', '2022', 'ict'),
+    (18, 'tg/2022/1425', '2022', 'ict'),
+    (19, 'tg/2022/1426', '2022', 'ict'),
+    (20, 'tg/2022/1427', '2022', 'ict'),
+    (21, 'tg/2022/1428', '2022', 'ict'),
+    (22, 'tg/2022/1429', '2022', 'ict'),
+    (23, 'tg/2022/1430', '2022', 'ict'),
+    (24, 'tg/2022/1431', '2022', 'ict'),
+    (25, 'tg/2022/1432', '2022', 'ict');
+
+
 
 
 DROP TABLE IF EXISTS `lecturer`;
@@ -197,12 +210,6 @@ INSERT INTO lecturer (user_id, lecturer_id, department) VALUES
                                                             (39, 'l0008', 'ict'),
                                                             (40, 'l0009', 'ict'),
                                                             (41, 'l0010', 'ict');
-
-select * from student;
-select * from user;
-
-
-select * from lecturer;
 
 
 
@@ -259,7 +266,6 @@ CREATE TABLE `course` (
 
 );
 
-
 DROP TABLE IF EXISTS `course`;
 
 CREATE TABLE `course` (
@@ -269,27 +275,27 @@ CREATE TABLE `course` (
                           `name` VARCHAR(100),
                           `credit` INT,
                           `week` VARCHAR(20),
-                          `course_semester` VARCHAR(50),
+                          `course_semester` VARCHAR(5),
                           `course_image` LONGBLOB
 
 );
 
 INSERT INTO `course`(`course_id`, `course_code`, `dep_code`, `name`, `credit`, `week`, `course_image`, `course_semester`)
 VALUES
-    (1, 'ict2113', 'ict', 'Data Structures and Algorithms', 3, '15', null, 'Level 2 First Semester'),
-    (2, 'ict2133', 'ict', 'E-Commerce Implementation, Management and Security', 3, '15', null, 'Level 2 First Semester'),
-    (3, 'ict2122', 'ict', 'Object Oriented Analysis and Design', 2, '15', null, 'Level 2 First Semester'),
-    (4, 'ict2142', 'ict', 'Object Oriented Programming Practicum', 2, '15', null, 'Level 2 First Semester'),
-    (5, 'ict2152', 'ict', 'Object Oriented Programming', 2, '15', null, 'Level 2 First Semester'),
-    (6, 'ict1023', 'ict', 'Web technologies', 2, '15', null, 'Level 1 First Semester'),
-    (7, 'ict1033', 'ict', 'Multimedia technology', 2, '15', null, 'Level 1 First Semester'),
-    (8, 'ict1043', 'ict', 'Database management systems', 3, '15', null, 'Level 1 First Semester'),
-    (9, 'ict1045', 'ict', 'Computer networks', 2, '15', null, 'Level 1 First Semester'),
-    (10, 'ict1034', 'ict', 'Server side scripting', 2, '15', null, 'Level 1 First Semester'),
-    (11, 'ict3014', 'ict', 'Advance programming', 4, '15', null, 'Level 3 First Semester'),
-    (12, 'ict3012', 'ict', 'Advance database management system', 4, '15', null, 'Level 3 First Semester'),
-    (13, 'ict3031', 'ict', 'Operating system', 2, '15', null, 'Level 3 First Semester'),
-    (14, 'ict4021', 'ict', 'Software development', 4, '15', null, 'Level 4 First Semester');
+    (1, 'ict2113', 'ict', 'Data Structures and Algorithms', 3, '15', null, 'l2s1'),
+    (2, 'ict2133', 'ict', 'E-Commerce Implementation, Management and Security', 3, '15', null, 'l2s1'),
+    (3, 'ict2122', 'ict', 'Object Oriented Analysis and Design', 2, '15', null, 'l2s1'),
+    (4, 'ict2142', 'ict', 'Object Oriented Programming Practicum', 2, '15', null, 'l2s1'),
+    (5, 'ict2152', 'ict', 'Object Oriented Programming', 2, '15', null, 'l2s1'),
+    (6, 'ict1023', 'ict', 'Web technologies', 2, '15', null, 'l1s1'),
+    (7, 'ict1033', 'ict', 'Multimedia technology', 2, '15', null, 'l1s1'),
+    (8, 'ict1043', 'ict', 'Database management systems', 3, '15', null, 'l1s1'),
+    (9, 'ict1045', 'ict', 'Computer networks', 2, '15', null, 'l1s1'),
+    (10, 'ict1034', 'ict', 'Server side scripting', 2, '15', null, 'l1s1'),
+    (11, 'ict3014', 'ict', 'Advance programming', 4, '15', null, 'l3s1'),
+    (12, 'ict3012', 'ict', 'Advance database management system', 4, '15', null, 'l3s1'),
+    (13, 'ict3031', 'ict', 'Operating system', 2, '15', null, 'l3s1'),
+    (14, 'ict4021', 'ict', 'Software development', 4, '15', null, 'l4s1');
 
 select * from course;
 
@@ -297,22 +303,29 @@ select * from course;
 
 
 
-
-
+-- Updated table structure
 DROP TABLE IF EXISTS `medical`;
 CREATE TABLE `medical` (
-                           `medical_id` INT PRIMARY KEY AUTO_INCREMENT,
-                           `student_username` VARCHAR(50),
-                           `medical_data` LONGBLOB,
-                           `medical_start_date` DATE NOT NULL,
-                           `medical_end_date` DATE NOT NULL
+    `medical_id` INT PRIMARY KEY AUTO_INCREMENT,
+    `student_id` VARCHAR(15),
+    `medical_data` LONGBLOB,
+    `medical_start_date` DATE NOT NULL,
+    `medical_end_date` DATE NOT NULL,
+    `batch` VARCHAR(10)
 );
 
--- Corrected INSERT statements with unique medical_id values and valid date format
-INSERT INTO `medical` (`medical_id`, `student_username`, `medical_start_date`, `medical_end_date`) VALUES
-                                                                                                       (1, 'tg1416', '2025-03-04', '2025-06-04'),
-                                                                                                       (2, 'tg1415', '2025-03-05', '2025-09-04'),
-                                                                                                       (3, 'tg1413', '2025-03-03', '2025-06-03');
+
+
+-- Insert updated data
+INSERT INTO `medical` (`medical_id`, `student_id`, `medical_start_date`, `medical_end_date`, `batch`) VALUES
+(1, 'tg/2022/1416', '2025-03-04', '2025-06-04', '2022'),
+(2, 'tg/2022/1415', '2025-03-05', '2025-09-04', '2022'),
+(3, 'tg/2022/1413', '2025-03-03', '2025-06-03', '2022');
+
+
+
+select * from `medical`;
+
 
 
 
@@ -327,22 +340,84 @@ CREATE TABLE `notices` (
 );
 
 
-select * from `notices`;
-
-
-
-
-
-CREATE TABLE `attendance` (
-                              `att_id` int primary key AUTO_INCREMENT,
-                              `username` varchar(10) NOT NULL,
-                              `date` date DEFAULT NULL,
-                              `session` varchar(50) NOT NULL,
-                              `year` varchar(20) DEFAULT NULL,
-                              `courseCode` varchar(50) DEFAULT NULL,
-                              `department` varchar(50) NOT NULL,
-                              `status` varchar(10) DEFAULT NULL
+DROP TABLE IF EXISTS `course_material`;
+CREATE TABLE course_material (
+    material_id INT AUTO_INCREMENT PRIMARY KEY,
+    course_id VARCHAR(10) NOT NULL,
+    lecture_title VARCHAR(100) NOT NULL,
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    resource LONGBLOB
 );
+
+
+--     (1, 'ict2113', 'ict', 'Data Structures and Algorithms', 3, '15', null, 'l2s1'),
+--     (2, 'ict2133', 'ict', 'E-Commerce Implementation, Management and Security', 3, '15', null, 'l2s1'),
+--     (3, 'ict2122', 'ict', 'Object Oriented Analysis and Design', 2, '15', null, 'l2s1'),
+--     (4, 'ict2142', 'ict', 'Object Oriented Programming Practicum', 2, '15', null, 'l2s1'),
+--     (5, 'ict2152', 'ict', 'Object Oriented Programming', 2, '15', null, 'l2s1'),
+-- ict2142
+
+INSERT INTO `course_material`(material_id, course_id, lecture_title) VALUES
+-- ict2113
+(1, 'ict2113', 'Introduction'),
+(2, 'ict2113', 'Lecture1 DSA'),
+(3, 'ict2113', 'Lecture2 stacks'),
+(4, 'ict2113', 'Lecture3 Linked List complete 2025'),
+(5, 'ict2113', 'Lecture4 queue 2025'),
+(6, 'ict2113', 'Lecture5 Trees 2025'),
+(7, 'ict2113', 'Lecture6 Tree part2'),
+(8, 'ict2113', 'Lecture7 Tree part2'),
+(9, 'ict2113', 'Lecture9 AVL trees 2025'),
+(10, 'ict2113', 'Lecture9 Tree and algorithm 2025'),
+
+-- ict2133
+(11, 'ict2133', 'Lecture01 Introduction'),
+(12, 'ict2133', 'Lecture02 Overview'),
+(13, 'ict2133', 'Lecture03 Advanced Topics'),
+(14, 'ict2133', 'Lecture04 Security Aspects'),
+(15, 'ict2133', 'Lecture05 Implementation Details'),
+(16, 'ict2133', 'Lecture06 Management Techniques'),
+
+-- ict2122
+(17, 'ict2122', 'Lecture01 Introduction to OOAD'),
+(18, 'ict2122', 'Lecture02 Use Cases and UML Diagrams'),
+(19, 'ict2122', 'Lecture03 Class Diagrams'),
+(20, 'ict2122', 'Lecture04 Object Interaction'),
+(21, 'ict2122', 'Lecture05 Patterns in OOAD'),
+(22, 'ict2122', 'Lecture06 Design Principles'),
+
+-- ict2142
+(23, 'ict2142', 'Lecture01 Introduction to OOP Practicum'),
+(24, 'ict2142', 'Lecture02 Programming Basics'),
+(25, 'ict2142', 'Lecture03 Classes and Objects'),
+(26, 'ict2142', 'Lecture04 Inheritance and Polymorphism'),
+(27, 'ict2142', 'Lecture05 Exception Handling'),
+(28, 'ict2142', 'Lecture06 Advanced Topics'),
+
+-- ict2152
+(29, 'ict2152', 'Lecture01 Introduction to OOP'),
+(30, 'ict2152', 'Lecture02 Fundamentals of OOP'),
+(31, 'ict2152', 'Lecture03 Classes and Methods'),
+(32, 'ict2152', 'Lecture04 Data Structures in OOP'),
+(33, 'ict2152', 'Lecture05 Object Lifecycle'),
+(34, 'ict2152', 'Lecture06 Advanced Concepts in OOP');
+
+
+
+select * from  `course_material`;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 DROP TABLE IF EXISTS course_enrollment;
@@ -356,6 +431,8 @@ CREATE TABLE course_enrollment (
                                    CONSTRAINT fk_course_enrollment_student FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
                                    CONSTRAINT fk_course_enrollment_course FOREIGN KEY (course_code) REFERENCES course(course_code) ON DELETE CASCADE
 );
+
+
 
 INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1062', 'ict2113', 'ict', TRUE);
 INSERT INTO course_enrollment (student_id, course_code, department, enrolled) VALUES ('tg/2022/1062', 'ict2133', 'ict', TRUE);
@@ -492,7 +569,6 @@ CREATE TABLE lecturing (
 );
 
 
-
 INSERT INTO lecturing(course_id, lecturer_id) VALUES
                                                   ('ict2142', 'l0001'),
                                                   ('ict2152', 'l0001'),
@@ -517,1753 +593,2006 @@ select * from course;
 select * from course_enrollment;
 
 
-SELECT c.name, c.course_image, c.course_semester FROM course c JOIN  lecturing lec ON c.course_code = lec.course_id
-WHERE  lec.lecturer_id = 'l0001';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 DROP TABLE IF EXISTS `medical`;
+
 CREATE TABLE `medical` (
-                           `medical_id` int primary key  AUTO_INCREMENT,
-                           `student_username` VARCHAR(50),
-                           `medical_data` LONGBLOB,
-                           `medical_start_date` DATE NOT NULL ,
-                           `medical_end_date` DATE NOT NULL
+    `medical_id` INT PRIMARY KEY AUTO_INCREMENT,
+    `student_id` VARCHAR(15),
+    `medical_data` LONGBLOB,
+    `medical_start_date` DATE NOT NULL,
+    `medical_end_date` DATE NOT NULL
 );
 
-INSERT INTO `medical` (`medical_id`, `student_username`, `medical_start_date` , `medical_end_date`)  VALUES
-                                                                                                         (1 , 'tg1416','04/03/2025','04/06/2025'),
-                                                                                                         (1 , 'tg1415','05/03/2025','04/09/2025'),
-                                                                                                         (1 , 'tg1413','03/03/2025','03/06/2025');
+INSERT INTO `medical` (`student_id`, `medical_start_date`, `medical_end_date`) VALUES
+    ('tg1416', '2025-03-04', '2025-06-04'),
+    ('tg1415', '2025-03-05', '2025-09-04');
 
 
 DROP TABLE IF EXISTS `notices`;
 CREATE TABLE `notices` (
-                           `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
-                           `admin_username` VARCHAR(50),
-                           `notice_name` VARCHAR(255),
-                           `notice_title`  VARCHAR(255),
-                           `notice_data` LONGBLOB,
-                           `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ `notice_id` INT PRIMARY KEY AUTO_INCREMENT,
+ `admin_username` VARCHAR(50),
+ `notice_name` VARCHAR(255),
+ `notice_title`  VARCHAR(255),
+ `notice_data` LONGBLOB,
+ `medical_create_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 select * from `notices`;
+-- '1', 'tg/2022/1062', 'ict2113', '2025-01-01', '2022', 'ICT', 'Absent'-- 
+
+
+
+-- Drop the table if it already exists
+DROP TABLE IF EXISTS `attendance`;
 
 
 
 
+select *  from `attendance`;
 
+-- Create the attendance table
 CREATE TABLE `attendance` (
-                              `att_id` int primary key AUTO_INCREMENT,
-                              `username` varchar(10) NOT NULL,
-                              `date` date DEFAULT NULL,
-                              `session` varchar(50) NOT NULL,
-                              `year` varchar(20) DEFAULT NULL,
-                              `courseCode` varchar(50) DEFAULT NULL,
-                              `department` varchar(50) NOT NULL,
-                              `status` varchar(10) DEFAULT NULL
+    `att_id` INT PRIMARY KEY AUTO_INCREMENT,
+    `student_id` CHAR(15) NOT NULL,
+    `course_code` VARCHAR(10) NOT NULL,
+    `attendance_date` DATE DEFAULT NULL,
+    `batch` VARCHAR(20) DEFAULT NULL,
+    `department` VARCHAR(50) NOT NULL,
+	status VARCHAR(10) DEFAULT 'Pending',
+    CONSTRAINT `fk_student_id` FOREIGN KEY (`student_id`) REFERENCES `student`(`student_id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_course_code` FOREIGN KEY (`course_code`) REFERENCES `course`(`course_code`) ON DELETE CASCADE
 );
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## `attendance` table structure
-DROP TABLE  IF EXISTS `attendance`;
-CREATE TABLE IF NOT EXISTS `attendance` (
-                                            `student_id` varchar(10) NOT NULL,
-    `course_id` varchar(10) NOT NULL,
-    `week_01` varchar(2) DEFAULT NULL,
-    `week_02` varchar(2) DEFAULT NULL,
-    `week_03` varchar(2) DEFAULT NULL,
-    `week_04` varchar(2) DEFAULT NULL,
-    `week_05` varchar(2) DEFAULT NULL,
-    `week_06` varchar(2) DEFAULT NULL,
-    `week_07` varchar(2) DEFAULT NULL,
-    `week_08` varchar(2) DEFAULT NULL,
-    `week_09` varchar(2) DEFAULT NULL,
-    `week_10` varchar(2) DEFAULT NULL,
-    `week_11` varchar(2) DEFAULT NULL,
-    `week_12` varchar(2) DEFAULT NULL,
-    `week_13` varchar(2) DEFAULT NULL,
-    `week_14` varchar(2) DEFAULT NULL,
-    `week_15` varchar(2) DEFAULT NULL,
-    `total_attended` int(11) GENERATED ALWAYS AS (
-                                                     CASE WHEN `week_01` = 'AB' THEN 0 WHEN `week_01` = 'MC' THEN 1 ELSE CAST(`week_01` AS SIGNED) END +
-    CASE WHEN `week_02` = 'AB' THEN 0 WHEN `week_02` = 'MC' THEN 1 ELSE CAST(`week_02` AS SIGNED) END +
-    CASE WHEN `week_03` = 'AB' THEN 0 WHEN `week_03` = 'MC' THEN 1 ELSE CAST(`week_03` AS SIGNED) END +
-    CASE WHEN `week_04` = 'AB' THEN 0 WHEN `week_04` = 'MC' THEN 1 ELSE CAST(`week_04` AS SIGNED) END +
-    CASE WHEN `week_05` = 'AB' THEN 0 WHEN `week_05` = 'MC' THEN 1 ELSE CAST(`week_05` AS SIGNED) END +
-    CASE WHEN `week_06` = 'AB' THEN 0 WHEN `week_06` = 'MC' THEN 1 ELSE CAST(`week_06` AS SIGNED) END +
-    CASE WHEN `week_07` = 'AB' THEN 0 WHEN `week_07` = 'MC' THEN 1 ELSE CAST(`week_07` AS SIGNED) END +
-    CASE WHEN `week_08` = 'AB' THEN 0 WHEN `week_08` = 'MC' THEN 1 ELSE CAST(`week_08` AS SIGNED) END +
-    CASE WHEN `week_09` = 'AB' THEN 0 WHEN `week_09` = 'MC' THEN 1 ELSE CAST(`week_09` AS SIGNED) END +
-    CASE WHEN `week_10` = 'AB' THEN 0 WHEN `week_10` = 'MC' THEN 1 ELSE CAST(`week_10` AS SIGNED) END +
-    CASE WHEN `week_11` = 'AB' THEN 0 WHEN `week_11` = 'MC' THEN 1 ELSE CAST(`week_11` AS SIGNED) END +
-    CASE WHEN `week_12` = 'AB' THEN 0 WHEN `week_12` = 'MC' THEN 1 ELSE CAST(`week_12` AS SIGNED) END +
-    CASE WHEN `week_13` = 'AB' THEN 0 WHEN `week_13` = 'MC' THEN 1 ELSE CAST(`week_13` AS SIGNED) END +
-    CASE WHEN `week_14` = 'AB' THEN 0 WHEN `week_14` = 'MC' THEN 1 ELSE CAST(`week_14` AS SIGNED) END +
-    CASE WHEN `week_15` = 'AB' THEN 0 WHEN `week_15` = 'MC' THEN 1 ELSE CAST(`week_15` AS SIGNED) END
-    ) VIRTUAL,
-    `attendance_percentage` DECIMAL(5, 2) GENERATED ALWAYS AS (
-                                                                  CASE
-                                                                  WHEN `total_attended` IS NULL OR 15 = 0 THEN 0
-                                                                  ELSE (`total_attended` / 15.0) * 100
-    END
-    ) VIRTUAL,
-    PRIMARY KEY (`student_id`, `course_id`)  -- Assuming a composite primary key based on student and course
-    ) ;
-#ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
-
-## insert data into `attendance`
-##SART
-
-INSERT INTO `attendance` (`student_id`, `course_id`, `week_01`, `week_02`, `week_03`, `week_04`, `week_05`, `week_06`, `week_07`, `week_08`, `week_09`, `week_10`, `week_11`, `week_12`, `week_13`, `week_14`, `week_15`) VALUES
-('TG1062', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1222', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', 'MC', '1', 'AB', '1', '1', '1'),
-('TG1062', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1062', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1063', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1063', 'ICT1222', '1', '1', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', 'AB', '1'),
-('TG1063', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1063', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1063', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1063', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1063', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1063', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1063', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1063', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT1253', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1'),
-('TG1064', 'ICT1261', '1', 'MC', '1', '1', 'AB', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT1271', '1', 'MC', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT1283', '1', 'MC', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT1293', '1', 'MC', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ICT12102', '1', 'MC', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1414', 'ICT1213' ,'1', 'MC', '1', '1', '1', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1'),
-('TG1414', 'ICT1222', '1', 'MC', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1'),
-('TG1414', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1414', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1414', 'ICT1252', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1414', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1414', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1414', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1414', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1414', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1413', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1413', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1413', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1413', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1413', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1413', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1413', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1413', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1413', 'ICT1293', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1413', 'ICT12102', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1415', 'ICT1213', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1415', 'ICT1222', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1415', 'ICT1233', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1415', 'ICT1242', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1415', 'ICT1253', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1415', 'ICT1261', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1415', 'ICT1271', '1', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1415', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1415', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1415', 'ICT12102', '1', '1', 'AB', '1', 'AB', 'AB', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1417', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1417', 'ICT1222', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1417', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1417', 'ICT1242', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1417', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1417', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1417', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1417', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1417', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1417', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1067', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1067', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1067', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1067', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1067', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1067', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1067', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1067', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1067', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1067', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1416', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1416', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1345', 'ICT1213', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1345', 'ICT1222', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1345', 'ICT1233', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1345', 'ICT1242', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1345', 'ICT1261', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1345', 'TCS1271', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1345', 'ICT1283', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1345', 'ICT1293', '1', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1345', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1418', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1418', 'ICT1222', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', 'MC', '1', 'AB', '1', '1', '1'),
-('TG1418', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1418', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1418', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1418', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1418', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1418', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1418', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1418', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1419', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1419', 'ICT1222', '1', '1', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', 'AB', '1'),
-('TG1419', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1419', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1419', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1419', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1419', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1419', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1419', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1419', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1420', 'ICT1213', '1', 'MC', '1', '1', '1', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1'),
-('TG1420', 'ICT1222', '1', 'MC', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1'),
-('TG1420', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1420', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1420', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1420', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1420', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1420', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1420', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1420', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1421', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1421', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1421', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1421', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1421', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1421', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1421', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1421', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1421', 'ICT1293', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1421', 'ICT12103', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1422', 'ICT1213', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1422', 'ICT1222', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1422', 'ICT1233', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1422', 'ICT1242', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1422', 'TCS1253', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1422', 'ICT1261', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1422', 'ICT1271', '1', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1422', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1422', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1422', 'ICT12102', '1', '1', 'AB', '1', 'AB', 'AB', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1423', 'ICT1213', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1423', 'ICT1222', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1423', 'ICT1233', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1423', 'ICT1242', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1423', 'ICT1253', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1423', 'ICT1261', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1423', 'ICT1271', '1', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1423', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1423', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1423', 'ICT12102', '1', '1', 'AB', '1', 'AB', 'AB', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1424', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1424', 'ICT1222', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1424', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1424', 'ICT1242', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1424', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1424', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1424', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1424', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1424', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1424', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1425', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1425', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1425', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1425', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1425', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1425', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1425', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1425', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1425', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1425', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT1213', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1426', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT1261', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT1271', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT1283', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT1293', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1426', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1427', 'ICT1213', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1427', 'ICT1222', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1427', 'ICT1233', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1427', 'ICT1242', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1427', 'ICT1253', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1427', 'ICT1261', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1427', 'ICT1271', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1427', 'ICT1283', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1427', 'ICT1293', '1', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1427', 'ICT12102', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC');
-
-
-
-SELECT * FROM  `attendance`;
-
-
-## TABLE STRUCTURE ICT1213_course_marks
-
-DROP TABLE IF EXISTS ICT1213_course_marks;
-CREATE TABLE ICT1213_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-##INSERT ICT1213_course_marks DATA
-INSERT INTO ICT1213_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-('TG1062', 85.00, 90.00, 75.00, 80.00, 85.00, 88.00),
-('TG1063', 78.00, 80.00, 75.00, 90.00, 85.00, 76.00),
-('TG1064', 10.00, 30.00, 20.00, 20.00, 0.00, 0.00),
-('TG1067', 100.00, 90.00, 80.00, 90.00, 85.00, 54.00),
-('TG1345', 100.00, 100.00, 90.00, 90.00, 95.00, 90.00),
-('TG1413', 87.00, 90.70, 68.50, 90.00, 85.00, 98.00),
-('TG1414', 80.50, 90.50, 65.00, 59.00, 65.00, 58.00),
-('TG1415', 88.00, 90.00, 75.50, 80.00, 85.00, 75.00),
-('TG1416', 70.00, 80.00, 60.00, 80.00, 75.00, 73.00),
-('TG1417', 88.00, 90.00, 34.50, 90.00, 75.00, 87.00),
-('TG1418', 90.00, 80.00, 80.00, 85.00, 67.00, 89.00),
-('TG1419', 80.00, 80.00, 70.00, 65.00, 87.00, 90.00),
-('TG1420', 90.00, 80.00, 80.00, 85.00, 89.00, 76.00),
-('TG1421', 60.00, 60.50, 70.50, 85.00, 77.00, 88.00),
-('TG1422', 60.80, 80.70, 80.00, 85.00, 90.00, 87.00),
-('TG1423', 90.00, 70.00, 80.00, 85.00, 65.00, 78.00),
-('TG1424', 50.00, 70.00, 40.00, 85.00, 78.00, 89.00),
-('TG1425', 90.00, 80.00, 80.00, 95.00, 57.00, 92.00),
-('TG1426', 60.00, 80.00, 70.00, 67.00, 87.00, 77.00),
-('TG1427', 95.00, 100.00, 85.00, 100.00, 90.00, 85.00),
-##repeat student
-('TG901', 75.00, 80.00, 70.00, 85.00, 90.00, 88.00),
-('TG997', 85.00, 90.00, 80.00, 88.00, 82.00, 91.00),
-('TG998', 90.00, 85.00, 78.00, 82.00, 80.00, 86.00),
-('TG999', 70.00, 75.00, 80.00, 76.00, 78.00, 80.00),
-('TG1002', 80.00, 82.00, 75.00, 80.00, 85.00, 87.00);
-
-
-
-## TABLE STRUCTURE ICT1222_course_marks
-
-DROP TABLE IF EXISTS ICT1222_course_marks ;
-
-CREATE TABLE ICT1222_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-
-
-INSERT INTO ICT1222_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                              ('TG1067', 85.00, 100.00, 75.00, 99.00, 90.00, 75.00),
-                                                                                                                              ('TG1417', 98.00, 80.00, 94.50, 90.00, 85.00, 97.00),
-                                                                                                                              ('TG1414', 80.50, 93.50, 75.00, 89.00, 55.00, 88.00),
-                                                                                                                              ('TG1415', 88.00, 80.00, 85.50, 88.00, 85.00, 85.00),
-                                                                                                                              ('TG1413', 87.50, 90.90, 78.50, 90.00, 95.00, 88.00),
-                                                                                                                              ('TG1064', 80.00, 50.00, 50.00, 70.00, 60.00, 60.00),
-                                                                                                                              ('TG1063', 79.00, 84.00, 76.00, 95.00, 85.50, 76.50),
-                                                                                                                              ('TG1067', 90.00, 90.00, 84.00, 90.00, 85.50, 54.00),
-                                                                                                                              ('TG1416', 80.00, 88.00, 65.00, 90.50, 75.50, 73.00),
-                                                                                                                              ('TG1345', 90.00, 90.50, 80.50, 90.50, 98.00, 80.00),
-                                                                                                                              ('TG1418', 90.00, 80.00, 85.00, 75.00, 67.50, 89.00),
-                                                                                                                              ('TG1419', 80.00, 87.00, 77.00, 65.00, 97.00, 96.00),
-                                                                                                                              ('TG1420', 90.50, 80.00, 80.00, 85.00, 89.50, 77.00),
-                                                                                                                              ('TG1421', 70.00, 64.50, 76.50, 85.50, 77.50, 79.00),
-                                                                                                                              ('TG1422', 70.80, 85.70, 81.50, 96.50, 90.50, 89.00),
-                                                                                                                              ('TG1423', 94.00, 80.00, 86.00, 65.00, 55.00, 68.50),
-                                                                                                                              ('TG1424', 70.00, 80.60, 77.50, 86.60, 88.60, 90.80),
-                                                                                                                              ('TG1425', 97.00, 70.00, 80.50, 95.60, 77.00, 90.00),
-                                                                                                                              ('TG1426', 70.00, 83.50, 73.90, 77.50, 87.50, 79.50),
-                                                                                                                              ('TG1427', 85.00, 99.50, 95.50, 92.50, 99.50, 95.50),
-                                                                                                                              ('TG901', 80.00, 85.00, 90.00, 80.00, 90.00, 85.00),
-                                                                                                                              ('TG997', 85.50, 70.50, 60.50, 75.50, 80.50, 75.50),
-                                                                                                                              ('TG998', 75.00, 85.00, 65.00, 70.00, 75.00, 80.00),
-                                                                                                                              ('TG999', 80.50, 90.00, 85.00, 90.00, 85.00, 95.00),
-                                                                                                                              ('TG1002', 70.00, 75.50, 80.00, 70.00, 75.00, 70.50);
-
-DROP TABLE IF EXISTS ICT1233_course_marks ;
-
-CREATE TABLE ICT1233_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-
-INSERT INTO ICT1233_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                              ('TG1067', 75.00, 99.00, 85.00, 100.00, 90.00, 85.00),
-                                                                                                                              ('TG1417', 98.00, 90.50, 95.50, 91.00, 95.00, 100.00),
-                                                                                                                              ('TG1414', 81.00, 94.50, 75.50, 89.00, 95.00, 98.00),
-                                                                                                                              ('TG1415', 82.00, 83.50, 86.00, 89.00, 75.00, 85.50),
-                                                                                                                              ('TG1413', 87.50, 91.00, 77.00, 91.00, 96.00, 89.00),
-                                                                                                                              ('TG1064', 81.00, 70.00, 60.00, 71.00, 60.50, 63.00),
-                                                                                                                              ('TG1063', 89.00, 85.00, 76.10, 95.50, 85.60, 76.00),
-                                                                                                                              ('TG1067', 91.00, 50.00, 84.00, 80.00, 88.50, 64.00),
-                                                                                                                              ('TG1416', 81.00, 89.00, 65.50, 91.50, 85.50, 73.50),
-                                                                                                                              ('TG1345', 91.00, 80.50, 90.50, 70.50, 78.00, 70.00),
-                                                                                                                              ('TG1418', 90.10, 81.00, 85.50, 76.50, 77.50, 89.50),
-                                                                                                                              ('TG1419', 81.00, 88.00, 67.00, 75.10, 98.00, 99.00),
-                                                                                                                              ('TG1420', 93.50, 81.40, 82.00, 85.50, 89.50, 78.00),
-                                                                                                                              ('TG1421', 71.00, 64.00, 75.70, 85.40, 77.50, 89.00),
-                                                                                                                              ('TG1422', 71.60, 95.80, 81.50, 94.50, 91.20, 99.00),
-                                                                                                                              ('TG1423', 96.00, 84.30, 84.00, 76.00, 55.00, 68.50),
-                                                                                                                              ('TG1424', 70.00, 81.50, 75.50, 86.60, 68.60, 90.50),
-                                                                                                                              ('TG1425', 97.40, 73.00, 81.50, 95.50, 78.00, 91.00),
-                                                                                                                              ('TG1426', 74.00, 85.50, 73.91, 79.50, 88.50, 88.50),
-                                                                                                                              ('TG1427', 86.00, 99.60, 95.52, 93.50, 99.50, 95.80),
-                                                                                                                              ('TG901', 78.00, 88.00, 80.00, 85.00, 90.00, 88.00),
-                                                                                                                              ('TG997', 85.50, 70.50, 62.50, 78.00, 80.50, 75.50),
-                                                                                                                              ('TG998', 75.00, 85.00, 65.00, 75.00, 85.00, 80.00),
-                                                                                                                              ('TG999', 80.50, 90.00, 85.00, 85.00, 95.00, 92.00),
-                                                                                                                              ('TG1002', 70.00, 75.50, 78.00, 70.00, 80.00, 70.50);
-
-
-DROP TABLE IF EXISTS ICT1242_course_marks ;
-
-CREATE TABLE ICT1242_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-
-INSERT INTO ICT1242_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                              ('TG1067', 90.00, 80.00, 80.00, 85.00, 67.00, 89.00),
-                                                                                                                              ('TG1417', 80.00, 80.00, 70.00, 65.00, 87.00, 90.00),
-                                                                                                                              ('TG1414', 90.00, 80.00, 80.00, 85.00, 89.00, 76.00),
-                                                                                                                              ('TG1415', 60.00, 60.50, 70.50, 85.00, 77.00, 88.00),
-                                                                                                                              ('TG1413', 60.80, 80.70, 80.00, 85.00, 90.00, 87.00),
-                                                                                                                              ('TG1064', 90.00, 70.00, 80.00, 85.00, 65.00, 78.00),
-                                                                                                                              ('TG1063', 50.00, 70.00, 40.00, 85.00, 78.00, 89.00),
-                                                                                                                              ('TG1067', 90.00, 80.00, 80.00, 95.00, 57.00, 92.00),
-                                                                                                                              ('TG1416', 60.00, 80.00, 70.00, 67.00, 87.00, 77.00),
-                                                                                                                              ('TG1345', 95.00, 100.00, 85.00, 100.00, 90.00, 85.00),
-                                                                                                                              ('TG1418', 88.00, 90.00, 34.50, 90.00, 75.00, 87.00),
-                                                                                                                              ('TG1419', 80.50, 90.50, 65.00, 59.00, 65.00, 58.00),
-                                                                                                                              ('TG1420', 88.00, 90.00, 75.50, 80.00, 85.00, 75.00),
-                                                                                                                              ('TG1421', 87.00, 90.70, 68.50, 90.00, 85.00, 98.00),
-                                                                                                                              ('TG1422', 10.00, 30.00, 20.00, 20.00, 0.00, 0.00),
-                                                                                                                              ('TG1423', 78.00, 80.00, 75.00, 90.00, 85.00, 76.00),
-                                                                                                                              ('TG1424', 100.00, 90.00, 80.00, 90.00, 85.00, 54.00),
-                                                                                                                              ('TG1425', 70.00, 80.00, 60.00, 80.00, 75.00, 73.00),
-                                                                                                                              ('TG1426', 100.00, 100.00, 90.00, 90.00, 95.00, 90.00),
-                                                                                                                              ('TG1427', 86.00, 99.60, 95.52, 93.50, 99.50, 95.80),
-                                                                                                                              ('TG901', 85.00, 75.00, 65.00, 80.00, 85.00, 70.00),
-                                                                                                                              ('TG997', 77.00, 65.00, 50.00, 70.00, 80.00, 60.00),
-                                                                                                                              ('TG998', 60.00, 70.00, 55.00, 75.00, 68.00, 65.00),
-                                                                                                                              ('TG999', 88.00, 85.00, 90.00, 92.00, 95.00, 89.00),
-                                                                                                                              ('TG1002', 78.00, 80.00, 70.00, 78.00, 88.00, 79.00);
-
-
-
-DROP TABLE IF EXISTS ICT1253_course_marks ;
-
-CREATE TABLE ICT1253_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-
-
-
-INSERT INTO ICT1253_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                              ('TG1067', 80.00, 80.00, 70.00, 65.00, 87.00, 90.00),
-                                                                                                                              ('TG1417', 90.00, 80.00, 80.00, 85.00, 89.00, 76.00),
-                                                                                                                              ('TG1414', 60.00, 60.50, 70.50, 85.00, 77.00, 88.00),
-                                                                                                                              ('TG1415', 60.80, 80.70, 80.00, 85.00, 90.00, 87.00),
-                                                                                                                              ('TG1413', 90.00, 70.00, 80.00, 85.00, 65.00, 78.00),
-                                                                                                                              ('TG1064', 50.00, 70.00, 40.00, 85.00, 78.00, 89.00),
-                                                                                                                              ('TG1063', 90.00, 80.00, 80.00, 95.00, 57.00, 92.00),
-                                                                                                                              ('TG1067', 60.00, 80.00, 70.00, 67.00, 87.00, 77.00),
-                                                                                                                              ('TG1416', 95.00, 100.00, 85.00, 100.00, 90.00, 85.00),
-                                                                                                                              ('TG1345', 88.00, 90.00, 34.50, 90.00, 75.00, 87.00),
-                                                                                                                              ('TG1418', 80.50, 90.50, 65.00, 59.00, 65.00, 58.00),
-                                                                                                                              ('TG1419', 88.00, 90.00, 75.50, 80.00, 85.00, 75.00),
-                                                                                                                              ('TG1420', 87.00, 90.70, 68.50, 90.00, 85.00, 98.00),
-                                                                                                                              ('TG1421', 40.00, 30.00, 20.00, 50.00, 0.00, 10.00),
-                                                                                                                              ('TG1422', 79.00, 80.00, 76.00, 90.00, 85.00, 77.00),
-                                                                                                                              ('TG1423', 100.00, 90.00, 81.00, 90.00, 85.00, 54.00),
-                                                                                                                              ('TG1424', 70.00, 81.00, 60.00, 80.00, 85.00, 83.00),
-                                                                                                                              ('TG1425', 100.00, 100.00, 91.00, 90.00, 95.00, 90.50),
-                                                                                                                              ('TG1426', 90.00, 87.00, 97.00, 90.06, 95.50, 80.00),
-                                                                                                                              ('TG1427', 80.00, 80.00, 70.00, 65.00, 87.00, 90.00),
-                                                                                                                              ('TG901', 78.00, 67.00, 50.00, 70.00, 80.00, 65.00),
-                                                                                                                              ('TG997', 72.00, 65.00, 55.00, 68.00, 75.00, 60.00),
-                                                                                                                              ('TG998', 63.00, 70.00, 50.00, 73.00, 70.00, 68.00),
-                                                                                                                              ('TG999', 89.00, 85.00, 90.00, 90.00, 95.00, 88.00),
-                                                                                                                              ('TG1002', 77.00, 75.00, 65.00, 80.00, 85.00, 72.00);
-
-
-DROP TABLE IF EXISTS ICT1261_course_marks ;
-
-CREATE TABLE ICT1261_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-
-INSERT INTO ICT1261_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                              ('TG1067', 95.00, 100.00, 89.00, 90.00, 85.00, 90.60),
-                                                                                                                              ('TG1417', 89.00, 90.00, 94.50, 75.00, 87.00, 76.80),
-                                                                                                                              ('TG1414', 80.50, 90.50, 65.00, 65.00, 58.00, 67.78),
-                                                                                                                              ('TG1415', 88.00, 70.00, 75.50, 85.00, 75.00, 78.78),
-                                                                                                                              ('TG1413', 67.00, 90.70, 68.50, 85.00, 78.00, 87.98),
-                                                                                                                              ('TG1064', 50.00, 50.00, 20.00, 20.00, 50.00, 87.00),
-                                                                                                                              ('TG1063', 58.00, 80.00, 65.00, 60.00, 76.00, 78.00),
-                                                                                                                              ('TG1067', 90.00, 90.00, 80.00, 85.00, 94.00, 98.00),
-                                                                                                                              ('TG1416', 60.00, 70.00, 90.00, 90.00, 80.00, 87.00),
-                                                                                                                              ('TG1345', 90.00, 80.00, 80.00, 67.00, 89.00, 87.70),
-                                                                                                                              ('TG1418', 80.50, 90.50, 65.00, 59.00, 65.00, 87.90),
-                                                                                                                              ('TG1419', 80.00, 80.00, 91.00, 87.50, 90.00, 89.50),
-                                                                                                                              ('TG1420', 70.00, 50.50, 90.00, 68.00, 76.00, 67.00),
-                                                                                                                              ('TG1421', 50.50, 65.50, 40.70, 67.00, 63.00, 90.00),
-                                                                                                                              ('TG1422', 60.80, 80.70, 80.00, 85.00, 87.00, 78.00),
-                                                                                                                              ('TG1423', 90.00, 70.00, 80.00, 85.00, 65.00, 89.00),
-                                                                                                                              ('TG1424', 70.00, 81.00, 60.00, 85.00, 83.00, 79.00),
-                                                                                                                              ('TG1425', 90.00, 80.00, 80.00, 95.00, 72.00, 76.00),
-                                                                                                                              ('TG1426', 60.00, 80.00, 70.00, 87.00, 65.00, 86.00),
-                                                                                                                              ('TG1427', 95.00, 100.00, 89.00, 90.00, 85.00, 99.00),
-                                                                                                                              ('TG901', 88.00, 90.00, 85.00, 80.00, 75.00, 70.00),
-                                                                                                                              ('TG997', 77.00, 80.00, 65.00, 70.00, 68.00, 82.00),
-                                                                                                                              ('TG998', 69.00, 75.00, 70.00, 80.00, 60.00, 80.00),
-                                                                                                                              ('TG999', 95.00, 90.00, 85.00, 90.00, 89.00, 88.00),
-                                                                                                                              ('TG1002', 76.00, 85.00, 80.00, 70.00, 78.00, 82.00);
-
-
-DROP TABLE IF EXISTS ICT1271_course_marks ;
-
-CREATE TABLE ICT1271_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-
-INSERT INTO ICT1271_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                              ('TG1067', 95.50, 90.00, 89.00, 90.00, 95.00, 89.90),
-                                                                                                                              ('TG1417', 89.50, 90.00, 94.50, 75.00, 87.00, 87.50),
-                                                                                                                              ('TG1414', 80.50, 80.50, 65.00, 75.00, 58.50, 76.70),
-                                                                                                                              ('TG1415', 88.50, 70.60, 79.50, 95.00, 85.00, 87.90),
-                                                                                                                              ('TG1413', 67.60, 90.70, 68.50, 85.00, 78.00, 56.50),
-                                                                                                                              ('TG1064', 40.00, 50.50, 70.00, 40.00, 50.00, 67.50),
-                                                                                                                              ('TG1063', 58.80, 90.00, 65.50, 65.00, 76.50, 76.50),
-                                                                                                                              ('TG1067', 70.00, 90.50, 70.60, 65.00, 94.50, 78.50),
-                                                                                                                              ('TG1416', 60.00, 60.00, 90.00, 70.50, 90.00, 78.50),
-                                                                                                                              ('TG1345', 90.00, 80.00, 90.00, 67.00, 89.00, 60.50),
-                                                                                                                              ('TG1418', 80.60, 70.50, 65.00, 89.00, 65.00, 50.50),
-                                                                                                                              ('TG1419', 89.00, 90.00, 44.50, 76.00, 75.00, 76.50),
-                                                                                                                              ('TG1420', 80.50, 90.50, 65.00, 59.00, 65.00, 76.50),
-                                                                                                                              ('TG1421', 89.00, 80.00, 75.50, 76.50, 95.00, 67.50),
-                                                                                                                              ('TG1422', 67.00, 90.70, 68.50, 76.00, 85.00, 70.00),
-                                                                                                                              ('TG1423', 58.00, 80.00, 65.00, 80.00, 76.00, 78.90),
-                                                                                                                              ('TG1424', 90.00, 90.00, 80.00, 85.00, 94.00, 76.50),
-                                                                                                                              ('TG1425', 70.00, 88.00, 60.00, 71.00, 73.00, 78.50),
-                                                                                                                              ('TG1426', 90.00, 80.00, 80.00, 90.00, 89.00, 78.80),
-                                                                                                                              ('TG1427', 95.50, 90.60, 88.00, 80.50, 89.00, 67.50),
-                                                                                                                              ('TG901', 88.00, 90.00, 85.00, 80.00, 75.00, 70.00),
-                                                                                                                              ('TG997', 77.00, 80.00, 65.00, 70.00, 68.00, 82.00),
-                                                                                                                              ('TG998', 69.00, 75.00, 70.00, 80.00, 60.00, 80.00),
-                                                                                                                              ('TG999', 95.00, 90.00, 85.00, 90.00, 89.00, 88.00),
-                                                                                                                              ('TG1002', 76.00, 85.00, 80.00, 70.00, 78.00, 82.00);
-
-
-DROP TABLE IF EXISTS ICT1283_course_marks ;
-
-CREATE TABLE ICT1283_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-
-
-INSERT INTO ICT1283_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                              ('TG1067', 95.50, 90.00, 89.00, 100.00, 90.00, 85.00),
-                                                                                                                              ('TG1417', 89.50, 90.00, 94.50, 86.00, 99.60, 95.52),
-                                                                                                                              ('TG1414', 80.50, 80.50, 65.00, 90.00, 85.00, 98.00),
-                                                                                                                              ('TG1415', 88.50, 70.60, 79.50, 100.00, 90.00, 85.00),
-                                                                                                                              ('TG1413', 67.60, 90.70, 68.50, 20.00, 0.00, 0.00),
-                                                                                                                              ('TG1064', 40.00, 50.50, 70.00, 65.00, 87.00, 90.00),
-                                                                                                                              ('TG1063', 58.80, 90.00, 65.50, 60.00, 73.00, 60.00),
-                                                                                                                              ('TG1067', 70.00, 90.50, 70.60, 90.00, 80.00, 90.00),
-                                                                                                                              ('TG1416', 60.00, 60.00, 90.00, 67.00, 89.00, 67.00),
-                                                                                                                              ('TG1345', 90.00, 80.00, 90.00, 87.00, 90.00, 87.00),
-                                                                                                                              ('TG1418', 80.60, 70.50, 65.00, 69.00, 76.00, 69.00),
-                                                                                                                              ('TG1419', 89.00, 90.00, 44.50, 67.00, 63.00, 67.00),
-                                                                                                                              ('TG1420', 80.50, 90.50, 65.00, 85.00, 87.00, 85.00),
-                                                                                                                              ('TG1421', 89.00, 80.00, 75.50, 70.00, 80.00, 60.80),
-                                                                                                                              ('TG1422', 67.00, 60.00, 70.00, 90.00, 76.00, 85.00),
-                                                                                                                              ('TG1423', 65.00, 87.00, 90.00, 65.00, 80.00, 76.00),
-                                                                                                                              ('TG1424', 90.00, 90.00, 90.00, 44.50, 76.00, 94.00),
-                                                                                                                              ('TG1425', 70.00, 88.00, 60.00, 85.00, 75.00, 85.00),
-                                                                                                                              ('TG1426', 90.00, 80.00, 80.00, 90.70, 68.50, 76.00),
-                                                                                                                              ('TG1427', 95.50, 90.60, 88.00, 94.00, 85.00, 94.00),
-                                                                                                                              ('TG901', 88.00, 90.00, 85.00, 80.00, 75.00, 70.00),
-                                                                                                                              ('TG997', 77.00, 80.00, 65.00, 70.00, 68.00, 82.00),
-                                                                                                                              ('TG998', 69.00, 75.00, 70.00, 80.00, 60.00, 80.00),
-                                                                                                                              ('TG999', 95.00, 90.00, 85.00, 90.00, 89.00, 88.00),
-                                                                                                                              ('TG1002', 76.00, 85.00, 80.00, 70.00, 78.00, 82.00);
-
-
-DROP TABLE IF EXISTS ICT1293_course_marks ;
-
-CREATE TABLE ICT1293_course_marks (
-                                      student_id varchar(10) NOT NULL,
-                                      quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                      final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                      mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                      CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                      final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-
-INSERT INTO ICT1293_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                              ('TG1067', 95.50, 90.00, 85.00, 90.00, 90.00, 85.00),
-                                                                                                                              ('TG1417', 89.50, 95.00, 100.00, 89.00, 99.60, 95.52),
-                                                                                                                              ('TG1414', 80.50, 90.00, 44.50, 76.00, 85.00, 98.00),
-                                                                                                                              ('TG1415', 88.50, 70.60, 90.50, 65.00, 59.00, 85.00),
-                                                                                                                              ('TG1413', 67.60, 50.00, 50.00, 20.00, 0.00, 0.00),
-                                                                                                                              ('TG1064', 40.00, 50.50, 70.00, 50.00, 50.00, 20.00),
-                                                                                                                              ('TG1063', 58.80, 90.00, 65.00, 80.00, 60.00, 60.00),
-                                                                                                                              ('TG1416', 60.00, 60.00, 80.00, 60.00, 70.00, 67.00),
-                                                                                                                              ('TG1345', 90.00, 80.00, 60.00, 70.00, 90.00, 87.00),
-                                                                                                                              ('TG1418', 80.60, 65.50, 40.70, 55.00, 76.00, 69.00),
-                                                                                                                              ('TG1419', 89.00, 90.00, 44.50, 65.50, 40.70, 55.00),
-                                                                                                                              ('TG1420', 80.50, 90.50, 65.00, 85.00, 87.00, 85.00),
-                                                                                                                              ('TG1421', 65.50, 40.70, 55.00, 70.00, 80.00, 60.80),
-                                                                                                                              ('TG1422', 67.00, 44.50, 76.00, 75.00, 76.00, 85.00),
-                                                                                                                              ('TG1423', 65.00, 87.00, 65.00, 59.00, 65.00, 76.00),
-                                                                                                                              ('TG1424', 90.00, 75.50, 86.50, 85.00, 76.00, 94.00),
-                                                                                                                              ('TG1425', 70.00, 88.00, 20.00, 26.00, 20.00, 85.00),
-                                                                                                                              ('TG1426', 90.00, 80.00, 65.00, 80.00, 68.50, 76.00),
-                                                                                                                              ('TG1427', 95.50, 90.60, 90.00, 80.00, 80.00, 94.00),
-                                                                                                                              ('TG901', 88.00, 90.00, 85.50, 75.00, 80.00, 82.50),
-                                                                                                                              ('TG997', 92.50, 89.00, 91.00, 80.00, 85.00, 88.00),
-                                                                                                                              ('TG998', 78.00, 85.50, 80.00, 70.00, 72.50, 74.00),
-                                                                                                                              ('TG999', 85.00, 95.00, 88.00, 90.00, 93.00, 91.00),
-                                                                                                                              ('TG1002', 80.00, 82.00, 85.00, 77.00, 79.00, 81.00);
-
-
-DROP TABLE IF EXISTS ICT12101_course_marks ;
-
-CREATE TABLE ICT12101_course_marks (
-                                       student_id varchar(10) NOT NULL,
-                                       quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                       quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                       quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
-                                       inclass_test_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                       final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3 - least(quiz_1,quiz_2,quiz_3)) / 3 * 0.10) STORED,
-                                       final_assignment_marks decimal(5,2) GENERATED ALWAYS AS (inclass_test_marks * 0.05) STORED,
-                                       mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                       end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
-                                       CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25) STORED,
-                                       final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + final_assignment_marks + mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
-) ;
-
-INSERT INTO ICT12101_course_marks (student_id, quiz_1, quiz_2, quiz_3, inclass_test_marks, mid_exam_marks, end_exam_marks) VALUES
-                                                                                                                               ('TG1062', 88.00, 90.00, 85.00, 80.00, 75.00, 88.00),
-                                                                                                                               ('TG1063', 92.50, 85.00, 90.00, 89.00, 95.00, 91.00),
-                                                                                                                               ('TG1064', 75.00, 80.00, 78.00, 70.00, 72.00, 74.00),
-                                                                                                                               ('TG1414', 90.00, 86.00, 80.00, 80.00, 75.00, 85.00),
-                                                                                                                               ('TG1413', 60.00, 70.00, 65.00, 55.00, 60.00, 68.00),
-                                                                                                                               ('TG1345', 82.00, 88.00, 90.00, 85.00, 80.00, 83.00),
-                                                                                                                               ('TG1067', 100.00, 89.00, 80.00, 90.00, 85.00, 90.00),
-                                                                                                                               ('TG1415', 88.00, 78.00, 75.50, 88.50, 85.00, 95.00),
-                                                                                                                               ('TG1417', 99.50,  98.00, 100.00, 89.50, 98.60, 99.52),
-                                                                                                                               ('TG1416', 60.50, 81.00, 80.00, 60.70, 70.00, 77.00),
-                                                                                                                               ('TG1418', 70.00, 50.50, 90.00, 85.00, 69.00, 76.00),
-                                                                                                                               ('TG1419', 89.00, 90.00, 44.50, 65.50, 40.70, 55.00),
-                                                                                                                               ('TG1420', 60.80, 80.70, 80.00, 90.00, 85.00, 87.00),
-                                                                                                                               ('TG1421', 90.00, 70.00, 80.00, 60.80, 85.00, 65.00),
-                                                                                                                               ('TG1422',  50.00, 70.00, 40.00, 80.00, 85.00, 78.00),
-                                                                                                                               ('TG1423', 60.00, 80.00, 70.00, 50.00, 87.00, 65.00),
-                                                                                                                               ('TG1424',  95.00, 100.00, 89.00, 80.00, 90.00, 85.00),
-                                                                                                                               ('TG1425', 67.00, 90.70, 68.50, 76.00, 85.00, 78.00),
-                                                                                                                               ('TG1426', 90.00, 90.00, 80.00, 80.00, 75.00, 94.00),
-                                                                                                                               ('TG1427', 70.00, 80.00, 60.00, 70.00, 60.00, 73.00),
-                                                                                                                               ('TG901', 85.00, 88.00, 90.00, 78.00, 80.00, 85.00),
-                                                                                                                               ('TG997', 92.00, 90.00, 95.00, 88.00, 89.00, 90.00),
-                                                                                                                               ('TG998', 75.00, 80.00, 70.00, 65.00, 70.00, 75.00),
-                                                                                                                               ('TG999', 88.50, 87.00, 85.00, 90.00, 92.00, 88.00),
-                                                                                                                               ('TG1002', 90.00, 92.50, 89.00, 95.00, 91.00, 90.00);
-
-
-
-DROP TABLE IF EXISTS `student_grade`;
-CREATE TABLE IF NOT EXISTS `student_grade` (
-                                               `student_id` char(10) NOT NULL,
-    `course_id` char(10) NOT NULL,
-    `final_marks` decimal(5,2) NOT NULL,
-    `grade` varchar(5) GENERATED ALWAYS AS (
-    (CASE
-     WHEN (`final_marks` < 0) THEN 'MC'
-    WHEN (`final_marks` >= 90) THEN 'A+'
-    WHEN (`final_marks` >= 85) THEN 'A'
-    WHEN (`final_marks` >= 80) THEN 'A-'
-    WHEN (`final_marks` >= 75) THEN 'B+'
-    WHEN (`final_marks` >= 70) THEN 'B'
-    WHEN (`final_marks` >= 65) THEN 'B-'
-    WHEN (`final_marks` >= 60) THEN 'C+'
-    WHEN (`final_marks` >= 55) THEN 'C'
-    WHEN (`final_marks` >= 50) THEN 'C-'
-    WHEN (`final_marks` >= 45) THEN 'D'
-    ELSE 'E'
-    END)
-    ) VIRTUAL,
-    `SGPA` decimal(3,2) GENERATED ALWAYS AS (
-    (CASE
-     WHEN (`grade` = 'A+' OR `grade` = 'A') THEN 4.00
-    WHEN (`grade` = 'A-') THEN 3.70
-    WHEN (`grade` = 'B+') THEN 3.30
-    WHEN (`grade` = 'B') THEN 3.00
-    WHEN (`grade` = 'B-') THEN 2.70
-    WHEN (`grade` = 'C+') THEN 2.30
-    WHEN (`grade` = 'C') THEN 2.00
-    WHEN (`grade` = 'C-') THEN 1.70
-    WHEN (`grade` = 'D') THEN 1.00
-    WHEN (`grade` = 'E') THEN 0.00
-    END)
-    )
-    ##KEY `student_id` (`student_id`),
-    ## KEY `course_id` (`course_id`),
-    ## CONSTRAINT `student_grade_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
-    ## CONSTRAINT `student_grade_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`)  -- Changed couId to course_id
-    );
-##ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1213;
-DELIMITER //
-
-
-## GET VALUE FROM  ICT1213_course_marks table
-##SART
-
-CREATE PROCEDURE InsertStudentGrades_ICT1213()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1213_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1213', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-##END
-
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1222;
-## GET VALUE FROM  ICT1222_course_marks table
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT1222()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1222_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1222', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-
-##   GET VALUE FROM  ICT1233_course_marks table
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1233;
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT1233()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1233_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1233', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-
-
-
-##   GET VALUE FROM  ICT1242_course_marks table
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1242;
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT1242()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1242_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1242', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-
-
-
-
-##   GET VALUE FROM  ICT1253_course_marks table
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1253;
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT1253()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1253_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1253', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-
-
-##   GET VALUE FROM  ICT1261_course_marks table
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1261;
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT1261()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1261_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1261', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1293;
-
-##   GET VALUE FROM  ICT1293_course_marks table
-
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT1293()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1293_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1293', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-
-
-##   GET VALUE FROM  ICT1283_course_marks  table
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1283;
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT1283()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1283_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1283', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-
-
-##   GET VALUE FROM  ICT1271_course_marks  table
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT1271;
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT1271()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT1271_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT1271', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-
-
-
-
-##   GET VALUE FROM  ICT12101_course_marks  table
-DROP PROCEDURE IF EXISTS InsertStudentGrades_ICT12101;
-DELIMITER //
-CREATE PROCEDURE InsertStudentGrades_ICT12101()
-BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE student_id_char CHAR(6);
-    DECLARE final_marks_value DECIMAL(5,2);
-
-    DECLARE student_cursor CURSOR FOR
-SELECT student_id, final_marks FROM ICT12101_course_marks;
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-OPEN student_cursor;
-
-read_loop: LOOP
-        FETCH student_cursor INTO student_id_char, final_marks_value;
-        IF done THEN
-            LEAVE read_loop;
-END IF;
-INSERT INTO student_grade (student_id, course_id, final_marks)
-VALUES (student_id_char, 'ICT12101', final_marks_value);
-END LOOP;
-
-CLOSE student_cursor;
-END //
-DELIMITER ;
-
-
-CALL InsertStudentGrades_ICT12101();
-CALL InsertStudentGrades_ICT1271();
-CALL InsertStudentGrades_ICT1283();
-CALL InsertStudentGrades_ICT1293();
-CALL InsertStudentGrades_ICT1261();
-CALL InsertStudentGrades_ICT1253();
-CALL InsertStudentGrades_ICT1242();
-CALL InsertStudentGrades_ICT1283();
-CALL InsertStudentGrades_ICT1271();
-CALL InsertStudentGrades_ICT12101();
-
-
-SELECT * FROM `student_grade`;
-
-SHOW COLUMNS FROM student;
-SHOW COLUMNS FROM student_grade;
-
-
-
-SELECT * FROM `course`;
-
-
-#ALTER TABLE `student_grade`
-#MODIFY COLUMN `student_id` CHAR(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
-
-#ALTER TABLE `student_grade`
-#MODIFY COLUMN `course_id` CHAR(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
-#ALTER TABLE `student_grade`
-#ADD CONSTRAINT `fk_course_gread_student`
-#FOREIGN KEY (`student_id`) REFERENCES `student`(`student_id`);
-
-select   * from `student_grade`;
-
-ALTER TABLE student_grade
-    MODIFY COLUMN student_id CHAR(10) NOT NULL;
-
-ALTER TABLE student_grade
-    MODIFY COLUMN student_id CHAR(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL;
-
-/*SELECT student_id
-FROM `student_grade`
-WHERE student_id NOT IN (SELECT student_id FROM `student`);*/
-
-SELECT * FROM `student_grade`;
-
-ALTER TABLE student_grade
-    ADD CONSTRAINT fk_course_grade_student FOREIGN KEY (student_id) REFERENCES student(student_id);
-
-
-
-DROP TABLE IF EXISTS Student_Performance;
-CREATE TABLE Student_Performance (
-                                     student_id VARCHAR(12) NOT NULL,
-                                     semester_no INT,
-                                     SGPA DECIMAL(3,2),
-                                     CGPA DECIMAL(3,2),
-                                     GPA DECIMAL(3,2),
-                                     PRIMARY KEY (student_id, semester_no)
-);
-
-SELECT * FROM Student_Performance;
-
-INSERT INTO Student_Performance (student_id, semester_no,SGPA, CGPA, GPA)
-SELECT
-    sg.student_id,
-    1 AS semester_no,
-    (SUM(c.`credit` * CASE
-                          WHEN sg.Final_marks >= 90 THEN 4.00
-                          WHEN sg.Final_marks >= 85 THEN 3.70
-                          WHEN sg.Final_marks >= 80 THEN 3.30
-                          WHEN sg.Final_marks >= 75 THEN 3.00
-                          WHEN sg.Final_marks >= 70 THEN 2.70
-                          WHEN sg.Final_marks >= 65 THEN 2.30
-                          WHEN sg.Final_marks >= 60 THEN 2.00
-                          WHEN sg.Final_marks >= 55 THEN 1.70
-                          WHEN sg.Final_marks >= 50 THEN 1.30
-                          WHEN sg.Final_marks >= 45 THEN 1.00
-                          ELSE 0.00
-        END) / NULLIF(SUM(c.credit), 0)) AS SGPA,
-    NULL AS CGPA,
-    NULL AS GPA
-FROM
-    student_grade AS sg
-        JOIN
-    course AS c ON sg.course_id = c.course_id
-GROUP BY
-    sg.student_id;
-
-SELECT * FROM `student_grade`;
-
-SET SQL_SAFE_UPDATES = 0;
-
-
-UPDATE Student_Performance AS sp
-    JOIN (
-    SELECT
-    student_id,
-    AVG(SGPA) AS Avg_CGPA
-    FROM
-    Student_Performance
-    GROUP BY
-    student_id
-    ) AS avg_cgpa ON sp.student_id = avg_cgpa.student_id
-    SET sp.CGPA = avg_cgpa.Avg_CGPA;
-
-SET SQL_SAFE_UPDATES = 1;
-
-
-
-
-
-SET SQL_SAFE_UPDATES = 0;
-UPDATE Student_Performance sp
-    JOIN (
-    SELECT
-    student_id,
-    AVG(SGPA) AS avg_full_sgpa
-    FROM
-    Student_Performance
-    GROUP BY
-    student_id
-    ) AS avg_sp ON sp.student_id = avg_sp.student_id
-    SET sp.GPA = avg_sp.avg_full_sgpa;
-SET SQL_SAFE_UPDATES = 1;
-
-
-
-DELIMITER //
-CREATE PROCEDURE VIEW_STUDENT_GRADES_AS_BATCH(IN batch CHAR(4))
-BEGIN
-SELECT sg.*
-FROM `student_grade` sg
-         JOIN `student` s ON sg.`student_id` = s.`student_id`
-WHERE s.`batch` = batch;
-END //
-DELIMITER ;
-
-## get proper student grads
-CALL VIEW_STUDENT_GRADES_AS_BATCH('2022');
-
-
-## get repeat student grads
-CALL VIEW_STUDENT_GRADES_AS_BATCH('2021');
-
-
-#### get GetStudentDetailsByBatch  student grads AND detalis
-DELIMITER //
-CREATE PROCEDURE GetStudentDetailsByBatch(
-    IN batch CHAR(4)
-)
-BEGIN
-SELECT
-    S.student_id,
-    S.name AS StudentName,
-    COALESCE(
-            CASE
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ENG1222' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ENG1222' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ENG1222' AND student_id = S.student_id)
-                ELSE 'C+'
-                END, 'No Repeat'
-    ) AS ENG1222,
-    COALESCE(
-            CASE
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1212' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1212' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1212' AND student_id = S.student_id)
-                ELSE 'C+'
-                END, 'No Repeat'
-    ) AS ICT1212,
-    COALESCE(
-            CASE
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1222' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1222' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1222' AND student_id = S.student_id)
-                ELSE 'C+'
-                END, 'No Repeat'
-    ) AS ICT1222,
-    COALESCE(
-            CASE
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1233' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1233' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1233' AND student_id = S.student_id)
-                ELSE 'C+'
-                END, 'No Repeat'
-    ) AS ICT1233,
-    COALESCE(
-            CASE
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1242' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1242' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1242' AND student_id = S.student_id)
-                ELSE 'C+'
-                END, 'No Repeat'
-    ) AS ICT1242,
-    COALESCE(
-            CASE
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1253' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1253' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM `student_grade` WHERE Course_id = 'ICT1253' AND student_id = S.student_id)
-                ELSE 'C+'
-                END, 'No Repeat'
-    ) AS ICT1253,
-    COALESCE(
-            CASE
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'TCS1212' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'TCS1212' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM `student_grade` WHERE Course_id = 'TCS1212' AND student_id = S.student_id)
-                ELSE 'C+'
-                END, 'No Repeat'
-    ) AS TCS1212,
-    COALESCE(
-            CASE
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'TMS1233' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
-                WHEN (SELECT grade FROM `student_grade` WHERE Course_id = 'TMS1233' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM `student_grade` WHERE Course_id = 'TMS1233' AND student_id = S.student_id)
-                ELSE 'C+'
-                END, 'No Repeat'
-    ) AS TMS1233,
-    SP.SGPA,
-    SP.CGPA
-FROM
-    `student` AS S
-        JOIN
-    Student_Performance AS SP ON S.student_id = SP.student_id
-WHERE
-    S.batch = batch;
-END //
-
-DELIMITER ;
-
-
-CALL GetStudentDetailsByBatch('2021');
-# repeat student
-
-
-ALTER TABLE `user`
-    MODIFY COLUMN `NIC` CHAR(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
-
-ALTER TABLE `lecturer`
-    MODIFY COLUMN `NIC` CHAR(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-
-ALTER TABLE `lecturer`
-    ADD CONSTRAINT `fk_lecturer_user`
-        FOREIGN KEY (`NIC`) REFERENCES `user`(`NIC`)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE;
-
-
-
-
-ALTER TABLE `admin`
-    MODIFY COLUMN `NIC` CHAR(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-ALTER TABLE `admin`
-    ADD CONSTRAINT `fk_admin_user`
-        FOREIGN KEY (`NIC`) REFERENCES `user`(`NIC`)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE;
-
-
-ALTER TABLE `dean`
-    MODIFY COLUMN `NIC` CHAR(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-ALTER TABLE `dean`
-    ADD CONSTRAINT `fk_dean_user`
-        FOREIGN KEY (`NIC`) REFERENCES `user`(`NIC`)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE;
-
-
-ALTER TABLE `technical_Officer`
-    MODIFY COLUMN `NIC` CHAR(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-ALTER TABLE `technical_Officer`
-    ADD CONSTRAINT `fk_technical_Officer_user`
-        FOREIGN KEY (`NIC`) REFERENCES `user`(`NIC`)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE;
-
-
-ALTER TABLE `student`
-    MODIFY COLUMN `NIC` CHAR(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-ALTER TABLE `student`
-    ADD CONSTRAINT `fk_technical_student_user`
-        FOREIGN KEY (`NIC`) REFERENCES `user`(`NIC`)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE;
-##END
-
-
-
-
-
-
-
--- create  function show cource data
-DROP PROCEDURE IF EXISTS showALLCourses;
-DELIMITER //
-
-CREATE PROCEDURE showALLCourses()
-BEGIN
-SELECT * FROM `course`;
-END //
-
-DELIMITER ;
-
-
-CALL showALLCourses();
--- SELECT * FROM  CourceName;
-
-
--- create view for courceID , cource Name
-
-
-CREATE VIEW CourceName AS
-SELECT `course_id` AS ID , `name` AS  course FROM `course`;
-
--- SELECT * FROM  CourceName;
-
--- SHOW ALL DATA FROM  Database_management_system marks
-
-CREATE VIEW `get_databaseManagementSystemMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1213_course_marks;
-
--- SELECT * FROM `get_databaseManagementSystemMarks`;
-
-
-
-
--- get all data from computer_architecture marks
-
-CREATE VIEW `get_Computer_architectureMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1222_course_marks;
-
-
--- SELECT * FROM `get_Computer_architectureMarks`;
-
--- get all data from network subject marks
-CREATE VIEW `get_Computer_networkMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1233_course_marks;
-
--- SELECT * FROM `get_Computer_networkMarks`;
-
-
--- get all data from Server side web development marks
-CREATE VIEW `get_Server_side_web_developmentMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1242_course_marks;
-
--- SELECT * FROM `get_Server_side_web_developmentMarks`;
-
--- get all data from Computer_programing marks
-
-CREATE VIEW `get_Computer_programingMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1253_course_marks;
-
--- SELECT * FROM `get_Computer_programingMarks`;
-
-
-
--- get all data from Muiltimedia_technology marks
-
-CREATE VIEW `get_Muiltimedia_technologyMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1261_course_marks;
-
--- SELECT * FROM `get_Muiltimedia_technologyMarks`;
-
-
--- get all data from Muiltimedia_technology marks
-
-CREATE VIEW `get_Fundamendal_of_ISMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1271_course_marks;
-
--- SELECT * FROM `get_Fundamendal_of_ISMarks`;
-
--- get all data from Web_technology marks
-CREATE VIEW `get_Web_technologyMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1283_course_marks;
-
-
--- SELECT * FROM `get_Web_technologyMarks`;
-
--- get all data from Artificial_inteligence marks
-CREATE VIEW `Artificial_inteligenceMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT1293_course_marks;
-
-
--- SELECT * FROM `Artificial_inteligenceMarks`;
-
-
--- get all data from Artificial_inteligence marks
-CREATE VIEW `Software_engineeringMarks` AS
-SELECT student_id AS `TG NUMBER` ,
-       quiz_1 AS `QUIZ ONE` ,
-       quiz_2 AS `QUIZ TWO`,
-       quiz_3 AS `QUIZ THREE`,
-       inclass_test_marks AS `IN CLASS TEST`,
-       mid_exam_marks AS `MID EXAM`,
-       end_exam_marks AS `END EXAM`
-FROM ICT12101_course_marks;
-
-
-
--- SELECT * FROM `Software_engineeringMarks`;
-
-
-
-
-
-
-
-ALTER TABLE `attendance`
-    MODIFY COLUMN `student_id` CHAR(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-
-
-SELECT student_id
-FROM `attendance`
-WHERE student_id NOT IN (SELECT student_id FROM `student`);
-
-ALTER TABLE `attendance`
-    ADD CONSTRAINT `fk_attendance_student`
-        FOREIGN KEY (`student_id`) REFERENCES `student`(`student_id`)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE;
-
-
-CREATE VIEW seeAllAttendance AS
-SELECT * FROM  `attendance` ;
-
-SELECT * FROM seeAllAttendance;
-
-CREATE VIEW Attendance_Eligibility AS
-SELECT DISTINCT
-    SA.student_id,
-    S.name AS StudentName,
-    (CASE
-         WHEN SA.attendance_percentage >= 80.00 THEN 'Eligible'
-         ELSE 'Not Eligible'
-        END) AS eligibility
-FROM
-    attendance AS SA
-        JOIN
-    student AS S ON SA.student_id = S.student_id;
-
-SELECT * FROM Attendance_Eligibility;
-
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1062', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2142', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1063', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1064', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2113', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1414', 'ict2152', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2133', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2142', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1413', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1345', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1067', 'ict2152', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1415', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2142', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1417', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1416', 'ict2152', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1418', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1419', 'ict2152', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2122', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1420', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2113', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1421', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2142', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1422', 'ict2152', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2122', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1423', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1424', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1425', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2133', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1426', 'ict2152', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2122', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1427', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2113', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2133', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2142', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1428', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2122', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1429', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-03-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-02-05', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2142', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1430', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2113', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2133', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-02-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1431', 'ict2152', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-02-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2113', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-03-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2133', '2025-04-09', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-01-15', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-01-22', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-01-29', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2122', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-01-01', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-01-08', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-02-26', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-03-12', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-03-19', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-04-02', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2142', '2025-04-09', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-01-01', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-01-08', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-01-15', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-01-22', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-01-29', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-02-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-02-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-02-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-02-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-03-05', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-03-12', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-03-19', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-03-26', '2022', 'ict', 'present');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-04-02', '2022', 'ict', 'absent');
+INSERT INTO attendance (student_id, course_code, attendance_date, batch, department, status) VALUES ('tg/2022/1432', 'ict2152', '2025-04-09', '2022', 'ict', 'present');
+select * from `attendance`;
+
+
+
+
+
+
+
+
+
+
+
+select * from student;
+
+
+
+
+select * from medical;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select *  from batch;
+select * from student;
+
+SELECT `name` 
+FROM `course` 
+WHERE `course_semester` IN (
+    SELECT `current_student_semester` 
+    FROM `batch` 
+    WHERE `batch_year` = '2022'
+) 
+AND `dep_code` = 'bst';
+
+select course_code from course where  name = 'E-Commerce Implementation, Management and Security';
+
+
+
+select * from course ;
+select * from batch;
+
+select * from student;
+
+
+
+
+
+select * from `attendance`;
 
 
 
