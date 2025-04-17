@@ -19,6 +19,7 @@ import org.techlms.demoitest.service.lecturerService.CoursePageService;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CourseRegisterStudentsDataController implements Initializable {
@@ -51,7 +52,7 @@ public class CourseRegisterStudentsDataController implements Initializable {
         // Root VBox
         VBox studentInfoCard = new VBox(30);
         studentInfoCard.getStyleClass().add("student-info-card");
-        studentInfoCard.getStylesheets().add(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/all-student-info-page.css").toExternalForm());
+        studentInfoCard.getStylesheets().add(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/style-sheets/all-student-info-page.css").toExternalForm());
 
         // Profile HBox
         HBox profileContainer = new HBox();
@@ -75,7 +76,7 @@ public class CourseRegisterStudentsDataController implements Initializable {
 //        userprofile.profile().
 
             Image image = new Image(
-                    this.getClass().getResourceAsStream("/org/techlms/demoitest/application-images/util/10337609.png"),
+                    Objects.requireNonNull(this.getClass().getResourceAsStream("/org/techlms/demoitest/application-images/util/10337609.png")),
                     100, // Desired width of the image
                     100, // Desired height of the image
                     false, // Preserve aspect ratio

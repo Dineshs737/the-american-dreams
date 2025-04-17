@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -141,13 +140,74 @@
                                        </VBox>
                                        <VBox layoutX="10.0" layoutY="10.0" styleClass="user-barchart-card" HBox.hgrow="ALWAYS">
                                            <children>
-                                               <VBox VBox.vgrow="ALWAYS">
+                                               <VBox spacing="20.0" VBox.vgrow="ALWAYS">
                                                    <children>
-                                                       <VBox VBox.vgrow="ALWAYS">
-                                                           <children>
-                                                               <PieChart fx:id="userPIChart" VBox.vgrow="ALWAYS" />
-                                                           </children>
-                                                       </VBox>
+                                          <VBox alignment="CENTER" onMouseClicked="#switchUndergraduatesPage" styleClass="admin-user-page-card">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <VBox>
+                                                         <children>
+                                                            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../application-images/lecturer-images/3658756.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                                                         <children>
+                                                            <Label styleClass="admin-user-page-card-label" text="upload lecture" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchUndergraduatesPage" styleClass="admin-user-page-card">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <VBox>
+                                                         <children>
+                                                            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../application-images/lecturer-images/5580015.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                                                         <children>
+                                                            <Label styleClass="admin-user-page-card-label" text="Update" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="150.0" onMouseClicked="#switchUndergraduatesPage" styleClass="admin-user-page-card">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <VBox>
+                                                         <children>
+                                                            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../application-images/lecturer-images/14620389.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                                                         <children>
+                                                            <Label styleClass="admin-user-page-card-label" text="Delete" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
                                                    </children>
                                                </VBox>
                                            </children>

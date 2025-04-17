@@ -5,13 +5,23 @@ import java.util.Arrays;
 public class CourseMaterial {
     private String courseMaterialId;
     private String courseCode;
+    private String lectureId;
     private String lectureTitle;
     private String lectureDate;
 //    private String lectureDescription;
     private byte[] courseResource;
 
-    public CourseMaterial(String courseMaterialId, String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
+    public CourseMaterial(String courseMaterialId, String lectureId, String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
         this.courseMaterialId = courseMaterialId;
+        this.lectureId = lectureId;
+        this.courseCode = courseCode;
+        this.lectureTitle = lectureTitle;
+        this.lectureDate = lectureDate;
+        this.courseResource = courseResource;
+    }
+
+    public CourseMaterial(String lectureId, String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
+        this.lectureId = lectureId;
         this.courseCode = courseCode;
         this.lectureTitle = lectureTitle;
         this.lectureDate = lectureDate;
@@ -23,6 +33,15 @@ public class CourseMaterial {
         this.lectureTitle = lectureTitle;
         this.lectureDate = lectureDate;
         this.courseResource = courseResource;
+    }
+
+
+    public String getLectureId() {
+        return lectureId;
+    }
+
+    public void setLectureId(String lectureId) {
+        this.lectureId = lectureId;
     }
 
     public String getLectureDate() {
@@ -70,8 +89,10 @@ public class CourseMaterial {
     public String toString() {
         return "CourseMaterial{" +
                 "courseMaterialId='" + courseMaterialId + '\'' +
+                ", lectureId='" + lectureId + '\'' +
                 ", courseCode='" + courseCode + '\'' +
                 ", lectureTitle='" + lectureTitle + '\'' +
+                ", lectureDate='" + lectureDate + '\'' +
                 ", courseResource=" + Arrays.toString(courseResource) +
                 '}';
     }

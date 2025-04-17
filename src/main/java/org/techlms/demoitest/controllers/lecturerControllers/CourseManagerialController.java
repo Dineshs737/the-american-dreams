@@ -58,7 +58,7 @@ public class CourseManagerialController {
         FXMLLoader fxmlLoader = null;
         try {
             try {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/show-all-student-page.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
                 Parent undergraduatePage = fxmlLoader.load();
 
                 // Create a new Stage for the pop-up
