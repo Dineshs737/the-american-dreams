@@ -1,6 +1,7 @@
 package org.techlms.demoitest.service.lecturerService;
 
 import org.techlms.demoitest.dbconnection.DBConnection;
+import org.techlms.demoitest.model.course.CourseMaterial;
 import org.techlms.demoitest.model.util.Attendance;
 import org.techlms.demoitest.util.GetStudents;
 
@@ -76,6 +77,68 @@ public class LecturerService implements GetStudents {
         }
 
         return studentName;
+    }
+
+
+    public List<CourseMaterial> getCourseMaterialByCourseCodeAndLecturerId(String lecturedId , String courseCode){
+        List<CourseMaterial> courseMaterials = new ArrayList<CourseMaterial>();
+        Connection con = DBConnection.getConnection();
+        try{
+
+/*******
+ *
+ * DROP TABLE IF EXISTS course_material;
+ * CREATE TABLE course_material (
+ *     material_id INT AUTO_INCREMENT PRIMARY KEY,
+ *     course_id VARCHAR(10) NOT NULL,
+ *     lecture_title VARCHAR(100) NOT NULL,
+ *     create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ *     resource LONGBLOB,
+ *     lecturer_id CHAR(15) NOT NULL
+ * );
+ *
+ * SELECT lecturer_id ,  course_id , lecture_title , create_date , resource FROM course_material WHERE course_id = 'ict2113' AND lecturer_id = 'l0001';
+ */
+
+
+            String sql = "SELECT material_id,lecturer_id ,  course_id , lecture_title , create_date , resource FROM course_material WHERE lecturer_id = ?  AND course_id = ? ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            /****
+             *     public CourseMaterial(String lectureId, String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
+             *         this.lectureId = lectureId;
+             *         this.courseCode = courseCode;
+             *         this.lectureTitle = lectureTitle;
+             *         this.lectureDate = lectureDate;
+             *         this.courseResource = courseResource;
+             *     }
+             */
+
+
+            ps.setString(1, lecturedId.toLowerCase().trim());
+            ps.setString(2, courseCode.toLowerCase().trim());
+            System.out.println(ps);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                System.out.println(rs.getString(1));
+                courseMaterials.add(
+                        new CourseMaterial(
+                                rs.getInt(1),
+                                rs.getString(2).toLowerCase(),
+                                rs.getString(3).toLowerCase(),
+                                rs.getString(4),
+                                rs.getDate(5).toString(),
+                                rs.getBytes(6)
+
+                        )
+                );
+            }
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return courseMaterials;
     }
 
 }
