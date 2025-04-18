@@ -20,20 +20,21 @@ public class CourseMaterial {
         this.courseResource = courseResource;
     }
 
-    public CourseMaterial(String lectureId, String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
+    public CourseMaterial(String lectureId, String courseCode, String lectureTitle, byte[] courseResource) {
         this.lectureId = lectureId;
         this.courseCode = courseCode;
         this.lectureTitle = lectureTitle;
-        this.lectureDate = lectureDate;
         this.courseResource = courseResource;
     }
 
-    public CourseMaterial(String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
-        this.courseCode = courseCode;
-        this.lectureTitle = lectureTitle;
-        this.lectureDate = lectureDate;
-        this.courseResource = courseResource;
-    }
+//    public CourseMaterial(String courseCode, String lectureTitle, String lectureDate, byte[] courseResource) {
+//        this.courseCode = courseCode;
+//        this.lectureTitle = lectureTitle;
+//        this.lectureDate = lectureDate;
+//        this.courseResource = courseResource;
+//    }
+
+
 
 
     public String getLectureId() {
