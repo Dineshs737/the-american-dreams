@@ -40,7 +40,7 @@ public class CourseRegisterStudentsDataController implements Initializable {
 
         // Fetch student data using coursePageService
 //        System.out.println(course.getCourseCode());
-        List<Student> students = coursePageService.getStudentsInformation(course.getCourseCode());
+        List<Student> students = coursePageService.getStudentsInformation("ict2113");
 
 
         for (Student student : students) {

@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="./style-sheets/lecturer-student-attendance-css.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.lecturerControllers.studentAttendancePageController">
+<VBox fx:id="contentContainer" alignment="CENTER" stylesheets="@style-sheets/lecturer-student-attendance-css.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.lecturerControllers.studentAttendancePageController">
    <children>
+      <HBox alignment="TOP_RIGHT" styleClass="back-button-container" VBox.vgrow="NEVER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#back" styleClass="back-button" text="Back" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="5.0" right="30.0" top="15.0" />
+         </padding>
+      </HBox>
 
       <!-- Attendance Table Section -->
       <VBox stylesheets="@./style-sheets/student-attendance.css" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="studentAttendance" VBox.vgrow="ALWAYS">
+            <TableView fx:id="studentAttendance" stylesheets="@style-sheets/course-material-table.css" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="studentId" editable="false" minWidth="200.0" sortable="false" text="Student Id" />
                   <TableColumn fx:id="studentName" editable="false" minWidth="200.0" sortable="false" text="Student Name" />
