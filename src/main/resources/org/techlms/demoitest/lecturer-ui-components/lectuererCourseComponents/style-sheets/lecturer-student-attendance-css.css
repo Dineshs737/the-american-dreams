@@ -29,3 +29,18 @@
     -fx-border-width: 0px 0px 1px 0px;
 
 }
+
+
+.back-button-container{
+    -fx-background-color: #EBEAFF;
+}
+
+.back-button{
+    -fx-padding: 5px 30px;
+    -fx-background-color: #2D336B;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px 5px 5px 10px;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold
+}

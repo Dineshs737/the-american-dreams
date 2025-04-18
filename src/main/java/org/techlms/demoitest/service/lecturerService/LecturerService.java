@@ -5,10 +5,7 @@ import org.techlms.demoitest.model.course.CourseMaterial;
 import org.techlms.demoitest.model.util.Attendance;
 import org.techlms.demoitest.util.GetStudents;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,6 +136,47 @@ public class LecturerService implements GetStudents {
             e.printStackTrace();
         }
         return courseMaterials;
+    }
+
+
+    public boolean saveCourseMaterial(CourseMaterial courseMaterial){
+        Connection con = DBConnection.getConnection();
+        try{
+//            INSERT INTO course_material (lecturer_id, course_id, lecture_title, create_date, resource)
+    //VALUES (?, ?, ?, ?, ?);
+            /*****
+             * CREATE TABLE course_material (
+             *     material_id INT AUTO_INCREMENT PRIMARY KEY,
+             *     course_id VARCHAR(10) NOT NULL,
+             *     lecture_title VARCHAR(100) NOT NULL,
+             *     create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+             *     resource LONGBLOB,
+             *     lecturer_id CHAR(15) NOT NULL
+             * );
+             */
+
+            String sql = "INSERT INTO course_material (lecturer_id, course_id, lecture_title, resource) VALUES (?,?,?,?);";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,courseMaterial.getLectureId());
+            ps.setString(2,courseMaterial.getCourseCode());
+            ps.setString(3,courseMaterial.getLectureTitle());
+            ps.setBytes(4,courseMaterial.getCourseResource());
+
+
+
+            int result = ps.executeUpdate();
+            if(result > 0){
+                return true;
+            }
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+        return false;
     }
 
 }
