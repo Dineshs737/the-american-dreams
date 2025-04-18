@@ -3,19 +3,27 @@ package org.techlms.demoitest.controllers.lecturerControllers;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 import org.techlms.demoitest.model.course.Course;
 import org.techlms.demoitest.model.util.Attendance;
 import org.techlms.demoitest.service.lecturerService.LecturerService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class studentAttendancePageController implements Initializable {
     LecturerService lecturerService = new LecturerService();
+
+    @FXML
+    private  VBox contentContainer;
 
     Course courseManager = Course.courseSessionManager();
     private ObservableList<Attendance> attendanceList;
@@ -84,5 +92,25 @@ public class studentAttendancePageController implements Initializable {
         double percentage = (participateCount * 100.0) / totalAttendance;
         return String.format("%.2f%%", percentage);
     }
+
+
+    @FXML
+
+    void back(ActionEvent event) {
+        System.out.println("Back button clicked");
+
+        try {
+            // Load the FXML file and retrieve its root
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/lecturer-course-material-page.fxml"));
+            Parent newContent = fxmlLoader.load();
+            this.contentContainer.getChildren().clear();
+            this.contentContainer.getChildren().add(newContent); // Add the new content
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 }
