@@ -188,6 +188,7 @@ public class CourseManagerialController implements Initializable {
     }
 
     public void switchtoUndergaduatesMedicalPage(MouseEvent event) {
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-attendance-page.fxml"));
         contentContainer.getChildren().clear();
         try {
@@ -219,6 +220,7 @@ public class CourseManagerialController implements Initializable {
 
     public void undergaduatesMarks(MouseEvent event) {
     }
+
 
     @FXML
     void switchUndergraduatesPage(MouseEvent event) {
@@ -266,5 +268,4 @@ public class CourseManagerialController implements Initializable {
         }catch (Exception e) {
             e.printStackTrace();
         }
-    }
 }
