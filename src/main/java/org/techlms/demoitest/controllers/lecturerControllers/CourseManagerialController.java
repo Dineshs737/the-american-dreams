@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -22,7 +24,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.ResourceBundle;
 
-public class CourseManagerialController  implements Initializable {
+public class CourseManagerialController implements Initializable {
 
     private final LecturerService service = new LecturerService();
 
@@ -36,27 +38,10 @@ public class CourseManagerialController  implements Initializable {
     private VBox contentContainer;
 
     @FXML
-    void switchDeletePage(MouseEvent event) {
-
-    }
-
-    @FXML
-    void switchGetAllUsersPage(MouseEvent event) {
-
-    }
-
-    @FXML
-    void switchToEligiblity(MouseEvent event) {
-
-    }
-
-
-
-    @FXML
     private TableView<CourseMaterial> courseMaterialTable;
 
     @FXML
-    private TableColumn<CourseMaterial,Integer> materialNumber;
+    private TableColumn<CourseMaterial, Integer> materialNumber;
 
     @FXML
     private TableColumn<CourseMaterial, CourseMaterial> lectureResource;
@@ -67,153 +52,157 @@ public class CourseManagerialController  implements Initializable {
     @FXML
     private TableColumn<CourseMaterial, String> lectureUploadDate;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Initialize TableView columns
+        courseMaterialTable.getItems().clear();
 
-        materialNumber.setCellValueFactory(cellData->
-                new SimpleIntegerProperty((
-                    cellData.getValue().getCourseMaterialId()
-                )).asObject());
+        materialNumber.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getCourseMaterialId()).asObject());
 
-        lectureTitle.setCellValueFactory(cellData->
-                new SimpleStringProperty(
-                        cellData.getValue().getLectureTitle()
-                ));
+        lectureTitle.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getLectureTitle()));
 
-        lectureUploadDate.setCellValueFactory(cellData->
-                new SimpleStringProperty(
-                        cellData.getValue().getLectureDate()
-                ));
+        lectureUploadDate.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getLectureDate()));
 
-        lectureDownloadResource();
+        // Set up download button for each course material
+        setupDownloadResourceButton();
 
-        courseMaterialTable.getItems().setAll(service.getCourseMaterialByCourseCodeAndLecturerId("l0001", "ict2113"));
-
+        // Load course materials
+        loadCourseMaterials();
     }
 
+    private void setupDownloadResourceButton() {
+        lectureResource.setCellFactory(col -> new TableCell<>() {
+            Button downloadButton = new Button("Download");
 
-    private void lectureDownloadResource(){
-        lectureResource.setCellFactory(
-                col -> new TableCell<>() {
-                    Button downloadButton = new Button("Download");
-                    {
-                        downloadButton.setOnAction(event ->{
-                            System.out.println("Button clicked");
-                            CourseMaterial dto = getTableView().getItems().get(getIndex());
-                            byte[] lectureResource =   dto.getCourseResource();
-                            // open file chooser
-                            FileChooser fileChooser = new FileChooser();
-                            fileChooser.setTitle("Save File");
-                            fileChooser.setInitialFileName(dto.getLectureTitle().trim() + ".pdf");
+            {
+                downloadButton.setOnAction(event -> {
+                    CourseMaterial courseMaterial = getTableView().getItems().get(getIndex());
+                    byte[] courseResource = courseMaterial.getCourseResource();
 
-                            File file = fileChooser.showSaveDialog(getScene().getWindow());
-                            if (file != null) {
-                                try {
-                                    // Save the notice data to the file
-                                    Files.write(file.toPath(), lectureResource);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-//                                    showError("Failed to save the file.");
-                                    System.out.println("Failed to save the file.");
-                                }
-                            }
-                        });
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Save File");
+                    fileChooser.setInitialFileName(courseMaterial.getLectureTitle().trim() + ".pdf");
 
-                        downloadButton.setStyle("-fx-background-color: #2D336B; -fx-text-fill: white; -fx-background-radius: 10px 5px 5px 10px; -fx-font-size: 15px; -fx-cursor: hand;-fx-font-weight: bold");
+                    File file = fileChooser.showSaveDialog(getScene().getWindow());
+                    if (file != null) {
+                        try {
+                            Files.write(file.toPath(), courseResource);
+                        } catch (IOException e) {
+                            System.err.println("Failed to save the file: " + e.getMessage());
+                            e.printStackTrace();
+                        }
                     }
-
-                    protected void updateItem(CourseMaterial item, boolean empty) {
-                        super.updateItem(item, empty);
-                        setGraphic(empty ? null : downloadButton);
-                    }
-
-
-
-
                 });
 
-
-
-
-    }
-
-
-
-    @FXML
-    void switchUserUpdatePage(MouseEvent event) {
-
-    }
-
-    @FXML
-    void switchtoUndergaduatesMedicalPage(MouseEvent event) {
-        FXMLLoader fxmlLoader = null;
-        try {
-            try {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-attendance-page.fxml"));
-                Parent undergraduatePage = fxmlLoader.load();
-
-                // Create a new Stage for the pop-up
-                Stage popUpStage = new Stage();
-                popUpStage.setTitle("Undergraduates Page");
-                popUpStage.initModality(Modality.APPLICATION_MODAL); // Set as a modal window
-                popUpStage.initOwner(contentContainer.getScene().getWindow());
-                popUpStage.setScene(new Scene(undergraduatePage));
-
-                // Set window size (optional)
-                popUpStage.setWidth(800);
-                popUpStage.setHeight(600);
-
-                // Show the pop-up
-                popUpStage.showAndWait(); // Wait until the pop-up is closed
-                System.out.println("Undergraduates Page Loaded");
-            } catch (Exception e) {
-                e.printStackTrace();
+                downloadButton.setStyle("-fx-background-color: #2D336B; -fx-text-fill: white; -fx-background-radius: 10px 5px 5px 10px; -fx-font-size: 15px; -fx-cursor: hand;-fx-font-weight: bold");
             }
 
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
+            @Override
+            protected void updateItem(CourseMaterial item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : downloadButton);
+            }
+        });
     }
 
-
-    @FXML
-    void switchUndergraduatesPage(MouseEvent event) {
-
-        FXMLLoader fxmlLoader = null;
+    private void loadCourseMaterials() {
         try {
-            try {
-                fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
-                Parent undergraduatePage = fxmlLoader.load();
-
-                // Create a new Stage for the pop-up
-                Stage popUpStage = new Stage();
-                popUpStage.setTitle("Undergraduates Page");
-                popUpStage.initModality(Modality.APPLICATION_MODAL); // Set as a modal window
-                popUpStage.initOwner(contentContainer.getScene().getWindow());
-                popUpStage.setScene(new Scene(undergraduatePage));
-
-                // Set window size (optional)
-                popUpStage.setWidth(800);
-                popUpStage.setHeight(600);
-
-                // Show the pop-up
-                popUpStage.showAndWait(); // Wait until the pop-up is closed
-                System.out.println("Undergraduates Page Loaded");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }catch (Exception e) {
+            courseMaterialTable.getItems().setAll(service.getCourseMaterialByCourseCodeAndLecturerId("l0001", "ict2113"));
+        } catch (Exception e) {
+            System.err.println("Error loading course materials: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @FXML
-    void undergaduatesMarks(MouseEvent event) {
-
+    void switchToEligibilityPage(MouseEvent event) {
+        // Navigate to eligibility page logic here
     }
 
+    @FXML
+    void switchToUndergraduateMarksPage(MouseEvent event) {
+        // Navigate to undergraduate marks page logic here
+    }
 
+    @FXML
+    void switchToUndergraduatesPage(MouseEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
+            Parent undergraduatePage = fxmlLoader.load();
+            contentContainer.getChildren().clear();
+            contentContainer.getChildren().add(undergraduatePage);
+        } catch (IOException e) {
+            System.err.println("Error loading undergraduates page: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void createCourseMaterial(MouseEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/upload-student-material.fxml"));
+            Parent courseMaterialPage = fxmlLoader.load();
+            Stage popUpStage = new Stage();
+            popUpStage.setTitle("Create Course Material");
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.initOwner(contentContainer.getScene().getWindow());
+            popUpStage.setScene(new Scene(courseMaterialPage));
+
+            popUpStage.setOnHiding(windowEvent -> {
+                System.out.println("Pop-up closed. Reloading main content...");
+                reloadMainContent(); // Call the method to reload main content
+            });
+
+            popUpStage.showAndWait();
+        } catch (IOException e) {
+            System.err.println("Error loading course material creation page: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void refreshCourseMaterialTable() {
+        System.out.println("Refreshing course material table...");
+        loadCourseMaterials();
+    }
+    private void reloadMainContent() {
+        try {
+            // Load the updated FXML for the main content
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/lecturer-course-material-page.fxml"));
+            Parent newContent = fxmlLoader.load();
+
+            // Replace the content in the `contentContainer`
+            if (contentContainer != null) {
+                contentContainer.getChildren().clear();
+                contentContainer.getChildren().add(newContent);
+            } else {
+                System.err.println("contentContainer is null. Cannot reload main content.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void switchUserUpdatePage(MouseEvent event) {
+    }
+
+    public void switchToEligiblity(MouseEvent event) {
+    }
+
+    public void switchGetAllUsersPage(MouseEvent event) {
+    }
+
+    public void switchtoUndergaduatesMedicalPage(MouseEvent event) {
+    }
+
+    public void switchDeletePage(MouseEvent event) {
+    }
+
+    public void undergaduatesMarks(MouseEvent event) {
+    }
+
+    public void switchUndergraduatesPage(MouseEvent event) {
+    }
 }
