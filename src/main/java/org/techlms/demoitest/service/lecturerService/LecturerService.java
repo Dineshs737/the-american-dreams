@@ -179,4 +179,138 @@ public class LecturerService implements GetStudents {
         return false;
     }
 
+
+
+    public List<String> getCourseMaterial(String courseCode, String lectureId){
+        List<String> courseMaterialTitle = new ArrayList<String>();
+        Connection con = DBConnection.getConnection();
+        try{
+            String sql = "select material_id, lecture_title from course_material where lecturer_id = ?  AND course_id = ?  ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, lectureId.toLowerCase().trim());
+            ps.setString(2, courseCode.toLowerCase().trim());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                courseMaterialTitle.add(rs.getString(2));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return courseMaterialTitle;
+    }
+
+    public CourseMaterial getCourseMaterialById(int materialId){
+        CourseMaterial courseMaterial = null;
+        Connection con = DBConnection.getConnection();
+        try{
+        String sql = "select material_id , lecturer_id , course_id ,   lecture_title ,  create_date , resource from course_material  where material_id = ?;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, materialId);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            courseMaterial = new CourseMaterial(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getDate(5).toString(),
+                    rs.getBytes(6)
+            );
+        }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return courseMaterial;
+    }
+
+
+    public boolean updateCourseMaterial(CourseMaterial oldCourseMaterial , CourseMaterial newCourseMaterial){
+        Connection con = DBConnection.getConnection();
+        try{
+            con.setAutoCommit(false);
+            String sql = """
+                    UPDATE course_material
+                    SET
+                        course_id = ?, 
+                        lecture_title = ?,      
+                        resource = ?,                         
+                        lecturer_id = ?       
+                    WHERE
+                        material_id = ?; 
+                    
+                    """;
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,newCourseMaterial.getCourseCode().toLowerCase().trim());
+            ps.setString(2,newCourseMaterial.getLectureTitle().trim());
+            ps.setBytes(3,newCourseMaterial.getCourseResource());
+            ps.setString(4,newCourseMaterial.getLectureId());
+
+            ps.setInt(5,oldCourseMaterial.getCourseMaterialId());
+
+            System.out.println(ps);
+            if(ps.executeUpdate() > 0){
+                con.commit();
+                return true;
+            }
+
+        }catch (SQLException e){
+            try{
+                con.rollback();
+            }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+
+            e.printStackTrace();
+
+        }
+
+        return false;
+    }
+
+
+    public boolean deleteCourseMaterial(int materialId){
+        Connection con = DBConnection.getConnection();
+        try{
+            con.setAutoCommit(false);
+            String sql = "DELETE FROM course_material WHERE material_id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,materialId);
+            System.out.println(ps);
+            if(ps.executeUpdate() > 0){
+                con.commit();
+                return true;
+            }
+        }catch (SQLException e){
+            try{
+                con.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public  int getCourseMaterialId( String courseCode , String title ){
+        Connection con = DBConnection.getConnection();
+        int courseMaterialId = 0;
+        try{
+            String sql = "select material_id from course_material where course_id = ? AND lecture_title = ? ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, courseCode);
+            ps.setString(2, title);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                courseMaterialId = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courseMaterialId;
+
+    }
 }

@@ -188,6 +188,31 @@ public class CourseManagerialController implements Initializable {
     }
 
     public void switchtoUndergaduatesMedicalPage(MouseEvent event) {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-attendance-page.fxml"));
+        contentContainer.getChildren().clear();
+        try {
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-attendance-page.fxml"));
+            Parent undergraduatePage = fxmlLoader.load();
+
+// Add to a VBox for layout management
+            VBox parentVBox = new VBox();
+            VBox.setVgrow(undergraduatePage, Priority.ALWAYS);
+            parentVBox.getChildren().add(undergraduatePage);
+            parentVBox.setFillWidth(true);
+            parentVBox.setPrefWidth(Double.MAX_VALUE);
+            parentVBox.setPrefHeight(Double.MAX_VALUE);
+
+// Add the VBox to the main container
+            contentContainer.getChildren().clear();
+            contentContainer.getChildren().add(undergraduatePage);
+
+
+        } catch (IOException e) {
+            System.err.println("Error loading undergraduate medical page: " + e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     public void switchDeletePage(MouseEvent event) {
@@ -196,6 +221,51 @@ public class CourseManagerialController implements Initializable {
     public void undergaduatesMarks(MouseEvent event) {
     }
 
-    public void switchUndergraduatesPage(MouseEvent event) {
-    }
+
+    @FXML
+    void switchUndergraduatesPage(MouseEvent event) {
+
+        FXMLLoader fxmlLoader = null;
+        try {
+            try {
+
+
+//                fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
+//                Parent undergraduatePage = fxmlLoader.load();
+//
+//// Add to a VBox for layout management
+//                VBox parentVBox = new VBox();
+//                VBox.setVgrow(undergraduatePage, Priority.ALWAYS);
+//                parentVBox.getChildren().add(undergraduatePage);
+//                parentVBox.setFillWidth(true);
+//                parentVBox.setPrefWidth(Double.MAX_VALUE);
+//                parentVBox.setPrefHeight(Double.MAX_VALUE);
+
+// Add the VBox to the main container
+//                contentContainer.getChildren().clear();
+//                contentContainer.getChildren().add(undergraduatePage);
+                fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
+                Parent undergraduatePage = fxmlLoader.load();
+
+                // Create a new Stage for the pop-up
+                Stage popUpStage = new Stage();
+                popUpStage.setTitle("Undergraduates Page");
+                popUpStage.initModality(Modality.APPLICATION_MODAL); // Set as a modal window
+                popUpStage.initOwner(contentContainer.getScene().getWindow());
+                popUpStage.setScene(new Scene(undergraduatePage));
+
+                // Set window size (optional)
+                popUpStage.setWidth(800);
+                popUpStage.setHeight(600);
+
+                // Show the pop-up
+                popUpStage.showAndWait(); // Wait until the pop-up is closed
+                System.out.println("Undergraduates Page Loaded");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
 }
