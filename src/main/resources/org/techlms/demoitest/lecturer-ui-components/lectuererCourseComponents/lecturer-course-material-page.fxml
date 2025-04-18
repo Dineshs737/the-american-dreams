@@ -142,7 +142,7 @@
                                            <children>
                                                <VBox spacing="20.0" VBox.vgrow="ALWAYS">
                                                    <children>
-                                          <VBox alignment="CENTER" onMouseClicked="#switchUndergraduatesPage" styleClass="admin-user-page-card">
+                                          <VBox alignment="CENTER" onMouseClicked="#createCourseMaterial" styleClass="admin-user-page-card">
                                              <children>
                                                 <HBox>
                                                    <children>
