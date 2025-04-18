@@ -54,7 +54,6 @@ public class CourseManagerialController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Initialize TableView columns
         courseMaterialTable.getItems().clear();
 
         materialNumber.setCellValueFactory(cellData ->
@@ -66,10 +65,7 @@ public class CourseManagerialController implements Initializable {
         lectureUploadDate.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getLectureDate()));
 
-        // Set up download button for each course material
         setupDownloadResourceButton();
-
-        // Load course materials
         loadCourseMaterials();
     }
 
@@ -169,11 +165,8 @@ public class CourseManagerialController implements Initializable {
     }
     private void reloadMainContent() {
         try {
-            // Load the updated FXML for the main content
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/lecturer-course-material-page.fxml"));
             Parent newContent = fxmlLoader.load();
-
-            // Replace the content in the `contentContainer`
             if (contentContainer != null) {
                 contentContainer.getChildren().clear();
                 contentContainer.getChildren().add(newContent);
