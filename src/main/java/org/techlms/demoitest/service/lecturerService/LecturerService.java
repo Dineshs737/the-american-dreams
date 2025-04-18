@@ -190,7 +190,7 @@ public class LecturerService implements GetStudents {
             ps.setString(2, courseCode.toLowerCase().trim());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                courseMaterialTitle.add(. rs.getString(2));
+                courseMaterialTitle.add(rs.getString(2));
             }
 
         }catch (SQLException e){
