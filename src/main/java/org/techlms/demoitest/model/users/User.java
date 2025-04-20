@@ -1,5 +1,7 @@
 package org.techlms.demoitest.model.users;
 
+import java.util.Arrays;
+
 public class User{
     protected int userID;
     protected String userName;
@@ -24,6 +26,16 @@ public class User{
         this.userProfile = userProfile;
     }
 
+    public User(String userName, String password, String name, String email, String contactNumber, String gender, byte[] userProfile ,String role) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.contactNumber = contactNumber;
+        this.gender = gender;
+        this.userProfile = userProfile;
+        this.role = role;
+    }
 
     public User(byte[] userProfile, String name, String email, String gender) {
         this.userProfile = userProfile;
@@ -117,5 +129,21 @@ public class User{
 
     public void setUserProfile(byte[] userProfile) {
         this.userProfile = userProfile;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", role='" + role + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", userProfile=" + Arrays.toString(userProfile) +
+                '}';
     }
 }
