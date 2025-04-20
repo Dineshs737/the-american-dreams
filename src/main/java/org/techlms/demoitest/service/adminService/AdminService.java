@@ -1,6 +1,8 @@
 package org.techlms.demoitest.service.adminService;
 
 import org.techlms.demoitest.dbconnection.DBConnection;
+//import org.techlms.demoitest.dto.adminDTO.UserCountDTO;
+//import org.techlms.demoitest.dto.adminDTO.UserPercentageDTO;
 import org.techlms.demoitest.model.users.Lecturer;
 import org.techlms.demoitest.model.users.Student;
 import org.techlms.demoitest.model.users.User;
@@ -26,11 +28,11 @@ public class AdminService {
 //        String sql =  "SELECT * FROM UserRoleCounts";
 //        Connection con = DBConnection.getConnection();
 //        try{
-//        PreparedStatement ps = con.prepareStatement(sql);
-//        ResultSet rs = ps.executeQuery();
-//        rs.next();
-//        // ------------------------------------ student , lecturer , admin , tech officer
-//        userCount = new UserCountDTO(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4));
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery();
+//            rs.next();
+//            // ------------------------------------ student , lecturer , admin , tech officer
+//            userCount = new UserCountDTO(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4));
 //
 //        }catch (SQLException e){
 //            e.printStackTrace();
@@ -68,39 +70,39 @@ public class AdminService {
 
 
     public boolean isUserExists(String username){
-      Connection con = DBConnection.getConnection();
-      String sql = "SELECT COUNT(`user_id`) FROM `user` where `username` = ?";
-      try{
-          PreparedStatement ps = con.prepareStatement(sql);
-          ps.setString(1, username);
-          ResultSet rs = ps.executeQuery();
-          rs.next();
-          if(rs.getInt(1) > 0){
-              return true;
-          }
+        Connection con = DBConnection.getConnection();
+        String sql = "SELECT COUNT(`user_id`) FROM `user` where `username` = ?";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            if(rs.getInt(1) > 0){
+                return true;
+            }
 
-      }catch (SQLException e){
-          e.printStackTrace();
-      }
-      return false;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
 
 
     public List<String> getDepartment(){
-       List<String> departments = new ArrayList<>();
-       Connection con = DBConnection.getConnection();
-       try {
-           String sql = "SELECT `dep_code` FROM `department` ;";
-           PreparedStatement ps = con.prepareStatement(sql);
-           ResultSet rs = ps.executeQuery();
-           while(rs.next()){
-               departments.add(rs.getString(1));
-           }
-       } catch (SQLException e) {
-           e.printStackTrace();
-       }
-       return departments;
+        List<String> departments = new ArrayList<>();
+        Connection con = DBConnection.getConnection();
+        try {
+            String sql = "SELECT `dep_code` FROM `department` ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                departments.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return departments;
     }
 
     public List<String> getBatchYears(){
@@ -141,11 +143,9 @@ public class AdminService {
     }
 
 
-    public int createUser(User user){
-        Connection con = DBConnection.getConnection();
+    public int createUser(User user , Connection con){
         String insertTOUserTable = "INSERT INTO `user` (`username`, `name`, `email`, `role`, `contact_no`, `password`, `gender` ,  `user_profile`) VALUES (?,?,?,?,?,?,?,?);";
         try{
-            con.setAutoCommit(false);
 
             //insert user table data
             PreparedStatement ps = con.prepareStatement(insertTOUserTable,PreparedStatement.RETURN_GENERATED_KEYS);
@@ -160,9 +160,7 @@ public class AdminService {
             if(ps.executeUpdate() > 0){
                 //allow to send data to database
                 //print query
-
                 System.out.println(ps);
-                con.commit();
                 try(ResultSet rs = ps.getGeneratedKeys()) {
                     if(rs.next()) {
                         // return created  user id
@@ -171,11 +169,6 @@ public class AdminService {
                 }
             }
         }catch (SQLException e){
-            try {
-                con.rollback();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
             System.out.println(e.getMessage());
         }
 
@@ -186,42 +179,33 @@ public class AdminService {
 
     public boolean createStudent(Student student) {
         Connection con = DBConnection.getConnection();
+
         String sql  = "INSERT INTO `student` (`user_id`, `student_id`, `batch_year`, `department`) VALUES (?,?,?,?);";
 
-//        newUser = new Student(
-//                "blaxdwxx01",
-//                "dineshVip",
-//                "dinesh",
-//                "dinesh77saefewarck@gmail.com",
-//                "0703728309",
-//                "m",
-//                null,
-//                "student",
-//                "tg/2022/1204",
-//                "2022",
-//                "ict");
-        //pass user table data as User model object
-        User user = new User(
-                student.getUserName(),
-                student.getPassword(),
-                student.getName(),
-                student.getEmail(),
-                student.getContactNumber(),
-                student.getGender(),
-                student.getUserProfile(),
-                student.getRole()
-        );
+        try {
+            //stop data pass
+            con.setAutoCommit(false);
+            //pass user table data as User model object
+            User user = new User(
+                    student.getUserName(),
+                    student.getPassword(),
+                    student.getName(),
+                    student.getEmail(),
+                    student.getContactNumber(),
+                    student.getGender(),
+                    student.getUserProfile(),
+                    student.getRole()
+            );
 
-        System.out.println(user);
+            System.out.println(user);
 
-            int userId= createUser(user);
+            int userId = createUser(user, con);
 
-            if( userId!= -100) {
-                try {
-                    con.setAutoCommit(false);
-                    PreparedStatement ps = con.prepareStatement(sql);
+            if (userId != -100) {
+                try (PreparedStatement ps = con.prepareStatement(sql)){
+                    ;
 
-                    //add user id to student id
+                    //add user id to student
                     ps.setInt(1, userId);
                     ps.setString(2, student.getStudentId());
                     ps.setString(3, student.getBranch());
@@ -232,23 +216,17 @@ public class AdminService {
                         con.commit();
                         return true;
                     }
-                }catch (SQLException e){
-                    e.printStackTrace();
-                    try {
-                        con.rollback();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }finally {
-                        try{
-                            con.setAutoCommit(true);
-                        }catch (SQLException ex){
-                            ex.printStackTrace();
-                        }
-                    }
+
+
                 }
-
-
+                // reverse data from database
+                con.rollback();
             }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+
+        }
 
 
         return false;
@@ -258,48 +236,47 @@ public class AdminService {
     public boolean createLecturer(Lecturer lecturer) {
         Connection con = DBConnection.getConnection();
         String sql  = "INSERT INTO lecturer (user_id, lecturer_id, department) VALUES (?,?,?);";
-        //pass user table data as User model object
-        User user = new User(
-                lecturer.getUserName(),
-                lecturer.getPassword(),
-                lecturer.getName(),
-                lecturer.getEmail(),
-                lecturer.getContactNumber(),
-                lecturer.getGender(),
-                lecturer.getUserProfile(),
-                lecturer.getRole()
-        );
+        try {
+            //stop data pass
+            con.setAutoCommit(false);
+            //pass user table data as User model object
+            User user = new User(
+                    lecturer.getUserName(),
+                    lecturer.getPassword(),
+                    lecturer.getName(),
+                    lecturer.getEmail(),
+                    lecturer.getContactNumber(),
+                    lecturer.getGender(),
+                    lecturer.getUserProfile(),
+                    lecturer.getRole()
+            );
 
-        int userId= createUser(user);
-        if( userId!= -100) {
-            try {
-                con.setAutoCommit(false);
-                PreparedStatement ps = con.prepareStatement(sql);
+            System.out.println(user);
 
-                //add user id to lecturer id
-                ps.setInt(1, userId);
-                ps.setString(2,lecturer.getLecturerID());
-                ps.setString(3,lecturer.getDepartment());
+            int userId = createUser(user, con);
 
-                if (ps.executeUpdate() > 0) { // check query execute or not
-                    System.out.println(ps);
-                    con.commit();
-                    return true;
-                }
-            }catch (SQLException e){
-                e.printStackTrace();
-                try {
-                    con.rollback();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }finally {
-                    try{
-                        con.setAutoCommit(true);
-                    }catch (SQLException ex){
-                        ex.printStackTrace();
+            if (userId != -100) {
+                try (PreparedStatement ps = con.prepareStatement(sql)){
+                    ;
+
+                    //add user id to lecturer
+                    ps.setInt(1, userId);
+                    ps.setString(2, lecturer.getLecturerID());
+                    ps.setString(3, lecturer.getDepartment());
+
+                    if (ps.executeUpdate() > 0) { // check query execute or not
+                        System.out.println(ps);
+                        con.commit();
+                        return true;
                     }
+
+
                 }
+                // reverse data from database
+                con.rollback();
             }
+        }catch (SQLException e){
+            e.printStackTrace();
 
 
         }
