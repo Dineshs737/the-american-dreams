@@ -20,9 +20,9 @@ public class AuthService {
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()) {
-                int id = rs.getInt(1);
-                String username = rs.getString(2);
-                String role = rs.getString(3);
+                int id = rs.getInt("user_id");
+                String username = rs.getString("username");
+                String role = rs.getString("role");
                 user = new User(id, username, role);
 
             }

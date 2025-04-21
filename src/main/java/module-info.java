@@ -13,6 +13,7 @@ module org.techlms.demoitest {
     requires static lombok;
     requires java.sql;
     requires com.fasterxml.jackson.core;
+    requires java.desktop;
     opens org.techlms.demoitest to javafx.fxml;
     exports org.techlms.demoitest;
     exports org.techlms.demoitest.util;
@@ -25,6 +26,8 @@ module org.techlms.demoitest {
     opens org.techlms.demoitest.controllers.lecturerControllers to javafx.fxml;
     exports org.techlms.demoitest.controllers.studentControllers to javafx.fxml;
     opens org.techlms.demoitest.controllers.studentControllers to javafx.fxml;
+    exports org.techlms.demoitest.controllers.techOfficerControllers to javafx.fxml;
+    opens org.techlms.demoitest.controllers.techOfficerControllers to javafx.fxml;
 
 
 }
