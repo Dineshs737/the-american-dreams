@@ -42,29 +42,40 @@ public class LoginCon {
                 FXMLLoader fxmlLoader = null;
                 if(SessionManager.getInstance().getRole().equals("student")){
                     fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-ui.fxml"));
-
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
 
                 }
                 else if(SessionManager.getInstance().getRole().equals("admin")){
                     fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/admin-ui-components/admin-home-page.fxml"));
-
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
 
                 }
-                else if(SessionManager.getInstance().getRole().equals("tech officer")){
-                    fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/tech-officer-ui-Components/tech-officer-Home-Page.fxml"));
-
+                else if(SessionManager.getInstance().getRole().equals("technical officer")){
+                    FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/tech-officer-ui-Components/technical-officer.fxml"));
+                    Scene scene = new Scene(fxmlLoader2.load());
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.resizableProperty().setValue(Boolean.FALSE);
+                    stage.setTitle("Technical Officer");
+                    stage.centerOnScreen();
+                    stage.show();
 
                 }
                 else if(SessionManager.getInstance().getRole().equals("lecturer")){
                     fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lechurer-home.fxml"));
-
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
 
                 }
 
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
 
             }catch (Exception e){
                 e.printStackTrace();
