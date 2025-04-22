@@ -4,14 +4,33 @@ A **Student Management System** built using Java to manage student records effic
 
 ---
 
-## Features
+## **🌟 Features**
 
-- **Add New Students**: Add student details including name, ID, age, and course.
-- **View All Students**: Display a list of all students.
-- **Update Student Details**: Edit the details of a student using their ID.
-- **Delete Student Records**: Remove student data permanently.
-- **Search Students**: Find specific students based on various criteria.
-- **Data Persistence**: Save data using file handling or database integration.
+- 📝 **Add New Students**  
+  Add student details, including name, ID, age, and course.
+
+- 👀 **View All Students**  
+  Display a list of all registered students.
+
+- ✏️ **Update Student Details**  
+  Edit student information by searching for their unique ID.
+
+- ❌ **Delete Student Records**  
+  Remove unnecessary student records permanently.
+
+- 🔍 **Search Students**  
+  Find specific students using name, ID, or course as criteria.
+
+- 💾 **Data Persistence**  
+  Save student data securely using file handling or database integration.
+
+
+
+
+
+
+
+
 
 ---
 
@@ -31,8 +50,7 @@ A **Student Management System** built using Java to manage student records effic
    ```bash
    git clone git@github.com:Dineshs737/the-american-dreams.git
    cd the-american-dreams
-   cd demoiTest
-   ```
+   ```   
 
 ---
 
@@ -81,6 +99,30 @@ A **Student Management System** built using Java to manage student records effic
 
 > [!NOTE]
 > A `.env` file is essential for maintaining security, enabling seamless configuration management, and reducing the risk of exposing sensitive information in your project.
+
+
+## **Test User Credentials**
+
+Use the following credentials to log in and test the system:
+
+| **Role**             | **Username**    | **Password**  |
+|-----------------------|-----------------|---------------|
+| **Admin**            | `admin`         | `admin123`    |
+| **Student**          | `student`       | `student123`  |
+| **Lecturer**         | `lecturer`      | `lecturer123` |
+| **Technical Officer**| `tech_officer`  | `tech123`     |
+
+---
+
+> [!NOTE]
+> These credentials are for testing purposes only and should not be used in a final project.
+> Change the passwords regularly or disable these accounts in a live setup for security.
+
+
+
+
+
+
 
 ### Accessing `.env` Variables in Code
 
@@ -320,6 +362,5 @@ Contributions are welcome to improve the project and fix issues. Here are the st
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## Final Note
-
-Thank you for checking out this project! Feel free to explore, use, and contribute. Let's build something amazing together!
+> [!NOTE]
+>Thank you for checking out this project! Feel free to explore, use, and contribute. Let's build something amazing together!
