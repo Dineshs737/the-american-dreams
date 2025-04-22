@@ -36,7 +36,8 @@ A **Student Management System** built using Java to manage student records effic
 
 ---
 
-## Configuration: `.env` File Setup
+> [!IMPORTANT]
+> Configuration: `.env` File Setup
 
 This project uses a `.env` file to store sensitive information like database credentials, API keys, and other configuration settings. The `.env` file ensures that sensitive data is not hard-coded into the project and remains secure.
 
