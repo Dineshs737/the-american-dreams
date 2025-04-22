@@ -39,22 +39,26 @@ public class LoginCon {
 
             // switch user
             try{
-                //FXMLLoader fxmlLoader = null;
+                FXMLLoader fxmlLoader = null;
                 if(SessionManager.getInstance().getRole().equals("student")){
-                    //fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-ui.fxml"));
-
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-ui.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
 
                 }
                 else if(SessionManager.getInstance().getRole().equals("admin")){
-                    //fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/admin-ui-components/admin-home-page.fxml"));
-
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/admin-ui-components/admin-home-page.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
 
                 }
                 else if(SessionManager.getInstance().getRole().equals("technical officer")){
-
-                    System.out.println("ok");
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/tech-officer-ui-Components/technical-officer.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load());
+                    FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/tech-officer-ui-Components/technical-officer.fxml"));
+                    Scene scene = new Scene(fxmlLoader2.load());
                     Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     stage.setScene(scene);
                     stage.resizableProperty().setValue(Boolean.FALSE);
@@ -62,19 +66,16 @@ public class LoginCon {
                     stage.centerOnScreen();
                     stage.show();
 
-
                 }
                 else if(SessionManager.getInstance().getRole().equals("lecturer")){
-                    //fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lechurer-home.fxml"));
-
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lechurer-home.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
 
                 }
 
-//                assert fxmlLoader != null;
-//                Scene scene = new Scene(fxmlLoader.load());
-//                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-//                stage.setScene(scene);
-//                stage.show();
 
             }catch (Exception e){
                 e.printStackTrace();
