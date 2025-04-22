@@ -81,6 +81,7 @@ A **Student Management System** built using Java to manage student records effic
 
 > [!NOTE]
 > A `.env` file is essential for maintaining security, enabling seamless configuration management, and reducing the risk of exposing sensitive information in your project.
+
 ### Accessing `.env` Variables in Code
 
 The project uses the [dotenv-java](https://github.com/cdimascio/dotenv-java) library to load environment variables from the `.env` file. Here's how it works:
