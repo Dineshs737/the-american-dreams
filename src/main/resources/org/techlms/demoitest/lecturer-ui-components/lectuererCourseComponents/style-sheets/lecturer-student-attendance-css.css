@@ -1,0 +1,46 @@
+.choice-box-container{
+-fx-background-color: #102E50;
+
+}
+.choice-box{
+    -fx-background-color: #F1EFEC;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px
+
+}
+.choice-box-label{
+    -fx-text-fill: #F1EFEC;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-padding: 10px;
+
+}
+
+.table-view .column-header{
+    -fx-background-color: #D4C9BE;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.slection-menu-card{
+    -fx-border-color: #D4C9BE;
+    -fx-border-width: 0px 0px 1px 0px;
+
+}
+
+
+.back-button-container{
+    -fx-background-color: #EBEAFF;
+}
+
+.back-button{
+    -fx-padding: 5px 30px;
+    -fx-background-color: #2D336B;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px 5px 5px 10px;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold
+}

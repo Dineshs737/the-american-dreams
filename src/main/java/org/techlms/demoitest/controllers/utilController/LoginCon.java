@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.techlms.demoitest.dto.utilDTO.LoginDTO;
 import org.techlms.demoitest.service.utilService.AuthService;
-import org.techlms.demoitest.users.User;
+import org.techlms.demoitest.model.users.User;
 import org.techlms.demoitest.util.SessionManager;
 
 public class LoginCon {
@@ -35,7 +35,7 @@ public class LoginCon {
 
         if (user != null) {
             // Set session
-            SessionManager.getInstance().setUser(user.getUser_id(), user.getUser_name(), user.getRole());
+            SessionManager.getInstance().setUser(user.getUserID(), user.getUserName(), user.getRole());
 
             // switch user
             try{

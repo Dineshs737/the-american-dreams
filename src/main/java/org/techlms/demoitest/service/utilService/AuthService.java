@@ -2,7 +2,7 @@ package org.techlms.demoitest.service.utilService;
 
 import org.techlms.demoitest.dbconnection.DBConnection;
 import org.techlms.demoitest.dto.utilDTO.LoginDTO;
-import org.techlms.demoitest.users.User;
+import org.techlms.demoitest.model.users.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,0 +1,27 @@
+.scroll-bar{
+    -fx-background-color: #F6F1DE;
+}
+
+
+.student-info-card{
+    -fx-background-color: #09122C;
+    -fx-padding: 20px;
+    -fx-background-radius: 15px 30px;
+}
+.student-info-card-container{
+    -fx-padding: 20px 20px;
+}
+.student-info-card-label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+
+
+}
+.student-info-text-input{
+    -fx-background-color: F1EFEC;
+    -fx-padding: 5 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: Black;
+    -fx-font-size: 14px;
+}
