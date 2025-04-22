@@ -15,12 +15,13 @@ A **Student Management System** built using Java to manage student records effic
 
 ---
 
-## Requirements
+> [!IMPORTANT]
+> Ensure you have the following tools installed before proceeding:
 
-1. **Java Development Kit (JDK)**: Version 17 or higher.
+1. **Java Development Kit (JDK)**: Version 22.0.2
 2. **Maven**: For dependency management and project building.
 3. **IntelliJ IDEA** or any preferred IDE.
-4. **MySQL** (optional): For database-backed data storage.
+4. **MySQL**: For database-backed data storage.
 
 ---
 
