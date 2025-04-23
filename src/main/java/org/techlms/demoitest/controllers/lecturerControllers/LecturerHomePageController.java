@@ -12,19 +12,27 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.techlms.demoitest.model.course.Course;
+import org.techlms.demoitest.model.users.User;
 import org.techlms.demoitest.service.lecturerService.LecturerCourseService;
 import org.techlms.demoitest.util.SessionManager;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 // set
 public class LecturerHomePageController {
     @FXML
     private FlowPane coursesContainer;
+
+    @FXML
+    private Circle userprofile;
 
     @FXML
     private Label homeLabel;
@@ -44,6 +52,7 @@ public class LecturerHomePageController {
             System.out.println(course.getCourseCode());
             coursesContainer.getChildren().add(createCourseCard(course));
         }
+        loadUserProfile();
     }
 
     // open Course Details
@@ -124,33 +133,12 @@ public class LecturerHomePageController {
     }
 
     @FXML
-    public void switchTimeTable() {
-        System.out.println("Switch TimeTable Button clicked");
-    }
-
-    @FXML
-    public void switchGrades() {
-
-        FXMLLoader fxmlLoader = null;
-        try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-marks.fxml"));
-            Parent gradesPage = fxmlLoader.load();
-            contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(gradesPage);
-            System.out.println("Grades Page");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @FXML
     public void switchNotes() {
         FXMLLoader fxmlLoader = null;
         try{
             fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/util/user-notices.fxml"));
             Parent notice = fxmlLoader.load();
+            VBox.setVgrow(notice, Priority.ALWAYS);
             contentContainer.getChildren().clear();
             contentContainer.getChildren().add(notice);
             System.out.println("Notes Page");
@@ -176,24 +164,7 @@ public class LecturerHomePageController {
         }
     }
 
-    // switch attendance page//
-    @FXML
-    public void switchAttendance() {
 
-        FXMLLoader fxmlLoader = null;
-        try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-attance.fxml"));
-            Parent attendancePage = fxmlLoader.load();
-            contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
-
-            System.out.println("Attendance Page Loaded");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     @FXML
     public void switchProfile() {
@@ -234,7 +205,33 @@ public class LecturerHomePageController {
 
     }
 
-    public void switchStudent(MouseEvent mouseEvent) {
-        System.out.println("Switch Student Button clicked");
+    private void loadUserProfile(){
+        SessionManager sessionManager = SessionManager.getInstance();
+        System.out.println(sessionManager);
+
+        userprofile.setCenterX(150);
+        userprofile.setCenterY(150);
+//        userprofile.profile().
+
+        byte[] userProfileImage = User.getUserProfileByUserName(sessionManager.getUsername());
+        System.out.println("userProfileImage: " + sessionManager.getUsername());
+        if (userProfileImage != null) {
+            InputStream inputStream = new ByteArrayInputStream(userProfileImage);
+            Image image = new Image(inputStream , 100, 100, false, true);
+            userprofile.setFill(new ImagePattern(image));
+        }else {
+
+            Image image = new Image(
+                    this.getClass().getResourceAsStream("/org/techlms/demoitest/application-images/util/10337609.png"),
+                    100, // Desired width of the image
+                    100, // Desired height of the image
+                    false, // Preserve aspect ratio
+                    true   // Smooth scaling
+            );
+
+// Set the image as a pattern for the circle
+            userprofile.setFill(new ImagePattern(image));
+        }
+
     }
 }

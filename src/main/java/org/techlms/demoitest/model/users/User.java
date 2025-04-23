@@ -1,5 +1,11 @@
 package org.techlms.demoitest.model.users;
 
+import org.techlms.demoitest.dbconnection.DBConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class User{
@@ -145,5 +151,22 @@ public class User{
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", userProfile=" + Arrays.toString(userProfile) +
                 '}';
+    }
+
+    public static byte[] getUserProfileByUserName(String username) {
+        Connection con = DBConnection.getConnection();
+        String sql = "select user_profile from user where username = ?";
+        byte[] profile = null;
+        try(PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setString(1,username);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                profile = rs.getBytes(1);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return profile;
     }
 }
