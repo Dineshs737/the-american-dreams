@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #adffaf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.tech-officer-ui-Components.ShowTechnicalOfficerStudentMedical">
+   <children>
+      <Label layoutX="245.0" layoutY="37.0" prefHeight="40.0" prefWidth="138.0" text="Select Batch">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="398.0" layoutY="37.0" prefHeight="40.0" prefWidth="346.0" />
+      <TableView layoutX="14.0" layoutY="150.0" prefHeight="530.0" prefWidth="975.0">
+        <columns>
+          <TableColumn prefWidth="167.20004272460938" text="Medical Number" />
+          <TableColumn prefWidth="152.79998779296875" text="Student ID" />
+            <TableColumn prefWidth="197.60003662109375" text="Student Name" />
+            <TableColumn prefWidth="138.39990234375" text="Batch" />
+            <TableColumn prefWidth="164.0" text="Medical Start Date" />
+            <TableColumn prefWidth="158.39990234375" text="Medical" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

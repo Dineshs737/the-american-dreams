@@ -10,6 +10,13 @@ public class Student extends User {
     private String department;
 
 
+    public Student(String userName, String password, String name, String email, String contactNumber, String gender, byte[] userProfile, String role, String studentId, String branch, String department) {
+        super(userName, password, name, email, contactNumber, gender, userProfile, role);
+        this.studentId = studentId;
+        this.branch = branch;
+        this.department = department;
+    }
+
     public Student(String userName, String password, String name, String email, String contactNumber, String role, String gender, String dateOfBirth, byte[] userProfile, String studentId, String branch, String currentSemester, String department) {
         super(userName, password, name, email, contactNumber, role, gender, dateOfBirth, userProfile);
         this.studentId = studentId;
