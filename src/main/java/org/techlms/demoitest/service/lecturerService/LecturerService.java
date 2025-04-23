@@ -180,7 +180,6 @@ public class LecturerService implements GetStudents {
     }
 
 
-
     public List<String> getCourseMaterial(String courseCode, String lectureId){
         List<String> courseMaterialTitle = new ArrayList<String>();
         Connection con = DBConnection.getConnection();
@@ -313,4 +312,5 @@ public class LecturerService implements GetStudents {
         return courseMaterialId;
 
     }
+
 }
