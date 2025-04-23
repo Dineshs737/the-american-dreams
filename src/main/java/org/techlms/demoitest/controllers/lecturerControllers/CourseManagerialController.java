@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -113,28 +112,20 @@ public class CourseManagerialController implements Initializable {
         }
     }
 
-    @FXML
-    void switchToEligibilityPage(MouseEvent event) {
-        // Navigate to eligibility page logic here
-    }
 
-    @FXML
-    void switchToUndergraduateMarksPage(MouseEvent event) {
-        // Navigate to undergraduate marks page logic here
-    }
 
-    @FXML
-    void switchToUndergraduatesPage(MouseEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
-            Parent undergraduatePage = fxmlLoader.load();
-            contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(undergraduatePage);
-        } catch (IOException e) {
-            System.err.println("Error loading undergraduates page: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+//    @FXML
+//    void switchToUndergraduatesPage(MouseEvent event) {
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
+//            Parent undergraduatePage = fxmlLoader.load();
+//            contentContainer.getChildren().clear();
+//            contentContainer.getChildren().add(undergraduatePage);
+//        } catch (IOException e) {
+//            System.err.println("Error loading undergraduates page: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 
     @FXML
     void createCourseMaterial(MouseEvent event) {
@@ -178,14 +169,6 @@ public class CourseManagerialController implements Initializable {
         }
     }
 
-    public void switchUserUpdatePage(MouseEvent event) {
-    }
-
-    public void switchToEligiblity(MouseEvent event) {
-    }
-
-    public void switchGetAllUsersPage(MouseEvent event) {
-    }
 
     public void switchtoUndergaduatesMedicalPage(MouseEvent event) {
 
@@ -215,12 +198,6 @@ public class CourseManagerialController implements Initializable {
 
     }
 
-    public void switchDeletePage(MouseEvent event) {
-    }
-
-    public void undergaduatesMarks(MouseEvent event) {
-    }
-
 
     @FXML
     void switchUndergraduatesPage(MouseEvent event) {
@@ -228,22 +205,6 @@ public class CourseManagerialController implements Initializable {
         FXMLLoader fxmlLoader = null;
         try {
             try {
-
-
-//                fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
-//                Parent undergraduatePage = fxmlLoader.load();
-//
-//// Add to a VBox for layout management
-//                VBox parentVBox = new VBox();
-//                VBox.setVgrow(undergraduatePage, Priority.ALWAYS);
-//                parentVBox.getChildren().add(undergraduatePage);
-//                parentVBox.setFillWidth(true);
-//                parentVBox.setPrefWidth(Double.MAX_VALUE);
-//                parentVBox.setPrefHeight(Double.MAX_VALUE);
-
-// Add the VBox to the main container
-//                contentContainer.getChildren().clear();
-//                contentContainer.getChildren().add(undergraduatePage);
                 fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
                 Parent undergraduatePage = fxmlLoader.load();
 
@@ -268,4 +229,82 @@ public class CourseManagerialController implements Initializable {
         }catch (Exception e) {
             e.printStackTrace();
         }
-}}
+}
+
+
+    @FXML
+    void deleteCourseMaterial(MouseEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/delete-course-material.fxml"));
+            Parent courseMaterialPage = fxmlLoader.load();
+            Stage popUpStage = new Stage();
+            popUpStage.setTitle("Create Course Material");
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.initOwner(contentContainer.getScene().getWindow());
+            popUpStage.setScene(new Scene(courseMaterialPage));
+
+            popUpStage.setOnHiding(windowEvent -> {
+                System.out.println("Pop-up closed. Reloading main content...");
+                reloadMainContent(); // Call the method to reload main content
+            });
+
+            popUpStage.showAndWait();
+        } catch (IOException e) {
+            System.err.println("Error loading course material creation page: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @FXML
+    void switchToEligibility(MouseEvent event) {
+
+    }
+
+
+    @FXML
+    void switchUserUpdatePage(MouseEvent event) {
+
+    }
+
+    @FXML
+    void switchtoUndergraduatesMedicalPage(MouseEvent event) {
+
+    }
+
+    @FXML
+    void undergraduatesMarks(MouseEvent event) {
+
+    }
+
+    @FXML
+    void updateCourseMaterial(MouseEvent event) {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/update-course-material.fxml"));
+            Parent courseMaterialPage = fxmlLoader.load();
+            Stage popUpStage = new Stage();
+            popUpStage.setTitle("Create Course Material");
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.initOwner(contentContainer.getScene().getWindow());
+            popUpStage.setScene(new Scene(courseMaterialPage));
+
+            popUpStage.setOnHiding(windowEvent -> {
+                System.out.println("Pop-up closed. Reloading main content...");
+                reloadMainContent(); // Call the method to reload main content
+            });
+
+            popUpStage.showAndWait();
+        } catch (IOException e) {
+            System.err.println("Error loading course material creation page: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+}
