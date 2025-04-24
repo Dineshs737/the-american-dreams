@@ -57,13 +57,17 @@ public class LoginCon {
 
                 }
                 else if(SessionManager.getInstance().getRole().equals("technical officer")){
-                    FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/tech-officer-ui-Components/technical-officer.fxml"));
-                    Scene scene = new Scene(fxmlLoader2.load());
+//                    FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/tech-officer-ui-Components/tech-officer-Home-Page.fxml"));
+//                    Scene scene = new Scene(fxmlLoader2.load());
+//                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+//                    stage.setScene(scene);
+//                    stage.setTitle("Technical Officer");
+//                    stage.centerOnScreen();
+//                    stage.show();
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/tech-officer-ui-Components/tech-officer-Home-Page.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
                     Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     stage.setScene(scene);
-                    stage.resizableProperty().setValue(Boolean.FALSE);
-                    stage.setTitle("Technical Officer");
-                    stage.centerOnScreen();
                     stage.show();
 
                 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="container" alignment="CENTER" focusTraversable="true" spacing="30.0" styleClass="choice-box-container" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.techOfficerControllers.StudentUpdateMedicalPopController">
+    <children>
+        <VBox alignment="CENTER" fillWidth="false" spacing="10.0">
+            <children>
+                <Label styleClass="medical-label" text="Student Id" />
+                <TextField fx:id="studentId" prefWidth="400.0" styleClass="student-id-input-field" />
+            </children>
+        </VBox>
+
+        <HBox alignment="CENTER">
+            <children>
+                <VBox spacing="10.0">
+                    <children>
+                        <Label styleClass="medical-label" text="Medical PDF" />
+                        <Button mnemonicParsing="false" onAction="#selectMedical" prefWidth="400.0" styleClass="select-medical-button" text="Select your medical PDF" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER">
+            <children>
+                <VBox spacing="10.0">
+                    <children>
+                        <Label styleClass="medical-label" text="Medical Start Date" />
+                        <DatePicker fx:id="medicalStartDate" prefWidth="400.0" styleClass="medical-date-picker-container" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER">
+            <children>
+                <VBox spacing="10.0">
+                    <children>
+                        <Label styleClass="medical-label" text="Medical End Date" />
+                        <DatePicker fx:id="medicalEndDate" prefWidth="400.0" styleClass="medical-date-picker-container" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER">
+            <children>
+                <VBox spacing="10.0">
+                    <children>
+                        <Label styleClass="medical-label" text="Select batch" />
+                        <ChoiceBox fx:id="selectBatch" prefWidth="400.0" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" onAction="#updatedMedical" styleClass="medical-submit-button" text="Update" />
+            </children>
+            <VBox.margin>
+                <Insets bottom="30.0" top="10.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+    <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <stylesheets>
+      <URL value="@../submit-student-medical-css.css" />
+      <URL value="@../tech-officer-student-attendance-css.css" />
+   </stylesheets>
+</VBox>

@@ -1,5 +1,7 @@
 package org.techlms.demoitest.model.util;
 
+import java.util.Arrays;
+
 public class Medical {
 
     /*********
@@ -24,7 +26,26 @@ public class Medical {
     private String medicalStartDate;
     private String medicalEndDate;
     private String batch;
+    private String department;
 
+    public Medical(int medicalId, String studentId, String batch, String department, String medicalStartDate, String medicalEndDate, byte[] medicalData) {
+        this.medicalId = medicalId;
+        this.studentId = studentId;
+        this.batch = batch;
+        this.department = department;
+        this.medicalStartDate = medicalStartDate;
+        this.medicalEndDate = medicalEndDate;
+        this.medicalData = medicalData;
+    }
+
+    public Medical(String studentId, String batch, String department, String medicalStartDate, String medicalEndDate, byte[] medicalData) {
+        this.studentId = studentId;
+        this.batch = batch;
+        this.department = department;
+        this.medicalStartDate = medicalStartDate;
+        this.medicalEndDate = medicalEndDate;
+        this.medicalData = medicalData;
+    }
 
     public Medical(int medicalId, String studentId, String batch, String medicalStartDate, String medicalEndDate, byte[] medicalData) {
         this.medicalId = medicalId;
@@ -35,15 +56,13 @@ public class Medical {
         this.medicalData = medicalData;
     }
 
-
-    public Medical(String studentId, String batch, String medicalStartDate, String medicalEndDate, byte[] medicalData) {
-        this.studentId = studentId;
-        this.batch = batch;
-        this.medicalStartDate = medicalStartDate;
-        this.medicalEndDate = medicalEndDate;
-        this.medicalData = medicalData;
+    public String getDepartment() {
+        return department;
     }
 
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public int getMedicalId() {
         return medicalId;
@@ -91,5 +110,19 @@ public class Medical {
 
     public void setBatch(String batch) {
         this.batch = batch;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Medical{" +
+                "medicalId=" + medicalId +
+                ", studentId='" + studentId + '\'' +
+                ", medicalData=" + Arrays.toString(medicalData) +
+                ", medicalStartDate='" + medicalStartDate + '\'' +
+                ", medicalEndDate='" + medicalEndDate + '\'' +
+                ", batch='" + batch + '\'' +
+                ", department='" + department + '\'' +
+                '}';
     }
 }
