@@ -76,8 +76,8 @@ public class LecturerUploadCourseMaterialController {
 
             // Create CourseMaterial object
             CourseMaterial courseMaterial = new CourseMaterial(
-                    "l0001", // Replace with dynamic lecturer ID
-                    "ict2113", // Replace with dynamic course ID
+                    "l0001",
+                    "ict2113",
                     courseTitle.getText(),
                     fileBytes
             );

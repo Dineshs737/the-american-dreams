@@ -39,7 +39,7 @@
                                        </HBox>
                                    </children>
                                </VBox>
-                               <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchUserUpdatePage" styleClass="admin-user-page-card">
+                               <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" styleClass="admin-user-page-card">
                                    <children>
                                        <HBox>
                                            <children>
@@ -52,7 +52,7 @@
                                                        </ImageView>
                                                    </children>
                                                </VBox>
-                                               <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEligiblity">
+                                               <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchToEligibility">
                                                    <children>
                                                        <Label styleClass="admin-user-page-card-label" text="Exam Eligibility" />
                                                    </children>
@@ -61,7 +61,7 @@
                                        </HBox>
                                    </children>
                                </VBox>
-                               <VBox alignment="CENTER" layoutX="320.0" layoutY="10.0" onMouseClicked="#switchGetAllUsersPage" styleClass="admin-user-page-card">
+                               <VBox alignment="CENTER" layoutX="320.0" layoutY="10.0" styleClass="admin-user-page-card">
                                    <children>
                                        <HBox>
                                            <children>
@@ -74,7 +74,7 @@
                                                        </ImageView>
                                                    </children>
                                                </VBox>
-                                               <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchtoUndergaduatesMedicalPage">
+                                               <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchtoUndergraduatesMedicalPage">
                                                    <children>
                                                        <Label styleClass="admin-user-page-card-label" text="Undergraduates Medical" />
                                                    </children>
@@ -83,7 +83,7 @@
                                        </HBox>
                                    </children>
                                </VBox>
-                               <VBox alignment="CENTER" layoutX="630.0" layoutY="10.0" onMouseClicked="#switchDeletePage" styleClass="admin-user-page-card">
+                               <VBox alignment="CENTER" layoutX="630.0" layoutY="10.0" styleClass="admin-user-page-card">
                                    <children>
                                        <HBox>
                                            <children>
@@ -98,7 +98,7 @@
                                                </VBox>
                                                <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
                                                    <children>
-                                                       <Label onMouseClicked="#undergaduatesMarks" styleClass="admin-user-page-card-label" text="Undergraduats Marks" />
+                                                       <Label onMouseClicked="#undergraduatesMarks" styleClass="admin-user-page-card-label" text="Undergraduats Marks" />
                                                    </children>
                                                </VBox>
                                            </children>
@@ -164,7 +164,7 @@
                                                 </HBox>
                                              </children>
                                           </VBox>
-                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#switchUndergraduatesPage" styleClass="admin-user-page-card">
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#updateCourseMaterial" styleClass="admin-user-page-card">
                                              <children>
                                                 <HBox>
                                                    <children>
@@ -186,7 +186,7 @@
                                                 </HBox>
                                              </children>
                                           </VBox>
-                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="150.0" onMouseClicked="#switchUndergraduatesPage" styleClass="admin-user-page-card">
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="150.0" onMouseClicked="#deleteCourseMaterial" styleClass="admin-user-page-card">
                                              <children>
                                                 <HBox>
                                                    <children>
