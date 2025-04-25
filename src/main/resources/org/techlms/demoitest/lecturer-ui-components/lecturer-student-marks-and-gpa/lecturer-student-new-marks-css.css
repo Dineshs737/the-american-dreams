@@ -1,0 +1,30 @@
+.student-new-grads-page-right-container{
+    -fx-background-color: #213448;
+    -fx-padding: 10px;
+}
+
+.student-new-grads-page-right-container-label{
+    -fx-text-fill: #D4C9BE;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.lecturer-marks-page-button{
+    -fx-background-color: #D4C9BE;
+    -fx-padding: 10px;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-radius: 10px;
+}
+
+.lecturer-marks-page-button:hover{
+    -fx-background-color: #FBE4D6;
+
+}
+
+.back-button{
+    -fx-background-color: #D4C9BE;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 30px;
+    -fx-font-weight: bold;
+}

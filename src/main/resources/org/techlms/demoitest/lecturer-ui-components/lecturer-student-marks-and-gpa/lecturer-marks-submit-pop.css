@@ -1,0 +1,101 @@
+.update-student-medical-banner{
+    -fx-text-fill: #F1EFEC;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-padding: 20px;
+}
+
+.update-student-medical-banner-label-container{
+
+    -fx-border-color: #D4C9BE;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.choice-box-container{
+    -fx-background-color: #3E3F5B;
+    -fx-background-radius:  1px 1px;
+
+}
+.container{
+    -fx-background-color: transparent;
+    -fx-background-radius: 15px;
+}
+.student-id-input-field{
+    -fx-background-color: #F1EFEC;
+    -fx-background-radius: 15px ;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-padding: 10px 30px;
+}
+
+.medical-label{
+    -fx-text-fill: #F1EFEC;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.select-medical-button{
+    -fx-background-color: #F1EFEC;
+    -fx-background-radius: 15px ;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-padding: 10px;
+
+}
+
+.medical-date-picker-container {
+    -fx-base: #F1EFEC;
+    /*-fx-fill: red;*/
+    -fx-background-color: #F1EFEC;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-padding: 10px;
+    /*-fx-border-color: #F1EFEC;*/
+    -fx-border-width: 0px 0px 0px 0px;
+    -fx-background-radius: 15px;
+
+
+}
+
+.choice-box{
+    -fx-background-color: #F1EFEC;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-padding: 8px 10px;
+    -fx-background-radius: 15px;
+
+}
+
+.medical-submit-button{
+    -fx-background-color: #F1EFEC;
+    -fx-background-radius: 15px ;
+    -fx-padding: 10px 50px;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+.choice-box-label{
+    -fx-text-fill: #F1EFEC;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-padding: 10px;
+
+}
+
+.table-view .column-header{
+    -fx-background-color: #D4C9BE;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.slection-menu-card{
+    -fx-border-color: #D4C9BE;
+    -fx-border-width: 0px 0px 1px 0px;
+
+}
+
+
