@@ -9,11 +9,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.techlms.demoitest.controllers.lecturerControllers.marks.LecturerStudentMarksPageController;
 import org.techlms.demoitest.model.course.CourseMaterial;
 import org.techlms.demoitest.service.lecturerService.LecturerService;
 
@@ -34,7 +37,7 @@ public class CourseManagerialController implements Initializable {
     private VBox userDataCard;
 
     @FXML
-    private VBox contentContainer;
+    public VBox contentContainer;
 
     @FXML
     private TableView<CourseMaterial> courseMaterialTable;
@@ -114,18 +117,6 @@ public class CourseManagerialController implements Initializable {
 
 
 
-//    @FXML
-//    void switchToUndergraduatesPage(MouseEvent event) {
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lectuererCourseComponents/show-all-student-page.fxml"));
-//            Parent undergraduatePage = fxmlLoader.load();
-//            contentContainer.getChildren().clear();
-//            contentContainer.getChildren().add(undergraduatePage);
-//        } catch (IOException e) {
-//            System.err.println("Error loading undergraduates page: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
 
     @FXML
     void createCourseMaterial(MouseEvent event) {
@@ -275,8 +266,27 @@ public class CourseManagerialController implements Initializable {
 
     @FXML
     void undergraduatesMarks(MouseEvent event) {
+        FXMLLoader fxmlLoader = null;
+        contentContainer.getChildren().clear(); // Clear previous content
+        try {
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lecturer-student-marks-and-gpa/lecturer-student-new-marks-ui-page.fxml"));
+            Parent studentMarks = fxmlLoader.load();
 
+            LecturerStudentMarksPageController studentMarksController = fxmlLoader.getController();
+            studentMarksController.setCourseManagerialController(this);
+
+            VBox.setVgrow(studentMarks, Priority.ALWAYS);
+
+            // Add the loaded component to the container
+            contentContainer.getChildren().add(studentMarks);
+            VBox.setVgrow(contentContainer, Priority.ALWAYS);
+        } catch (IOException e) {
+            System.err.println("Error loading undergraduate marks page: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+
+
 
     @FXML
     void updateCourseMaterial(MouseEvent event) {
