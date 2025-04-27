@@ -1,0 +1,40 @@
+.admin-user-find-container{
+    -fx-background-color: #3E3F5B;
+    -fx-background-radius:0;
+    -fx-padding: 15px;
+
+}
+.admin-user-find-label{
+    -fx-text-fill: #F6F1DE;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.find-button{
+    -fx-background-color: #3674B5;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 8px 30px;
+    -fx-background-radius: 10px 10px;
+    -fx-font-weight: bold;
+}
+
+.choice-box{
+    -fx-background-color: #F1EFEC;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-padding: 5px ;
+    -fx-background-radius: 10px;
+
+}
+
+.text-field{
+    -fx-background-color: #F1EFEC;
+    -fx-padding: 10px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+
+
+}
+

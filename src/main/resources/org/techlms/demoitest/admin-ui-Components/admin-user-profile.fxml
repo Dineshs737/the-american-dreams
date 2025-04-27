@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox fx:id="profileMainContainer" alignment="CENTER" fillWidth="false" spacing="50.0" styleClass="profile-container" stylesheets="@../student-ui-components/student-user-profile.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.adminControllers.AdminUserProfileController">
+   <!-- User Profile Picture -->
+   <HBox alignment="CENTER" fillHeight="false" VBox.vgrow="NEVER">
+      <children>
+         <VBox alignment="CENTER" spacing="30.0">
+            <children>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Circle fx:id="profilePicture" fill="#3d4d5c" onMouseClicked="#selectProfileImage" radius="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="edit-icon">
+                        <image>
+                           <Image url="@../application-images/user-profile-icon/edit-icon.png" />
+                        </image>
+                     </ImageView>
+                  </children>
+                  <padding>
+                     <Insets left="50.0" />
+                  </padding>
+               </HBox>
+               <HBox alignment="CENTER">
+                  <children>
+                     <TextField fx:id="adminName" prefWidth="300.0" styleClass="nameContainer" />
+                     <ImageView  fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../application-images/user-profile-icon/edit-icon.png" />
+                        </image>
+                     </ImageView>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   <HBox spacing="40.0">
+      <children>
+      
+         <!-- Profile Information Fields -->
+         <VBox alignment="CENTER" spacing="20.0">
+            <children>
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="User name" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="userName" editable="false" prefWidth="500.0" promptText="User Name" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../application-images/user-profile-icon/edit-icon.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Contact Number" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="phoneNumber" editable="false" prefWidth="500.0" promptText="Phone number" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="edit-icon">
+                              <image>
+                                 <Image url="@../application-images/user-profile-icon/edit-icon.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Gender" />
+                     <HBox>
+                        <children>
+                           <ChoiceBox fx:id="gender" prefWidth="500.0">
+                              <padding>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              </padding>
+                           </ChoiceBox>
+                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="edit-icon">
+                              <image>
+                                 <Image url="@../application-images/user-profile-icon/edit-icon.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Address" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="address" editable="false" prefWidth="500.0" promptText="Address" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="edit-icon">
+                              <image>
+                                 <Image url="@../application-images/user-profile-icon/edit-icon.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Email" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="email" editable="false" prefWidth="500.0" promptText="Email" scaleShape="false" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="edit-icon">
+                              <image>
+                                 <Image url="@../application-images/user-profile-icon/edit-icon.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <!-- Update Button -->
+               <HBox fx:id="buttonEditCard" alignment="CENTER">
+                  <VBox.margin>
+                     <Insets bottom="30.0" />
+                  </VBox.margin>
+                  <padding>
+                     <Insets top="15.0" />
+                  </padding>
+               </HBox>
+            </children>
+         </VBox>
+         <VBox spacing="20.0">
+            <children>
+               <VBox spacing="20.0">
+                  <children>
+                     <Label fx:id="currentUserIDLabel" styleClass="user-profile-input-label" text="Admin ID" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="techId" editable="false" prefWidth="500.0" promptText="Student ID" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../application-images/user-profile-icon/edit-icon.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   <VBox>
+      <children>
+         <HBox fx:id="profilePageEditButtonContainer" alignment="CENTER" VBox.vgrow="NEVER" />
+      </children>
+   </VBox>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</VBox>

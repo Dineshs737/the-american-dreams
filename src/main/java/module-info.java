@@ -34,6 +34,22 @@ module org.techlms.demoitest {
     exports org.techlms.demoitest.controllers.techOfficerControllers.attendanceController to javafx.fxml;
     opens org.techlms.demoitest.controllers.lecturerControllers.marks to javafx.fxml;
     exports  org.techlms.demoitest.controllers.lecturerControllers.marks to javafx.fxml;
+    opens org.techlms.demoitest.controllers.adminControllers.notice to javafx.fxml;
+    exports org.techlms.demoitest.controllers.adminControllers.notice to javafx.fxml;
+
+    opens  org.techlms.demoitest.controllers.adminControllers.course to javafx.fxml;
+    exports org.techlms.demoitest.controllers.adminControllers.course to javafx.fxml;
+
+
+    opens org.techlms.demoitest.controllers.adminControllers.newUIUserManagementControllers.adminUpdateUser to javafx.fxml;
+    exports org.techlms.demoitest.controllers.adminControllers.newUIUserManagementControllers.adminUpdateUser to javafx.fxml;
+    opens org.techlms.demoitest.controllers.adminControllers.newUIUserManagementControllers.adminCreateUser to javafx.fxml;
+    exports org.techlms.demoitest.controllers.adminControllers.newUIUserManagementControllers.adminCreateUser to javafx.fxml;
+
+
+    opens org.techlms.demoitest.controllers.adminControllers.userManagement to javafx.fxml;
+    exports org.techlms.demoitest.controllers.adminControllers.userManagement to javafx.fxml;
+
 
 
 }

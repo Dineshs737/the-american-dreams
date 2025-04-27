@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="container" focusTraversable="true" styleClass="user-create-pop-card" stylesheets="@user-create-profile.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.adminControllers.userManagement.UserUpdateController">
+    <children>
+        <VBox cacheShape="false" centerShape="false" focusTraversable="true" scaleShape="false" styleClass="user-create-pop-card">
+            <children>
+                <!-- Select User Profile -->
+                <VBox alignment="CENTER" styleClass="child-label">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                    </VBox.margin>
+                    <children>
+                        <VBox alignment="CENTER" styleClass="profile-card">
+                            <children>
+                                <HBox alignment="CENTER">
+                                    <children>
+                                        <Button fx:id="userProfile" mnemonicParsing="false" onAction="#selectUserProfile" styleClass="user-create-select-image-button" text="Select user profile" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- User Details Form -->
+                <VBox alignment="CENTER" spacing="5.0" styleClass="child-label">
+                    <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </VBox.margin>
+                    <children>
+
+                              <!-- Role -->
+                        <HBox alignment="CENTER">
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Label styleClass="user-create-label" text="Role">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                                        <ChoiceBox fx:id="selectRole" accessibleText="select user role" prefWidth="400.0" styleClass="user-select-box">
+                                            <padding>
+                                                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                            </padding>
+                                        </ChoiceBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <!-- Username -->
+                        <HBox alignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Label styleClass="user-create-label" text="User name">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                                        <TextField fx:id="username" prefWidth="400.0" promptText="User name" styleClass="user-create-input-box">
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                            </padding>
+                                        </TextField>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                              <!-- Password -->
+                        <HBox alignment="CENTER">
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Label styleClass="user-create-label" text="User password">
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </Label>
+                                        <TextField fx:id="password" prefWidth="400.0" promptText="User password" styleClass="user-create-input-box">
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                            </padding>
+                                        </TextField>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                              <!-- Phone Number -->
+                        <HBox alignment="CENTER">
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Label styleClass="user-create-label" text="Contact number">
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </Label>
+                                        <TextField fx:id="phoneNumber" prefWidth="400.0" promptText="Phone number" styleClass="user-create-input-box">
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                            </padding>
+                                        </TextField>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                              <!-- Gender -->
+                        <HBox alignment="CENTER">
+                            <children>
+                                <VBox styleClass="user-create-label">
+                                    <children>
+                                        <Label styleClass="user-create-label" text="Gender">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="gender" prefWidth="400.0" styleClass="user-select-box" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                              <!-- Address -->
+                        <HBox alignment="CENTER">
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Label styleClass="user-create-label" text="Address" />
+                                        <TextField fx:id="address" prefWidth="400.0" promptText="Address" styleClass="user-create-input-box">
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                            </padding>
+                                        </TextField>
+                                    </children>
+                           <HBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </HBox.margin>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                              <!-- Email -->
+                        <HBox alignment="CENTER">
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Label styleClass="user-create-label" text="Email">
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                                        <TextField fx:id="email" prefWidth="400.0" promptText="Email" styleClass="user-create-input-box">
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                            </padding>
+                                        </TextField>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <!-- Buttons -->
+                        <HBox alignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="20.0" top="10.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <HBox spacing="40.0">
+                                            <children>
+                                                <Button mnemonicParsing="false" onAction="#update" styleClass="user-create-button" text="Update">
+                                                    <padding>
+                                                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                    </padding>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#cancel" styleClass="user-cancel-button" text="Cancel">
+                                                    <padding>
+                                                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                    </padding>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
+</VBox>
