@@ -192,11 +192,11 @@ public class StudentDashBoardController {
 
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-profile.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-user-profile.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
-
+            contentContainer.getChildren().add(timeTable);
             System.out.println("profile Page Loaded");
 
         } catch (Exception e) {
