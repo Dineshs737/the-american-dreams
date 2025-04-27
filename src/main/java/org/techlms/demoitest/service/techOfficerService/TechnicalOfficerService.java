@@ -2,6 +2,8 @@ package org.techlms.demoitest.service.techOfficerService;
 
 import org.techlms.demoitest.dbconnection.DBConnection;
 import org.techlms.demoitest.model.course.Course;
+import org.techlms.demoitest.model.users.Lecturer;
+import org.techlms.demoitest.model.users.TechnicalOfficer;
 import org.techlms.demoitest.model.util.Attendance;
 import org.techlms.demoitest.model.util.Batch;
 import org.techlms.demoitest.model.util.Medical;
@@ -881,6 +883,124 @@ private  final Connection con = DBConnection.getConnection();
 //
 //
 
+
+    public TechnicalOfficer getTechnicalOfficerProfile(int userId , String userRole){
+
+        TechnicalOfficer technicalOfficer = null;
+        Connection con = DBConnection.getConnection();
+
+        String sql = """
+                SELECT
+                    u.user_profile,
+                    u.username,
+                    u.email,
+                    u.name,
+                    u.gender,
+                    u.contact_no,
+                    u.address,
+                    t.technical_Officer_id,
+                    t.department
+                FROM
+                    user u
+                INNER JOIN
+                    technical_Officer t ON u.user_id = t.user_id where u.user_id = ? and u.role = ?;
+                """;
+
+        try(PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setInt(1,userId);
+            ps.setString(2,userRole);
+            ResultSet rs =  ps.executeQuery();
+            System.out.println(ps);
+            if(rs.next()){
+                /************
+                 *     public User(byte[] userProfile , String userName , String email, String name , String gender , String contactNumber , String address) {
+                 *         this.userName = userName;
+                 *         this.name = name;
+                 *         this.email = email;
+                 *         this.contactNumber = contactNumber;
+                 *         this.gender = gender;
+                 *         this.userProfile = userProfile;
+                 *         this.address = address;
+                 *     }
+                 */
+                technicalOfficer = new TechnicalOfficer(
+                        rs.getBytes(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9)
+
+                );
+
+            }
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+
+
+        return technicalOfficer;
+
+
+    }
+
+
+    public boolean updateTechnicalOfficerProfile(TechnicalOfficer newTechnicalOfficer, TechnicalOfficer oldTechnicalOfficer) {
+        Connection con = DBConnection.getConnection();
+
+        // Start building the SQL query
+        StringBuilder sql = new StringBuilder("""
+        UPDATE user
+        SET
+            user_profile = ?,
+            gender = ?,
+            contact_no = ?,
+            address = ?
+        """);
+
+        // Check if email has changed and include it in the query if needed
+        boolean emailChanged = !newTechnicalOfficer.getEmail().equalsIgnoreCase(oldTechnicalOfficer.getEmail());
+        if (emailChanged) {
+            sql.insert(sql.indexOf("gender"), "email = ?, ");
+        }
+
+        // Add the WHERE clause
+        sql.append("WHERE user_id = ?;");
+
+        try (PreparedStatement ps = con.prepareStatement(sql.toString())) {
+            con.setAutoCommit(false);
+
+            // Set parameters dynamically
+            int paramIndex = 1;
+            ps.setBytes(paramIndex++, newTechnicalOfficer.getUserProfile());
+            if (emailChanged) {
+                ps.setString(paramIndex++, newTechnicalOfficer.getEmail().toLowerCase());
+            }
+            ps.setString(paramIndex++,newTechnicalOfficer.getGender());
+            ps.setString(paramIndex++, newTechnicalOfficer.getContactNumber());
+            ps.setString(paramIndex++, newTechnicalOfficer.getAddress());
+            ps.setInt(paramIndex, oldTechnicalOfficer.getUserID()); // Set user ID
+
+            System.out.println("Executing SQL: " + ps);
+
+            // Execute the update
+            if (ps.executeUpdate() > 0) {
+                con.commit();
+                return true;
+            }
+            con.rollback();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
 

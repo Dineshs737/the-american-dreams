@@ -13,6 +13,29 @@ public class Course {
     private String courseDescription;
     private String courseSemester;
     private byte[] courseImage;
+    private String department;
+    private String courseType;
+    private String createdDate;
+    private String updatedDate;
+
+    public Course(String courseCode, String courseName, int courseCredit, String courseSemester, String department, String courseType, String createdDate, String updatedDate) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.courseCredit = courseCredit;
+        this.courseSemester = courseSemester;
+        this.department = department;
+        this.courseType = courseType;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
+
+    //    select `course_code` ,  `name` ,
+//            `credit` ,`course_semester` , `dep_code` ,
+//            `course_type` , `created_date` ,
+//            `created_date` from course;
+
+
+
 
 
     public Course(String courseCode, String courseName, String courseDescription, String courseSemester, byte[] courseImage) {
@@ -116,6 +139,37 @@ public class Course {
         this.courseImage = courseImage;
     }
 
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(String courseType) {
+        this.courseType = courseType;
+    }
 
     @Override
     public String toString() {

@@ -13,6 +13,16 @@ public class TimeTable {
     private String endTime;
 
 
+    public TimeTable( String lecturerId, String courseId, String batch, String department, String timeSlot, String dayOfWeek, String lectureHall) {
+        this.lecturerId = lecturerId;
+        this.courseId = courseId;
+        this.batch = batch;
+        this.department = department;
+        this.timeSlot = timeSlot;
+        this.dayOfWeek = dayOfWeek;
+        this.lectureHall = lectureHall;
+    }
+
     private String monday;
     private String tuesday;
     private String wednesday;
@@ -83,16 +93,6 @@ public class TimeTable {
     }
 
 
-    public TimeTable(int timeTableId, String lecturerId, String courseId, String batch, String department, String timeSlot, String dayOfWeek, String lectureHall) {
-        this.timeTableId = timeTableId;
-        this.lecturerId = lecturerId;
-        this.courseId = courseId;
-        this.batch = batch;
-        this.department = department;
-        this.timeSlot = timeSlot;
-        this.dayOfWeek = dayOfWeek;
-        this.lectureHall = lectureHall;
-    }
 
 
 

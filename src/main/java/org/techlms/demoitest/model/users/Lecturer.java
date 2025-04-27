@@ -11,6 +11,19 @@ public class Lecturer extends  User{
         this.department = department;
     }
 
+    public Lecturer(byte[] userProfile , String userName , String email, String name , String gender , String contactNumber , String address , String lecturerID, String department) {
+//        this.userName = userName;
+//        this.name = name;
+//        this.email = email;
+//        this.contactNumber = contactNumber;
+//        this.gender = gender;
+//        this.userProfile = userProfile;
+//        this.address = address;
+        super(userProfile, userName, email, name, gender, contactNumber, address);
+        this.lecturerID = lecturerID;
+        this.department = department;
+    }
+
     public Lecturer(int userID, String name, String role, String lecturerID, String department) {
         super(userID, name, role);
         this.lecturerID = lecturerID;
@@ -37,5 +50,13 @@ public class Lecturer extends  User{
 
     public String getDepartment() {
         return department;
+    }
+
+
+    public static boolean isValidLecturerId(String lecturerId) {
+
+        String pattern = "^l\\d{4}$"; // Starts with 'l', followed by exactly 5 digits.
+        return lecturerId != null && lecturerId.matches(pattern);
+
     }
 }

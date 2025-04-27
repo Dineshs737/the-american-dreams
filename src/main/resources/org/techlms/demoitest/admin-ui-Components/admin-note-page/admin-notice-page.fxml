@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="contentContainer" alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.adminControllers.notice.AdminNoticeController">
+   <children>
+       <VBox fx:id="lecturer" alignment="CENTER" styleClass="right-side" stylesheets="@../admin-home-page.css" VBox.vgrow="ALWAYS">
+           <children>
+                   <HBox alignment="BOTTOM_CENTER" spacing="40.0" VBox.vgrow="ALWAYS">
+                       <children>
+                  <HBox stylesheets="@../admin-course-table.css" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TableView fx:id="noiceTable">
+                          <columns>
+                            <TableColumn fx:id="no" editable="false" prefWidth="150.0" sortable="false" text="No" />
+                            <TableColumn fx:id="title" editable="false" prefWidth="300.0" sortable="false" text="Title" />
+                              <TableColumn fx:id="createdDate" editable="false" prefWidth="200.0" sortable="false" text="Created Date" />
+                              <TableColumn fx:id="updatedDate" editable="false" prefWidth="200.0" sortable="false" text="Updated Date" />
+                              <TableColumn fx:id="resource" editable="false" prefWidth="200.0" sortable="false" text="Resource" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </HBox>
+                           <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="10.0" styleClass="user-barchart-card" HBox.hgrow="NEVER">
+                               <children>
+                                   <VBox spacing="20.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                              <VBox alignment="CENTER" onMouseClicked="#CreateNotice" styleClass="admin-user-page-card">
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../application-images/admin-notice-page-images/1024824.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                                             <children>
+                                                <Label styleClass="admin-user-page-card-label" text="Create Course" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#updateNotice" styleClass="admin-user-page-card">
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../application-images/admin-notice-page-images/256861.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                                             <children>
+                                                <Label styleClass="admin-user-page-card-label" text="Update Course" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="10.0" layoutY="150.0" onMouseClicked="#deleteNotice" styleClass="admin-user-page-card">
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../application-images/admin-notice-page-images/12503576.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0">
+                                             <children>
+                                                <Label styleClass="admin-user-page-card-label" text="Delete Course" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                                       </children>
+                                   </VBox>
+                               </children>
+                               <HBox.margin>
+                                   <Insets />
+                               </HBox.margin>
+                           </VBox>
+                       </children>
+                   </HBox>
+           </children>
+           <padding>
+               <Insets bottom="10.0" left="10.0" right="50.0" top="20.0" />
+           </padding>
+       </VBox>
+
+   </children>
+</VBox>

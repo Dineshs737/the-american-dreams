@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox fx:id="profileMainContainer" alignment="CENTER" fillWidth="false" spacing="50.0" styleClass="profile-container" stylesheets="@../../student-ui-components/student-user-profile.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.adminControllers.newUIUserManagementControllers.adminCreateUser.AdminCreateTechnicalOfficerController">
+   <!-- User Profile Picture -->
+   <HBox alignment="CENTER" fillHeight="false" VBox.vgrow="NEVER">
+      <children>
+         <VBox alignment="CENTER" spacing="30.0">
+            <children>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Circle fx:id="profilePicture" fill="#3d4d5c" onMouseClicked="#selectProfileImage" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  </children>
+                  <padding>
+                     <Insets left="50.0" />
+                  </padding>
+               </HBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   <HBox spacing="40.0" VBox.vgrow="NEVER">
+      <children>
+      
+         <!-- Profile Information Fields -->
+         <VBox alignment="CENTER" spacing="20.0" HBox.hgrow="NEVER">
+            <children>
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="User name" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="userName" prefWidth="500.0" promptText="User Name" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+               <VBox layoutX="10.0" layoutY="10.0" spacing="20.0">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="User Password" />
+                     <HBox>
+                        <children>
+                           <PasswordField fx:id="password" prefWidth="500.0" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="12.0" left="10.0" right="10.0" top="15.0" />
+                              </padding>
+                           </PasswordField>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+               <VBox layoutX="10.0" layoutY="121.0" spacing="20.0">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Technical Name" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="name" prefWidth="500.0" promptText="Student Name" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Contact Number" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="phoneNumber" prefWidth="500.0" promptText="Phone number" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Gender" />
+                     <HBox>
+                        <children>
+                           <ChoiceBox fx:id="gender" prefWidth="500.0">
+                              <padding>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              </padding>
+                           </ChoiceBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Address" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="address" prefWidth="500.0" promptText="Address" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+      
+               <VBox spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Email" />
+                     <HBox>
+                        <children>
+                           <TextField fx:id="email" prefWidth="500.0" promptText="Email" scaleShape="false" styleClass="user-profile-input-box">
+                              <padding>
+                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                              </padding>
+                           </TextField>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+         <VBox spacing="20.0">
+            <children>
+               <VBox spacing="20.0">
+                  <children>
+                     <Label fx:id="currentUserIDLabel" styleClass="user-profile-input-label" text="Technical Officer ID" />
+                     <TextField fx:id="techId" prefWidth="500.0" promptText="Student ID" styleClass="user-profile-input-box">
+                        <padding>
+                           <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                        </padding>
+                     </TextField>
+                  </children>
+               </VBox>
+      
+                     <VBox fx:id="departmentCard" spacing="20.0" VBox.vgrow="NEVER">
+                  <children>
+                     <Label styleClass="user-profile-input-label" text="Department" />
+                     <ChoiceBox fx:id="department" prefWidth="500.0">
+                        <padding>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                     </ChoiceBox>
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   <VBox>
+      <children>
+         <HBox fx:id="profilePageEditButtonContainer" alignment="CENTER" VBox.vgrow="NEVER">
+            <children>
+               <Button mnemonicParsing="false" onAction="#createLecturer" text="Create Lecturer" />
+            </children></HBox>
+      </children>
+   </VBox>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</VBox>

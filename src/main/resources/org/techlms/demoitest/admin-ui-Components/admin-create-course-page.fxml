@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="medicalContainer" alignment="CENTER" styleClass="choice-box-container" stylesheets="@../tech-officer-ui-Components/submit-student-medical-css.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.techOfficerControllers.TechnicalOfficerMedicalController">
+   <children>
+      <VBox alignment="CENTER" spacing="30.0" styleClass="container" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" styleClass="update-student-medical-banner-label-container">
+                     <children>
+                        <Label styleClass="update-student-medical-banner" text="Create course code" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label styleClass="medical-label" text="Create Course" />
+                        <ChoiceBox fx:id="selectBatch" prefWidth="400.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+      
+                  <HBox alignment="CENTER">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label styleClass="medical-label" text="Select department" />
+                        <ChoiceBox prefWidth="400.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="30.0" layoutY="382.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label styleClass="medical-label" text="Course type" />
+                        <ChoiceBox prefWidth="400.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="30.0" layoutY="77.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label styleClass="medical-label" text="Course Code" />
+                        <TextField fx:id="studentId" prefWidth="400.0" styleClass="student-id-input-field" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="30.0" layoutY="162.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label styleClass="medical-label" text="Course Crdit" />
+                        <TextField fx:id="studentId1" prefWidth="400.0" styleClass="student-id-input-field" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="30.0" layoutY="609.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label styleClass="medical-label" text="Lecturer ID" />
+                        <TextField fx:id="studentId11" prefWidth="400.0" styleClass="student-id-input-field" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+      
+            <HBox alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#submitMedical" styleClass="medical-submit-button" text="Create" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

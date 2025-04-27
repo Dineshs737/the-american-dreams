@@ -1,0 +1,55 @@
+.admin-user-find-container{
+    -fx-background-color: #3E3F5B;
+    -fx-background-radius:0;
+    -fx-padding: 15px;
+
+}
+.admin-user-find-label{
+    -fx-text-fill: #F6F1DE;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.find-button{
+    -fx-background-color: #F93827;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 8px 30px;
+    -fx-background-radius: 10px 10px;
+    -fx-font-weight: bold;
+}
+.find-button:hover{
+    -fx-background-color: #8E1616;
+}
+
+.choice-box{
+    -fx-background-color: #F1EFEC;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-padding: 5px ;
+    -fx-background-radius: 10px;
+
+}
+
+.text-field{
+    -fx-background-color: #F1EFEC;
+    -fx-padding: 10px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+
+
+}
+
+.cancel-button{
+    -fx-background-color: #16C47F;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 8px 30px;
+    -fx-background-radius: 10px 10px;
+    -fx-font-weight: bold;
+}
+.cancel-button:hover{
+    -fx-background-color: #1F7D53;
+}
+
