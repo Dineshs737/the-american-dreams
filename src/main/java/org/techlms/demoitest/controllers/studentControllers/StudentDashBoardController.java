@@ -134,11 +134,11 @@ public class StudentDashBoardController {
 
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-marks.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/new-new-student-grads-page.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
-             System.out.println("Switch Grades Button clicked");
+            contentContainer.getChildren().add(timeTable);
         } catch (Exception e) {
             e.printStackTrace();
         }

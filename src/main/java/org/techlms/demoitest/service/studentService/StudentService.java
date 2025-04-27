@@ -452,4 +452,21 @@ public StudentGrade getStudentGradsByStudentId(String studentId){
 
         return studentGrade;
 }
+
+public String getStudentIdByUserId(int userId){
+        Connection con = DBConnection.getConnection();
+        String sql = "select student_id from student where user_id =  (select user_id from user where user_id = ?);";
+        String studentId = null;
+        try(PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setInt(1,userId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                studentId = rs.getString(1);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return studentId;
+}
 }
