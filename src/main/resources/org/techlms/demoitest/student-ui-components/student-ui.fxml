@@ -50,7 +50,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Circle fill="#686c70" onMouseClicked="#switchProfileEditPage" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                  <Circle fx:id="userprofile" fill="#686c70" onMouseClicked="#switchProfileEditPage" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
                      <HBox.margin>
                         <Insets bottom="30.0" />
                      </HBox.margin></Circle>

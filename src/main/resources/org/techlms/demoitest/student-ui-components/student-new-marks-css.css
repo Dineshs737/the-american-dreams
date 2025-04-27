@@ -1,0 +1,9 @@
+.student-new-grads-page-right-container{
+    -fx-background-color: #213448;
+}
+
+.student-new-grads-page-right-container-label{
+    -fx-text-fill: #D4C9BE;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox stylesheets="@../tech-officer-ui-Components/tech-officer-student-attendance-css.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.studentControllers.AttendanceController">
+   <children>
+
+      <!-- Attendance Table Section -->
+      <VBox stylesheets="@student-attendance.css" VBox.vgrow="ALWAYS">
+         <children>
+            <TableView fx:id="studentAttendance" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="codeCode" editable="false" minWidth="200.0" sortable="false" text="Course Code" />
+                  <TableColumn fx:id="codeName" editable="false" minWidth="200.0" sortable="false" text="Course Name" />
+                  <TableColumn fx:id="totalAttempt" editable="false" minWidth="150.0" sortable="false" text="Total attempt" />
+                  <TableColumn fx:id="nonParticipate" editable="false" minWidth="150.0" sortable="false" text="Total absent" />
+                  <TableColumn fx:id="totalPercentage" editable="false" minWidth="150.0" sortable="false" text="Total percentage" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</VBox>
