@@ -2,10 +2,13 @@ package org.techlms.demoitest.model.util;
 
 import org.techlms.demoitest.dbconnection.DBConnection;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -177,6 +180,7 @@ public class Marks {
             if (rs.next()) {
                 takenQuizCount = rs.getInt(1);
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -189,9 +193,11 @@ public class Marks {
             for (int i = allQuizMarks.length - 1; i >= allQuizMarks.length - takenQuizCount; i--) {
                 total += allQuizMarks[i];
             }
+
 //            System.out.println("course code is      " + marks.getCourseId() + "  "  + "Total marks : " + total / takenQuizCount);
             return total / takenQuizCount;
         } else {
+
             return 0.0;
         }
     }
@@ -208,6 +214,7 @@ public class Marks {
             if (rs.next()) {
                 takenAssessmentCount  = rs.getInt(1);
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -241,9 +248,11 @@ public class Marks {
                 assignmentWeight = rs.getInt(2);
                 midtermWeight = rs.getInt(3);
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
         if (quizzesWeight > 0) {
 //            System.out.println("Quizzes weight is " + quizzesWeight + " and assignments weight is " + assignmentWeight);
@@ -263,18 +272,138 @@ public class Marks {
         return (int) Math.round(totalCaMarks);
     }
 
+//    public static boolean caEligibility(Marks marks) {
+//        int quizzesWeight = 0, assignmentWeight = 0, midtermWeight = 0;
+//        Connection con = DBConnection.getConnection();
+//
+//        String sql = "SELECT quizzes_weight, assessments_weight, midterm_weight FROM subject_marks WHERE course_code = ?";
+//        try (PreparedStatement ps = con.prepareStatement(sql)) {
+//            ps.setString(1, marks.getCourseId());
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//                quizzesWeight = rs.getInt("quizzes_weight");
+//                assignmentWeight = rs.getInt("assessments_weight");
+//                midtermWeight = rs.getInt("midterm_weight");
+//            }
+//            con.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return false; // Return false in case of a database error
+//        }
+//
+//        // Total weight for CA components
+//        double totalCAWeight = quizzesWeight + assignmentWeight + midtermWeight;
+//        if (totalCAWeight <= 0) {
+//            System.err.println("Invalid total CA weight configuration in the database.");
+//            return false;
+//        }
+//
+//        // Calculate total CA marks obtained by the student
+//        double totalCaMarks = getTotalCaMarks(marks);
+//
+//        if (totalCaMarks < 0 || totalCaMarks > totalCAWeight) {
+//            System.err.println("Invalid CA marks provided for the student.");
+//            return false;
+//        }
+//
+//        // Eligibility check: CA marks should be >= 50% of the total weight
+//        double requiredMarksForEligibility = totalCAWeight * 0.5;
+//        return totalCaMarks >= requiredMarksForEligibility;
+//    }
+
+    public static boolean caEligibility(Marks marks) {
+        int quizzesWeight = 0, assignmentWeight = 0, midtermWeight = 0;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            // Get database connection
+            con = DBConnection.getConnection();
+            String sql = "SELECT quizzes_weight, assessments_weight, midterm_weight FROM subject_marks WHERE course_code = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, marks.getCourseId());
+            rs = ps.executeQuery();
+
+            // Retrieve weights
+            if (rs.next()) {
+                quizzesWeight = rs.getInt("quizzes_weight");
+                assignmentWeight = rs.getInt("assessments_weight");
+                midtermWeight = rs.getInt("midterm_weight");
+            } else {
+                System.err.println("No weight configuration found for course: " + marks.getCourseId());
+                return false;
+            }
+
+            // Validate individual weights
+            if (quizzesWeight < 0 || assignmentWeight < 0 || midtermWeight < 0) {
+                System.err.println("Negative weights detected for course: " + marks.getCourseId());
+                return false;
+            }
+
+            // Calculate total CA weight
+            double totalCAWeight = quizzesWeight + assignmentWeight + midtermWeight;
+            if (totalCAWeight <= 0) {
+                System.err.println("Invalid total CA weight configuration for course: " + marks.getCourseId());
+                return false;
+            }
+
+            // Calculate total CA marks
+            double totalCaMarks = getTotalCaMarks(marks);
+
+            // Validate CA marks
+            if (totalCaMarks < 0 || totalCaMarks > totalCAWeight) {
+                System.err.println("Invalid CA marks: " + totalCaMarks + " for total weight: " + totalCAWeight);
+                return false;
+            }
+
+            // Eligibility check: CA marks >= 50% of total weight
+            System.out.println("student id: " + marks.getStudentId() + " Total ca" + totalCaMarks  + " CA eligible weight " + totalCAWeight * 0.5);
+            double requiredMarksForEligibility = totalCAWeight * 0.5;
+            return totalCaMarks >= requiredMarksForEligibility;
+
+        } catch (SQLException e) {
+            System.err.println("Database error while checking CA eligibility for course: " + marks.getCourseId());
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Clean up resources
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing database resources");
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
+
+
     public static int finalTotalMarks(Marks marks) {
+        // First, check if the student is eligible for CA
+        if (!caEligibility(marks)) {
+            return 0; // If not eligible, return 0 total marks
+        }
+
         double totalMarks = 0.0;
         int finalTheoryWeight = 0, finalPracWeight = 0;
+        Connection con = DBConnection.getConnection();
 
         String sql = "SELECT final_theory_weight, final_practical_weight FROM subject_marks WHERE course_code = ?";
-        try (PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql)) {
+        try (PreparedStatement ps =con.prepareStatement(sql)) {
             ps.setString(1, marks.getCourseId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 finalTheoryWeight = rs.getInt(1);
                 finalPracWeight = rs.getInt(2);
             }
+            con.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -292,7 +421,12 @@ public class Marks {
 
 
 
+
     public static String studentGrads(int totalMarks) {
+        if (totalMarks == 0) {
+            return "F"; // Return "E" grade for students who failed the CA
+        }
+
         if (totalMarks < 0 || totalMarks > 100) {
             throw new IllegalArgumentException("Total marks must be between 0 and 100.");
         }
@@ -313,46 +447,299 @@ public class Marks {
         };
     }
 
-    public static double studentGradPoint(String grade) {
 
-       double gerd =  switch (grade) {
-            case "A+" , "A" -> 4.00;
+    public static double studentGradPoint(String grade) {
+        double gerd = switch (grade) {
+            case "A+", "A" -> 4.00;
             case "A-" -> 3.70;
-            case "B+" ->3.30;
+            case "B+" -> 3.30;
             case "B" -> 3.00;
             case "B-" -> 2.70;
-            case "C+" ->2.30;
+            case "C+" -> 2.30;
             case "C" -> 2.00;
             case "C-" -> 1.70;
-            case "D+" ->1.30;
+            case "D+" -> 1.30;
             case "D" -> 1.00;
-            default ->  0.00;
+            default -> 0.00;
         };
 
-       return Double.parseDouble(String.format("%.2f", gerd));
+        return Double.parseDouble(String.format("%.2f", gerd));
     }
 
-    public static double studentGradPointAverage(List<Marks> marks) {
-        double totalWeightedGradePoints = 0.0;
-        double totalCredit = 0.0;
-        for (Marks mark : marks) {
 
-            int credit =  getCourseCreditByCourseCode(mark.getCourseId());
-            totalWeightedGradePoints +=
-                    studentGradPoint(
-                            studentGrads(
-                                    finalTotalMarks(mark)))  * credit ;
 
-            totalCredit += credit;
+//    public static boolean studentGradPointAverage(String batch, String department) {
+//
+//        List<String> studentIdList = getAllStudentIdByBatchYarAndDepartment(batch, department);
+//
+//        for (String studentId : studentIdList) {
+//            List<Marks> marksList = getStudentMarksByStudentId(studentId);
+//
+//            double totalWeightedGradePoints = 0.0;
+//            int totalCredit = 0;
+//
+//            for (Marks mark : marksList) {
+//                int credit = getCourseCreditByCourseCode(mark.getCourseId());
+//                double gradePoint = studentGradPoint(studentGrads(finalTotalMarks(mark)));
+//                totalWeightedGradePoints += gradePoint * credit;
+//                totalCredit += credit;
+//            }
+//
+//
+//            // Avoid division by zero
+//            if (totalCredit > 0) {
+//                BigDecimal sgpa = new BigDecimal(totalWeightedGradePoints / totalCredit)
+//                        .setScale(2, RoundingMode.HALF_UP);  // Round SGPA to two decimal places
+//                System.out.println("Total weighted grade points: " + sgpa);
+//                System.out.println("Total credits: " + totalCredit);
+//                saveStudentGradients(studentId, getStudentSemesterCode(studentId), sgpa.doubleValue(), totalCredit, getStudentDepartment(studentId));
+//            } else {
+//                System.out.println("No courses found for student: " + studentId);
+//            }
+//        }
+//
+//        return true;
+//    }
 
+    public static boolean saveStudentGradients(List<StudentGrade> studentGradeList) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBConnection.getConnection();
+            String sql = """
+            INSERT INTO student_grades (studentID, semester, SGPA, semesterCredits, department)
+            VALUES (?, ?, ?, ?, ?)
+        """;
+            ps = con.prepareStatement(sql);
+
+            // Add all student grade data to the batch
+            for (StudentGrade studentGrade : studentGradeList) {
+                ps.setString(1, studentGrade.getStudentID());
+                ps.setString(2, studentGrade.getSemester());
+                ps.setDouble(3, studentGrade.getSGPA());
+                ps.setInt(4, studentGrade.getSemesterCredits());
+                ps.setString(5, studentGrade.getDepartment());
+                ps.addBatch();
+            }
+
+            // Execute the batch update
+            int[] result = ps.executeBatch();
+            con.close();
+            return result.length > 0; // Return true if any records were inserted
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+
+
+
+    public static void processAndUpdateStudentGrades(List<String> studentIdList) {
+        List<StudentGrade> studentGradeList = new ArrayList<>();
+
+        for (String studentId : studentIdList) {
+            List<Marks> marksList = getStudentMarksByStudentId(studentId);
+
+            double totalWeightedGradePoints = 0.0;
+            int totalCredit = 0;
+
+            for (Marks mark : marksList) {
+                int credit = getCourseCreditByCourseCode(mark.getCourseId());
+                double gradePoint = studentGradPoint(studentGrads(finalTotalMarks(mark)));
+                totalWeightedGradePoints += gradePoint * credit;
+                totalCredit += credit;
+            }
+
+            // Avoid division by zero
+            if (totalCredit > 0) {
+                BigDecimal sgpa = new BigDecimal(totalWeightedGradePoints / totalCredit)
+                        .setScale(2, RoundingMode.HALF_UP);  // Round SGPA to two decimal places
+
+                System.out.println("Total weighted grade points: " + sgpa);
+                System.out.println("Total credits: " + totalCredit);
+
+                System.out.println("lol");
+
+                // Add student grade info to list for batch update
+                studentGradeList.add(new StudentGrade(studentId, getStudentSemesterCode(studentId), sgpa.doubleValue(), totalCredit, getStudentDepartment(studentId)));
+                System.out.println("lol2");
+            } else {
+                System.out.println("No courses found for student: " + studentId);
+            }
         }
 
-
-        System.out.println("Total weighted gradient points: " +(String.format("%.2f", totalWeightedGradePoints / totalCredit)));
-        return Double.parseDouble(String.format("%.2f", totalWeightedGradePoints / totalCredit));
-
-
+        // Update all student grades in a single batch update
+        boolean result = saveStudentGradients(studentGradeList);
+        if (result) {
+            System.out.println("All student grades updated successfully!");
+        } else {
+            System.out.println("Failed to update student grades.");
+        }
     }
+
+
+//    public static boolean updateStudentGrades(List<StudentGrade> studentGradeList) {
+//        Connection con = null;
+//        PreparedStatement ps = null;
+//        try {
+//            con = DBConnection.getConnection(); // Assuming you have a connection pool set up
+//            System.out.println("potato");
+//            String sql = """
+//            UPDATE student_grades
+//            SET semester = ?, SGPA = ?, semesterCredits = ?, department = ?
+//            WHERE studentID = ? AND semester = ?
+//            """;
+//            ps = con.prepareStatement(sql);
+//
+//            // Add all update operations to the batch
+//            for (StudentGrade studentGrade : studentGradeList) {
+//                ps.setString(1, studentGrade.getSemester());
+//                ps.setDouble(2, studentGrade.getSGPA());
+//                ps.setInt(3, studentGrade.getSemesterCredits());
+//                ps.setString(4, studentGrade.getDepartment());
+//                ps.setString(5, studentGrade.getStudentID());
+//                ps.setString(6, studentGrade.getSemester());
+//                ps.addBatch();
+//            }
+//
+//            // Execute the batch update
+//            int[] result = ps.executeBatch();
+//
+//            // Return true if at least one record was updated
+//
+//            return result.length > 0;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (ps != null) ps.close();
+//                if (con != null) con.close(); // Ensure closing the connection to prevent leaks
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//        return false;
+//    }
+
+
+//    public static boolean saveStudentGradients(String studentID, String semester, double SGPA, int semesterCredits, String department) {
+//        Connection con = null;
+//        PreparedStatement ps = null;
+//        try {
+//            con = DBConnection.getConnection(); // Assuming you have a connection pool set up
+//            String sql = """
+//                INSERT INTO student_grades (studentID, semester, SGPA, semesterCredits, department)
+//                VALUES
+//                    (?, ?, ?, ?, ?)
+//                """;
+//            ps = con.prepareStatement(sql);
+////            con.setAutoCommit(false);
+//            ps.setString(1, studentID);
+//            ps.setString(2, semester);
+//            ps.setDouble(3, SGPA);
+//            ps.setInt(4, semesterCredits);
+//            ps.setString(5, department);
+//            if (ps.executeUpdate() > 0) {
+    ////                con.commit();
+//                return true;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (ps != null) ps.close();
+//                if (con != null) con.close(); // Ensure closing the connection to prevent leaks
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//        return false;
+//    }
+
+
+
+    public static List<String> getAllStudentIdByBatchYarAndDepartment(String batchYar, String department){
+        Connection con = DBConnection.getConnection();
+        List<String> studentIds = new ArrayList<>();
+        String sql = "select student_id from student where department = ? AND batch_year =  ? ;";
+        try(PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setString(1, department);
+            ps.setString(2, batchYar);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                studentIds.add(rs.getString(1));
+            }
+
+            con.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return studentIds;
+    }
+
+    public static List<Marks> getStudentMarksByStudentId(String studentId){
+        Connection con = DBConnection.getConnection();
+        List<Marks> marksList = new ArrayList<Marks>();
+        String sql = """
+                select studentID , courseID, Quiz1 , Quiz2 , Quiz3,  Quiz4, Assignment1 , Assignment2  , Midterm , FinalPrac , FinalTheory  from marks where studentID = ?;
+                """;
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,studentId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                /*****
+                 *     public Marks(String studentId, String courseId, double quiz1, double quiz2, double quiz3, double quiz4, double assignment1, double assignment2, double midterm, double finalPrac, double finalTheory) {
+                 *         this.studentId = studentId;
+                 *         this.courseId = courseId;
+                 *         this.quiz1 = quiz1;
+                 *         this.quiz2 = quiz2;
+                 *         this.quiz3 = quiz3;
+                 *         this.quiz4 = quiz4;
+                 *         this.assignment1 = assignment1;
+                 *         this.assignment2 = assignment2;
+                 *         this.midterm = midterm;
+                 *         this.finalPrac = finalPrac;
+                 *         this.finalTheory = finalTheory;
+                 *     }
+                 */
+
+                marksList.add(new Marks(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getDouble(4),
+                        rs.getDouble(5),
+                        rs.getDouble(6),
+                        rs.getDouble(7),
+                        rs.getDouble(8),
+                        rs.getDouble(9),
+                        rs.getDouble(10),
+                        rs.getDouble(11)
+
+
+                ));
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return marksList;
+    }
+
+
+
 
     public static int getCourseCreditByCourseCode(String courseCode){
         Connection con = DBConnection.getConnection();
@@ -372,8 +759,64 @@ public class Marks {
         return 0;
     }
 
+    public static String getStudentSemesterCode(String studentId){
+        Connection con = DBConnection.getConnection();
+        String semesterCode = null;
+        String sql = """
+                SELECT current_student_semester
+                FROM batch
+                WHERE batch_year = (
+                    SELECT batch_year
+                    FROM student
+                    WHERE student_id = ?
+                );
+                """;
+
+        try(PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setString(1,studentId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                semesterCode = rs.getString(1);
+            }
+
+            con.close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return semesterCode;
+    }
 
 
+    public static String getStudentDepartment(String studentId) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String department = null;
+        String sql = "SELECT department FROM student WHERE student_id = ?";
+
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, studentId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                department = rs.getString(1);
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return department;
+    }
 
     @Override
     public String toString() {

@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.techlms.demoitest.dto.studentDTO.StudentCourseDTO;
@@ -104,7 +105,19 @@ public class StudentDashBoardController {
 
     @FXML
     public void switchTimeTable() {
-        System.out.println("Switch TimeTable Button clicked");
+        FXMLLoader fxmlLoader = null;
+        try{
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-new-time-table.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
+            contentContainer.getChildren().clear();
+            contentContainer.getChildren().add(timeTable);
+
+            System.out.println("Time Table Loaded");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
