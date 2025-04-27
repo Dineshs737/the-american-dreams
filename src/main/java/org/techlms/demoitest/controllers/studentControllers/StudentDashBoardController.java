@@ -13,16 +13,22 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.techlms.demoitest.dto.studentDTO.StudentCourseDTO;
+import org.techlms.demoitest.model.users.User;
 import org.techlms.demoitest.service.studentService.StudentCourseService;
 import org.techlms.demoitest.util.SessionManager;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 
 public class StudentDashBoardController {
+    @FXML
+    private Circle userprofile;
     @FXML
     private FlowPane coursesContainer;
 
@@ -35,8 +41,11 @@ public class StudentDashBoardController {
     private final StudentCourseService studentCourseService = new StudentCourseService();
 
     public void initialize() {
+
+        loadUserProfile();
         loadCourses();
     }
+
 
     private void loadCourses() {
         List<StudentCourseDTO> courses = studentCourseService.getAllStudentCourses();
@@ -222,6 +231,37 @@ public class StudentDashBoardController {
 
         }catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    private void loadUserProfile(){
+        SessionManager sessionManager = SessionManager.getInstance();
+        System.out.println(sessionManager);
+
+        userprofile.setCenterX(150);
+        userprofile.setCenterY(150);
+//        userprofile.profile().
+
+        System.out.println(sessionManager.getUsername());
+        byte[] userProfileImage = User.getUserProfileByUserName(sessionManager.getUsername());
+        System.out.println("userProfileImage: " + sessionManager.getUsername());
+        if (userProfileImage != null) {
+            InputStream inputStream = new ByteArrayInputStream(userProfileImage);
+            Image image = new Image(inputStream , 100, 100, false, true);
+            userprofile.setFill(new ImagePattern(image));
+        }else {
+
+            Image image = new Image(
+                    this.getClass().getResourceAsStream("/org/techlms/demoitest/application-images/util/10337609.png"),
+                    100, // Desired width of the image
+                    100, // Desired height of the image
+                    false, // Preserve aspect ratio
+                    true   // Smooth scaling
+            );
+
+// Set the image as a pattern for the circle
+            userprofile.setFill(new ImagePattern(image));
         }
 
     }

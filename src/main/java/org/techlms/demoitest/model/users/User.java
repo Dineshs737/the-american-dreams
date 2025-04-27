@@ -54,9 +54,9 @@ public class User{
         this.gender = gender;
     }
 
-    public User(int userID, String name, String role) {
+    public User(int userID, String userName, String role) {
         this.userID = userID;
-        this.name = name;
+        this.userName = userName;
         this.role = role;
     }
 
