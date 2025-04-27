@@ -2,10 +2,7 @@ package org.techlms.demoitest.service.studentService;
 
 import org.techlms.demoitest.dbconnection.DBConnection;
 import org.techlms.demoitest.model.users.Student;
-import org.techlms.demoitest.model.util.Attendance;
-import org.techlms.demoitest.model.util.Marks;
-import org.techlms.demoitest.model.util.StudentGrade;
-import org.techlms.demoitest.model.util.TimeTable;
+import org.techlms.demoitest.model.util.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -469,4 +466,67 @@ public String getStudentIdByUserId(int userId){
         }
         return studentId;
 }
+
+    public String getStudentNameByStudentId(String studentID) {
+        Connection con = DBConnection.getConnection();
+        String studentName = null;
+        try{
+            String sql = "select name from user where user_id = (select user_id from student where student_id = ?);";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, studentID);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                studentName = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return studentName;
+    }
+
+
+
+    public List<Medical> getALlMedicalsByStudentId(String studentId){
+        Connection con = DBConnection.getConnection();
+
+        List<Medical> medicals = new ArrayList<Medical>();
+        try{
+            String sql = "select `medical_id` , `student_id` , `batch` ,`medical_start_date` , `medical_end_date` , `medical_data`   from medical where student_id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, studentId);
+            ResultSet rs = ps.executeQuery();
+            /********
+             *
+             *     public Medical(int medicalId, String studentId, String batch, String medicalStartDate, String medicalEndDate, byte[] medicalData) {
+             *         this.medicalId = medicalId;
+             *         this.studentId = studentId;
+             *         this.batch = batch;
+             *         this.medicalStartDate = medicalStartDate;
+             *         this.medicalEndDate = medicalEndDate;
+             *         this.medicalData = medicalData;
+             *     }
+             *
+             *
+             */
+
+            while(rs.next()){
+                medicals.add(new Medical(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4).toString(),
+                        rs.getDate(5).toString(),
+                        rs.getBytes(6)
+                ));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return medicals;
+
+
+    }
 }

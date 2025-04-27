@@ -165,10 +165,11 @@ public class StudentDashBoardController {
     public void switchMedical() {
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-medical.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-view-medical-page.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
+            contentContainer.getChildren().add(timeTable);
 
             System.out.println("Switch Medical Button clicked");
 
@@ -183,10 +184,11 @@ public class StudentDashBoardController {
 
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-attance.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-attendance-page.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
+            contentContainer.getChildren().add(timeTable);
 
             System.out.println("Attendance Page Loaded");
 
