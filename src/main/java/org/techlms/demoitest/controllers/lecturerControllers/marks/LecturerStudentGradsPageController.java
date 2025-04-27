@@ -128,7 +128,7 @@ public class LecturerStudentGradsPageController implements Initializable {
         studentMarksTable.getItems().setAll(service.getStudentMarksByStudentId("tg/2022/1413"));
         studentMarksTable.setFixedCellSize(150);
 
-        System.out.println(Marks.studentGradPointAverage(service.getStudentMarksByStudentId("tg/2022/1413")));
+//        System.out.println(Marks.studentGradPointAverage(service.getStudentMarksByStudentId("tg/2022/1413")));
 
 
 

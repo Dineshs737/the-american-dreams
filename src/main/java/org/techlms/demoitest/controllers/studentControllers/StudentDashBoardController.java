@@ -11,17 +11,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.techlms.demoitest.dto.studentDTO.StudentCourseDTO;
+import org.techlms.demoitest.model.users.User;
 import org.techlms.demoitest.service.studentService.StudentCourseService;
 import org.techlms.demoitest.util.SessionManager;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 
 public class StudentDashBoardController {
+    @FXML
+    private Circle userprofile;
     @FXML
     private FlowPane coursesContainer;
 
@@ -34,8 +41,11 @@ public class StudentDashBoardController {
     private final StudentCourseService studentCourseService = new StudentCourseService();
 
     public void initialize() {
+
+        loadUserProfile();
         loadCourses();
     }
+
 
     private void loadCourses() {
         List<StudentCourseDTO> courses = studentCourseService.getAllStudentCourses();
@@ -104,7 +114,19 @@ public class StudentDashBoardController {
 
     @FXML
     public void switchTimeTable() {
-        System.out.println("Switch TimeTable Button clicked");
+        FXMLLoader fxmlLoader = null;
+        try{
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-new-time-table.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
+            contentContainer.getChildren().clear();
+            contentContainer.getChildren().add(timeTable);
+
+            System.out.println("Time Table Loaded");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -112,11 +134,11 @@ public class StudentDashBoardController {
 
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-marks.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/new-new-student-grads-page.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
-             System.out.println("Switch Grades Button clicked");
+            contentContainer.getChildren().add(timeTable);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -143,10 +165,11 @@ public class StudentDashBoardController {
     public void switchMedical() {
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-medical.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-view-medical-page.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
+            contentContainer.getChildren().add(timeTable);
 
             System.out.println("Switch Medical Button clicked");
 
@@ -161,10 +184,11 @@ public class StudentDashBoardController {
 
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-attance.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-attendance-page.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
+            contentContainer.getChildren().add(timeTable);
 
             System.out.println("Attendance Page Loaded");
 
@@ -179,11 +203,11 @@ public class StudentDashBoardController {
 
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-profile.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/student-ui-components/student-user-profile.fxml"));
+            Parent timeTable = fxmlLoader.load();
+            VBox.setVgrow(timeTable, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
-
+            contentContainer.getChildren().add(timeTable);
             System.out.println("profile Page Loaded");
 
         } catch (Exception e) {
@@ -209,6 +233,37 @@ public class StudentDashBoardController {
 
         }catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    private void loadUserProfile(){
+        SessionManager sessionManager = SessionManager.getInstance();
+        System.out.println(sessionManager);
+
+        userprofile.setCenterX(150);
+        userprofile.setCenterY(150);
+//        userprofile.profile().
+
+        System.out.println(sessionManager.getUsername());
+        byte[] userProfileImage = User.getUserProfileByUserName(sessionManager.getUsername());
+        System.out.println("userProfileImage: " + sessionManager.getUsername());
+        if (userProfileImage != null) {
+            InputStream inputStream = new ByteArrayInputStream(userProfileImage);
+            Image image = new Image(inputStream , 100, 100, false, true);
+            userprofile.setFill(new ImagePattern(image));
+        }else {
+
+            Image image = new Image(
+                    this.getClass().getResourceAsStream("/org/techlms/demoitest/application-images/util/10337609.png"),
+                    100, // Desired width of the image
+                    100, // Desired height of the image
+                    false, // Preserve aspect ratio
+                    true   // Smooth scaling
+            );
+
+// Set the image as a pattern for the circle
+            userprofile.setFill(new ImagePattern(image));
         }
 
     }

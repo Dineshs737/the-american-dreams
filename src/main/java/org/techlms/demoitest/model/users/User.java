@@ -19,18 +19,22 @@ public class User{
     protected String gender;
     protected String dateOfBirth;
     protected byte[] userProfile;
+    protected String createdDate;
+    protected String updatedDate;
+    protected String address;
 
-    public User(String userName, String password, String name, String email, String contactNumber, String role, String gender, String dateOfBirth, byte[] userProfile) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.email = email;
-        this.contactNumber = contactNumber;
-        this.role = role;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.userProfile = userProfile;
-    }
+
+//    public User(String userName, String password, String name, String email, String contactNumber, String role, String gender, String dateOfBirth, byte[] userProfile) {
+//        this.userName = userName;
+//        this.password = password;
+//        this.name = name;
+//        this.email = email;
+//        this.contactNumber = contactNumber;
+//        this.role = role;
+//        this.gender = gender;
+//        this.dateOfBirth = dateOfBirth;
+//        this.userProfile = userProfile;
+//    }
 
     public User(String userName, String password, String name, String email, String contactNumber, String gender, byte[] userProfile ,String role) {
         this.userName = userName;
@@ -54,6 +58,151 @@ public class User{
         this.userID = userID;
         this.userName = userName;
         this.role = role;
+    }
+
+    //user Profile constructor
+    public User(byte[] userProfile , String userName , String email, String name , String gender , String contactNumber , String address) {
+        this.userName = userName;
+        this.name = name;
+        this.email = email;
+        this.contactNumber = contactNumber;
+        this.gender = gender;
+        this.userProfile = userProfile;
+        this.address = address;
+    }
+
+//    public User(String userName, String password, String email, String name, String gender, String contactNumber,String address, String role, byte[] userProfile) {
+//        this.userName = userName;
+//        this.password = password;
+//        this.email = email;
+//        this.name = name;
+//        this.gender = gender;
+//        this.address = address;
+//        this.contactNumber = contactNumber;
+//        this.role = role;
+//        this.userProfile = userProfile;
+//    }
+//    user.username
+//    user.password
+//    user.email
+//    user.name,
+//    user.contact_no,
+//    user.gender,
+//    user.address,
+//    user.user_profile,
+//    student.student_id,
+//    student.department,
+//    student.batch_year
+
+    //fetch
+    public User(int userID ,String userName, String password, String name, String email, String contactNumber, String role, String gender, String address, byte[] userProfile) {
+        this.userID = userID;
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.contactNumber = contactNumber;
+        this.role = role;
+        this.gender = gender;
+        this.address = address;
+        this.userProfile = userProfile;
+    }
+
+
+
+    ///  create user
+    public User(String userName, String password, String name, String email, String contactNumber, String role, String gender, String address, byte[] userProfile) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.contactNumber = contactNumber;
+        this.role = role;
+        this.gender = gender;
+        this.address = address;
+        this.userProfile = userProfile;
+    }
+
+    /********
+     *                     User newUser = new User(
+     *                             username.getText().trim().toLowerCase(),
+     *                             password.getText().trim(),
+     *                             email.getText().trim().toLowerCase(),
+     *                             "dinesh",
+     *                             gender.getSelectionModel().getSelectedItem().equals("Male")?"m":"f",
+     *                             phoneNumber.getText().trim(),
+     *                             existingUser.getRole(),
+     *                             existingUser.getUserProfile() //  important change user profile
+     *                     );
+     * @return
+     */
+
+    public User(String userName, String email, String name, String gender, String contactNumber, String role, byte[] userProfile, String createdDate, String updatedDate) {
+        this.userName = userName;
+        this.email = email;
+        this.name = name;
+        this.gender = gender;
+        this.contactNumber = contactNumber;
+        this.role = role;
+        this.userProfile = userProfile;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
+
+//    public User(String userName, String password, String email, String name, String gender, String contactNumber, String address, String role, byte[] userProfile, Object o) {
+//    }
+
+    /******
+     *                users.add(new User(
+     *                         rs.getString(1),
+     *                         rs.getString(2),
+     *                         rs.getString(3),
+     *                         rs.getString(4),
+     *                         rs.getString(5),
+     *                         rs.getString(6),
+     *                         rs.getBytes(7),
+     *                         rs.getDate(8).toString(),
+     *                         rs.getDate(9).toString()
+     *
+     *                 ));
+     *
+     *                    public User(String userName, String email, String name, String gender, String contactNumber, String role, byte[] userProfile) {
+     *                  *         this.userName = userName;
+     *                  *         this.email = email;
+     *                  *         this.name = name;
+     *                  *         this.gender = gender;
+     *                  *         this.contactNumber = contactNumber;
+     *                  *         this.role = role;
+     *                  *         this.userProfile = userProfile;
+     * @return
+     */
+
+
+
+
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -168,4 +317,5 @@ public class User{
         }
         return profile;
     }
+
 }

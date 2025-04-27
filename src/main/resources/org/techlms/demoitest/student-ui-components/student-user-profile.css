@@ -1,0 +1,36 @@
+.profile-container{
+    -fx-background-color: #E5D9F2;
+    -fx-padding: 20px;
+}
+
+.user-profile-input-box{
+    -fx-padding: 10px;
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
+    -fx-background-color: #F2EFE7;
+}
+
+.user-profile-input-label{
+    -fx-font-size: 16px;
+    -fx-text-fill:#4F1C51;
+    -fx-font-weight: bold;
+}
+.nameContainer{
+    -fx-padding: 5 0px 2px 0px;
+    -fx-border-color: #4F1C51;
+    -fx-border-width: 0px 0px 2px 0pc;
+}
+
+.nameLabel{
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+/*.edit-icon {*/
+/*    -fx-opacity: 0; !* Makes the element invisible *!*/
+/*    -fx-visibility: hidden; !* Prevents interaction and rendering *!*/
+/*}*/
+/*.edit-icon-again {*/
+/*    -fx-opacity: 0; !* Makes the element invisible *!*/
+/*    -fx-visibility: hidden; !* Prevents interaction and rendering *!*/
+/*}*/

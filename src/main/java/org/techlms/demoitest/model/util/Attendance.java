@@ -1,5 +1,15 @@
 package org.techlms.demoitest.model.util;
 
+import org.techlms.demoitest.dbconnection.DBConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Attendance {
 
     private int attendanceId;
@@ -127,6 +137,71 @@ public class Attendance {
         return String.format("%.2f%%", percentage);
     }
 
+    public static boolean AttendanceEligible(String studentId, String courseId) {
+        Attendance attendance = getAttendanceByStudentIdAndCourseId(studentId, courseId);
+
+        System.out.println(attendance);
+
+        if (attendance == null) {
+            throw new IllegalArgumentException("Attendance not found");
+        }
+
+        double totalAttendance = attendance.getTotalAttendance();
+        double totalPercentCount = attendance.getTotalPercentCount();
+
+        if (totalAttendance <= 0) {
+            throw new IllegalArgumentException("Invalid total attendance value");
+        }
+
+        System.out.println("student id: " + studentId + ", courseId: " + courseId + ", total attendance: " + (totalPercentCount / totalAttendance) * 100);
+
+        double totalAttemptsPercentage = (totalPercentCount / totalAttendance) * 100;
+
+        if (totalAttemptsPercentage > 100) {
+            throw new IllegalArgumentException("Invalid attendance eligibility record");
+        }
+
+        return totalAttemptsPercentage >= 80;
+    }
+
+
+
+
+    public static Attendance getAttendanceByStudentIdAndCourseId(String studentId, String courseId) {
+        Attendance attendance = null;
+        Connection con = DBConnection.getConnection();
+        String sql = """
+                    SELECT
+                        course_code,
+                        student_id,
+                      SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END) AS present_count,
+                      COUNT(att_id) AS total_attendance
+                      FROM
+                              attendance
+                      WHERE
+                              course_code = ? AND student_id = ?
+                      GROUP BY
+                      course_code, student_id;
+                """;
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, courseId);
+            ps.setString(2, studentId);
+            System.out.println(ps);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                System.out.println(rs.getString(1));
+                attendance = new Attendance(rs.getString(1), rs.getString(2), rs.getDouble(3),rs.getDouble(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return attendance;
+    }
     @Override
     public String toString() {
         return "Attendance{" +
