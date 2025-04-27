@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="container" focusTraversable="true" styleClass="user-create-pop-card" stylesheets="@../user-create-profile.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.techlms.demoitest.controllers.adminControllers.notice.CreateNoticeBoardControllerPop">
+    <padding>
+        <Insets top="20.0" />
+    </padding>
+    <children>
+        <VBox fx:id="userCreationCard" cacheShape="false" centerShape="false" focusTraversable="true" scaleShape="false" styleClass="user-create-pop-card">
+            <children>
+                <!-- Select User Profile -->
+                <VBox alignment="CENTER" styleClass="child-label">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                    </VBox.margin>
+                    <children>
+                        <VBox alignment="CENTER" styleClass="profile-card">
+                            <children>
+                                <HBox alignment="CENTER">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#selectNoticeFile" styleClass="user-create-select-image-button" text="Select notes" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- User Details Form -->
+                <VBox fx:id="usercCeatemenuContainer" alignment="CENTER" styleClass="child-label">
+                    <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </VBox.margin>
+                    <children>
+
+                              <!-- Email -->
+                        <HBox alignment="CENTER">
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Label styleClass="user-create-label" text="Notes Title">
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                                        <TextField fx:id="noiceTitle" prefWidth="400.0" promptText="Notes Title" styleClass="user-create-input-box">
+                                            <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                            </padding>
+                                        </TextField>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                                          <!-- Department -->
+                        <HBox alignment="CENTER" />
+
+                        <!-- Buttons -->
+                        <HBox alignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="20.0" top="10.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <HBox spacing="40.0">
+                                            <children>
+                                                <Button mnemonicParsing="false" onAction="#create" styleClass="user-create-button" text="Create Notes">
+                                                    <padding>
+                                                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                    </padding>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#cancelMenu" styleClass="user-cancel-button" text="Cancel">
+                                                    <padding>
+                                                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                    </padding>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>

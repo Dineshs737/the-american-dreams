@@ -1,0 +1,50 @@
+/* Style the entire TableView */
+.table-view {
+    -fx-background-color: #F5F5F5; /* Light gray background for the table */
+    -fx-border-color: #C5C5C5; /* Border color around the table */
+    -fx-border-width: 1px;
+    -fx-table-cell-border-color: #E0E0E0; /* Border between rows */
+    -fx-cell-size: 30px; /* Height of table rows */
+}
+
+/* Style the column headers */
+.table-view .column-header {
+    -fx-background-color: #D4C9BE; /* Beige background for headers */
+    -fx-text-fill: black; /* Black text for header */
+    -fx-font-weight: bold; /* Bold text */
+    -fx-font-size: 12px; /* Font size for header text */
+    -fx-alignment: center; /* Center align text in header */
+    -fx-padding: 10px; /* Padding for header text */
+    -fx-border-color: #A0A0A0; /* Border color for headers */
+    -fx-border-width: 0 0 1px 0; /* Bottom border only */
+}
+
+/* Style the rows */
+.table-view .cell {
+    -fx-background-color: white; /* White background for cells */
+    -fx-text-fill: #333333; /* Dark gray text */
+    -fx-font-size: 14px; /* Font size for cells */
+    -fx-alignment: center-left; /* Left align text */
+    -fx-padding: 5px 10px; /* Padding inside cells */
+}
+
+/* Alternate row colors for better readability */
+.table-view .row-cell:odd {
+    -fx-background-color: #FAFAFA; /* Light alternate row background */
+}
+
+.table-view .row-cell:even {
+    -fx-background-color: white; /* Default white background */
+}
+
+/* Highlight row when selected */
+.table-view .row-cell:selected {
+    -fx-background-color: #C5DFF5; /* Light blue background for selected row */
+    -fx-text-fill: black; /* Black text for selected row */
+}
+
+/* Focus highlight for TableView */
+.table-view:focused {
+    -fx-border-color: #7A9CC7; /* Blue border when focused */
+    -fx-border-width: 2px; /* Slightly thicker border */
+}

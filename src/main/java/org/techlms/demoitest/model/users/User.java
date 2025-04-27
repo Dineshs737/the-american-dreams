@@ -61,15 +61,15 @@ public class User{
     }
 
     //user Profile constructor
-    public User(byte[] userProfile , String userName , String email, String name , String gender , String contactNumber , String address) {
-        this.userName = userName;
-        this.name = name;
-        this.email = email;
-        this.contactNumber = contactNumber;
-        this.gender = gender;
-        this.userProfile = userProfile;
-        this.address = address;
-    }
+//    public User(byte[] userProfile , String userName , String email, String name , String gender , String contactNumber , String address) {
+//        this.userName = userName;
+//        this.name = name;
+//        this.email = email;
+//        this.contactNumber = contactNumber;
+//        this.gender = gender;
+//        this.userProfile = userProfile;
+//        this.address = address;
+//    }
 
 //    public User(String userName, String password, String email, String name, String gender, String contactNumber,String address, String role, byte[] userProfile) {
 //        this.userName = userName;
@@ -108,7 +108,15 @@ public class User{
         this.userProfile = userProfile;
     }
 
-
+    public User(byte[] userProfile , String userName , String email, String name , String gender , String contactNumber , String address) {
+        this.userName = userName;
+        this.name = name;
+        this.email = email;
+        this.contactNumber = contactNumber;
+        this.gender = gender;
+        this.userProfile = userProfile;
+        this.address = address;
+    }
 
     ///  create user
     public User(String userName, String password, String name, String email, String contactNumber, String role, String gender, String address, byte[] userProfile) {

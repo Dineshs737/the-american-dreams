@@ -171,12 +171,12 @@ public class LecturerHomePageController {
 
         FXMLLoader fxmlLoader = null;
         try{
-            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/util/user-profile.fxml"));
-            Parent attendancePage = fxmlLoader.load();
+            fxmlLoader = new FXMLLoader(getClass().getResource("/org/techlms/demoitest/lecturer-ui-components/lecturerUserProfile.fxml"));
+            Parent notice = fxmlLoader.load();
+            VBox.setVgrow(notice, Priority.ALWAYS);
             contentContainer.getChildren().clear();
-            contentContainer.getChildren().add(attendancePage);
-
-            System.out.println("profile Page Loaded");
+            contentContainer.getChildren().add(notice);
+            System.out.println("Notes Page");
 
         } catch (Exception e) {
             e.printStackTrace();

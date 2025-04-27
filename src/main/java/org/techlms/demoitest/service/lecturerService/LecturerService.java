@@ -2,6 +2,7 @@ package org.techlms.demoitest.service.lecturerService;
 
 import org.techlms.demoitest.dbconnection.DBConnection;
 import org.techlms.demoitest.model.course.CourseMaterial;
+import org.techlms.demoitest.model.users.Lecturer;
 import org.techlms.demoitest.model.util.Attendance;
 import org.techlms.demoitest.model.util.Marks;
 import org.techlms.demoitest.util.GetStudents;
@@ -629,6 +630,125 @@ public class LecturerService implements GetStudents {
             e.printStackTrace();
         }
         return courseName;
+    }
+
+
+    public Lecturer getLecturerProfile(int userId , String userRole){
+
+        Lecturer lecturer = null;
+        Connection con = DBConnection.getConnection();
+
+        String sql = """
+                SELECT
+                    u.user_profile,
+                    u.username,
+                    u.email,
+                    u.name,
+                    u.gender,
+                    u.contact_no,
+                    u.address,
+                    l.lecturer_id,
+                    l.department
+                FROM
+                    user u
+                INNER JOIN
+                    lecturer l ON u.user_id = l.user_id where u.user_id = ? and u.role = ?;
+                """;
+
+        try(PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setInt(1,userId);
+            ps.setString(2,userRole);
+            ResultSet rs =  ps.executeQuery();
+            System.out.println(ps);
+            if(rs.next()){
+                /************
+                 *     public User(byte[] userProfile , String userName , String email, String name , String gender , String contactNumber , String address) {
+                 *         this.userName = userName;
+                 *         this.name = name;
+                 *         this.email = email;
+                 *         this.contactNumber = contactNumber;
+                 *         this.gender = gender;
+                 *         this.userProfile = userProfile;
+                 *         this.address = address;
+                 *     }
+                 */
+                lecturer = new Lecturer(
+                        rs.getBytes(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9)
+
+                );
+
+            }
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+
+
+        return lecturer;
+
+
+    }
+
+
+    public boolean updateLecturerProfile(Lecturer newLecturerProfile, Lecturer oldLecturerProfile) {
+        Connection con = DBConnection.getConnection();
+
+        // Start building the SQL query
+        StringBuilder sql = new StringBuilder("""
+        UPDATE user
+        SET
+            user_profile = ?,
+            gender = ?,
+            contact_no = ?,
+            address = ?
+        """);
+
+        // Check if email has changed and include it in the query if needed
+        boolean emailChanged = !newLecturerProfile.getEmail().equalsIgnoreCase(oldLecturerProfile.getEmail());
+        if (emailChanged) {
+            sql.insert(sql.indexOf("gender"), "email = ?, ");
+        }
+
+        // Add the WHERE clause
+        sql.append("WHERE user_id = ?;");
+
+        try (PreparedStatement ps = con.prepareStatement(sql.toString())) {
+            con.setAutoCommit(false);
+
+            // Set parameters dynamically
+            int paramIndex = 1;
+            ps.setBytes(paramIndex++, newLecturerProfile.getUserProfile());
+            if (emailChanged) {
+                ps.setString(paramIndex++, newLecturerProfile.getEmail().toLowerCase());
+            }
+            ps.setString(paramIndex++, newLecturerProfile.getGender());
+            ps.setString(paramIndex++, newLecturerProfile.getContactNumber());
+            ps.setString(paramIndex++, newLecturerProfile.getAddress());
+            ps.setInt(paramIndex, oldLecturerProfile.getUserID()); // Set user ID
+
+            System.out.println("Executing SQL: " + ps);
+
+            // Execute the update
+            if (ps.executeUpdate() > 0) {
+                con.commit();
+                return true;
+            }
+            con.rollback();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 

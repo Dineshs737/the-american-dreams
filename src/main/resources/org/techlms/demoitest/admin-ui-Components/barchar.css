@@ -1,0 +1,61 @@
+/* Style the BarChart container */
+.bar-chart {
+    -fx-background-color: #3E3F5B;  /* Dark background for the chart */
+    /*#3E3F5B*/
+    -fx-padding: 10px;
+    -fx-background-radius: 10 30px;  /* Rounded corners */
+}
+
+/* Style the bars in the BarChart */
+.bar-chart .chart-series-line {
+    -fx-stroke: #2980B9;  /* Color of the border of the bars */
+    -fx-stroke-width: 4px;  /* Width of the border */
+}
+
+/* Style the bars themselves */
+.bar-chart .chart-bar {
+    -fx-background-color: #3498DB;  /* Bar color */
+    -fx-border-radius: 5px;  /* Rounded corners for the bars */
+}
+
+/* Style the axis labels */
+.chart-x-axis .axis-label,
+.chart-y-axis .axis-label {
+    -fx-font-size: 14px;  /* Font size for axis labels */
+    -fx-text-fill: white;  /* Color for axis labels */
+    -fx-font-weight: bold;  /* Make axis labels bold */
+}
+
+/* Style the gridlines */
+.chart .chart-plot-background {
+    -fx-background-color: transparent;  /* Make the background transparent */
+}
+
+.chart .chart-grid-lines {
+    -fx-stroke: rgba(255, 255, 255, 0.2);  /* Light, semi-transparent gridlines */
+}
+
+/* Customize the chart title */
+.chart-title {
+    -fx-font-size: 18px;  /* Font size for the chart title */
+    -fx-text-fill: #ECF0F1;  /* Light gray color for the chart title */
+}
+
+/* Style for the labels above the bars (data labels) */
+.bar-chart .chart-data-label {
+    -fx-text-fill: white;  /* White text color for data labels */
+    -fx-font-size: 14px;  /* Font size for data labels */
+    -fx-font-weight: bold;  /* Make the data labels bold */
+}
+
+/* Style the BarChart legend */
+.chart-legend {
+    -fx-text-fill: white;  /* White color for the legend text */
+    -fx-font-size: 12px;  /* Font size for the legend text */
+    -fx-font-weight: bold;  /* Make legend text bold */
+}
+
+/* Style the background grid of the BarChart */
+.chart .chart-plot-background {
+    -fx-background-color: transparent;  /* Make the plot background transparent */
+}
